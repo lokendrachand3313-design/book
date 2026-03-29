@@ -47,7 +47,6 @@
       padding: 1.5rem;
     }
 
-    /* Header */
     .top-bar {
       display: flex;
       flex-wrap: wrap;
@@ -171,7 +170,11 @@
       color: white;
     }
     
-    /* Navigation Tabs */
+    .btn-warning {
+      background: #e67e22;
+      color: white;
+    }
+    
     .nav-tabs {
       display: flex;
       gap: 1rem;
@@ -196,11 +199,6 @@
       color: #1e3c72;
     }
     
-    .nav-tab:hover:not(.active) {
-      background: rgba(255, 217, 102, 0.2);
-    }
-    
-    /* Search Bar */
     .search-section {
       background: rgba(255, 255, 255, 0.95);
       border-radius: 60px;
@@ -226,10 +224,6 @@
       color: #1e3c72;
     }
     
-    .search-wrapper input::placeholder {
-      color: #6c8cba;
-    }
-    
     .search-wrapper button {
       background: #2a5298;
       border: none;
@@ -240,7 +234,6 @@
       font-weight: 600;
     }
     
-    /* Pages */
     .page {
       display: none;
     }
@@ -249,7 +242,6 @@
       display: block;
     }
     
-    /* Dashboard Layout - Books on Left, Chat on Right */
     .dashboard {
       display: flex;
       flex-wrap: wrap;
@@ -266,9 +258,7 @@
       flex: 1.2;
       min-width: 320px;
       background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(4px);
       border-radius: 2rem;
-      box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.2);
       border: 1px solid #ffd966;
       padding: 1.4rem;
       height: fit-content;
@@ -288,7 +278,6 @@
       color: #ffd966;
     }
     
-    /* Books Grid */
     .books-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -307,7 +296,6 @@
     
     .book-card:hover {
       transform: translateY(-8px);
-      box-shadow: 0 25px 35px -12px rgba(0, 0, 0, 0.3);
     }
     
     .book-image {
@@ -348,11 +336,34 @@
       flex-wrap: wrap;
     }
     
-    /* Chat Panel Elements */
+    .commission-badge {
+      background: #ff8c42;
+      color: white;
+      padding: 0.2rem 0.8rem;
+      border-radius: 40px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      margin-left: 8px;
+    }
+    
+    .interest-badge {
+      background: #fff0e0;
+      color: #ff8c42;
+      font-size: 0.7rem;
+      border-radius: 60px;
+      padding: 0.25rem 0.8rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    
     .chat-messages {
       background: #fef9f2;
       border-radius: 1.5rem;
-      height: 400px;
+      height: 380px;
       overflow-y: auto;
       padding: 1rem;
       margin: 1rem 0;
@@ -372,12 +383,6 @@
       margin-left: auto;
     }
     
-    .chat-meta {
-      font-size: 0.6rem;
-      color: #8b7358;
-      margin-bottom: 4px;
-    }
-    
     .chat-input-area {
       display: flex;
       gap: 10px;
@@ -389,7 +394,6 @@
       border-radius: 60px;
       padding: 10px 16px;
       border: 1px solid #ffd966;
-      font-family: inherit;
     }
     
     .chat-header {
@@ -408,30 +412,6 @@
       font-size: 0.8rem;
     }
     
-    .interest-badge {
-      background: #fff0e0;
-      color: #ff8c42;
-      font-size: 0.7rem;
-      border-radius: 60px;
-      padding: 0.25rem 0.8rem;
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-    }
-    
-    .commission-badge {
-      background: #ff8c42;
-      color: white;
-      padding: 0.2rem 0.8rem;
-      border-radius: 40px;
-      font-size: 0.7rem;
-      font-weight: 600;
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      margin-left: 8px;
-    }
-    
     .info-note {
       background: #fff0e0;
       border-radius: 0.8rem;
@@ -441,7 +421,6 @@
       margin: 0.5rem 0;
     }
     
-    /* Profile Section */
     .profile-card {
       background: rgba(255, 255, 255, 0.98);
       border-radius: 2rem;
@@ -529,7 +508,6 @@
       border: 1px dashed #ffd966;
     }
     
-    /* Modal */
     .modal {
       display: none;
       position: fixed;
@@ -559,14 +537,6 @@
       margin-bottom: 1rem;
     }
     
-    .input-group label {
-      display: block;
-      font-size: 0.8rem;
-      font-weight: 600;
-      margin-bottom: 5px;
-      color: #2a5298;
-    }
-    
     .input-group input,
     .input-group textarea,
     .input-group select {
@@ -586,6 +556,7 @@
       max-width: 250px;
       border-radius: 20px;
       margin: 1rem 0;
+      cursor: pointer;
     }
     
     .download-btn {
@@ -595,6 +566,15 @@
       border-radius: 40px;
       border: none;
       cursor: pointer;
+      margin-top: 0.5rem;
+    }
+    
+    .commission-box {
+      background: #fef0e4;
+      border-radius: 1rem;
+      padding: 1rem;
+      margin: 1rem 0;
+      text-align: center;
     }
     
     .auth-tabs {
@@ -657,21 +637,11 @@
     }
     
     @media (max-width: 780px) {
-      .chat-panel {
-        position: static;
-        margin-top: 1rem;
-      }
-      .search-wrapper {
-        flex-wrap: wrap;
-      }
-      .search-wrapper button {
-        width: 100%;
-        margin-top: 0.5rem;
-      }
-      .nav-tab {
-        padding: 0.5rem 1rem;
-        font-size: 0.9rem;
-      }
+      .chat-panel { position: static; margin-top: 1rem; }
+      .search-wrapper { flex-wrap: wrap; }
+      .search-wrapper button { width: 100%; margin-top: 0.5rem; }
+      .nav-tab { padding: 0.5rem 1rem; font-size: 0.9rem; }
+      .profile-header { flex-direction: column; text-align: center; }
     }
   </style>
 </head>
@@ -682,32 +652,23 @@
       <img class="logo-image" src="image.png" alt="KitabSansar Logo" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 200 200\'%3E%3Crect width=\'200\' height=\'200\' fill=\'%23fff0e0\' rx=\'30\'/%3E%3Ctext x=\'100\' y=\'85\' font-size=\'48\' text-anchor=\'middle\' fill=\'%232a5298\'%3E📚%3C/text%3E%3Ctext x=\'100\' y=\'135\' font-size=\'28\' font-weight=\'bold\' text-anchor=\'middle\' fill=\'%23ff8c42\'%3EKitab%3C/text%3E%3Ctext x=\'100\' y=\'168\' font-size=\'28\' font-weight=\'bold\' text-anchor=\'middle\' fill=\'%23ff8c42\'%3ESansar%3C/text%3E%3Ctext x=\'100\' y=\'200\' font-size=\'16\' font-weight=\'bold\' text-anchor=\'middle\' fill=\'%232a5298\'%3EOLD BOOKS%3C/text%3E%3C/svg%3E'">
       <div class="logo-text">
         <h1>KitabSansar</h1>
-        <div class="oldbooks-badge">
-          <i class="fas fa-book"></i> OLD BOOKS
-        </div>
+        <div class="oldbooks-badge"><i class="fas fa-book"></i> OLD BOOKS</div>
       </div>
     </div>
     <div id="userDisplayArea">
       <div class="seller-info" id="sellerInfoSection" style="display: none;">
         <div class="seller-avatar" id="sellerAvatar">👤</div>
-        <div>
-          <div id="sellerNameDisplay" style="font-weight:600;"></div>
-          <div id="sellerCityDisplay" style="font-size:0.7rem;"></div>
-        </div>
+        <div><div id="sellerNameDisplay"></div><div id="sellerCityDisplay" style="font-size:0.7rem;"></div></div>
         <button class="btn btn-outline btn-sm" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</button>
       </div>
       <div class="seller-info" id="buyerInfoSection" style="display: flex;">
         <div class="seller-avatar" style="background: #ff8c42;">👋</div>
-        <div>
-          <div style="font-weight:600;">Guest Mode</div>
-          <div style="font-size:0.7rem;">Browse & Buy Books</div>
-        </div>
+        <div><div style="font-weight:600;">Guest Mode</div><div style="font-size:0.7rem;">Browse & Buy</div></div>
         <button class="btn btn-primary btn-sm" id="showSellerAuthBtn"><i class="fas fa-store"></i> Seller Login</button>
       </div>
     </div>
   </div>
 
-  <!-- Navigation Tabs -->
   <div class="nav-tabs">
     <div class="nav-tab active" data-page="buyer">📖 Buyer Dashboard</div>
     <div class="nav-tab" data-page="seller">👤 Seller Dashboard</div>
@@ -718,118 +679,145 @@
     <div class="search-section">
       <div class="search-wrapper">
         <i class="fas fa-search"></i>
-        <input type="text" id="searchInput" placeholder="Search by book title or author name...">
+        <input type="text" id="searchInput" placeholder="Search by book title or author...">
         <button id="searchBtn"><i class="fas fa-search"></i> Search</button>
       </div>
     </div>
-
     <div class="dashboard">
-      <!-- Left Side: Books Grid -->
       <div class="listings-panel">
-        <div class="section-title">
-          <i class="fas fa-book-open"></i>
-          <span>📚 Available Books for Sale</span>
-          <span id="bookCountBadge" style="font-size:0.8rem; background:#ffd966; padding:0.2rem 0.9rem; border-radius:40px; color:#1e3c72;">0</span>
-        </div>
+        <div class="section-title"><i class="fas fa-book-open"></i><span>📚 Available Books</span><span id="bookCountBadge" style="background:#ffd966; padding:0.2rem 0.9rem; border-radius:40px; color:#1e3c72;">0</span></div>
         <div id="booksGrid" class="books-grid"></div>
       </div>
-
-      <!-- Right Side: Chat Panel -->
       <div class="chat-panel">
-        <div class="chat-header">
-          <div class="section-title" style="font-size:1.3rem; margin-bottom:0;">
-            <i class="fas fa-comment-dots"></i> <span>💬 Live Chat</span>
-          </div>
-          <div id="currentChatBook" class="current-book-chat">Select a book to chat</div>
-        </div>
-        <div class="info-note">
-          <i class="fas fa-info-circle"></i> Click "Ask Question" on any book to start chatting with the seller
-        </div>
-        <div class="chat-messages" id="chatMessagesContainer">
-          <div style="text-align:center; padding:30px;">✨ Click "Ask Question" on a book to start chatting</div>
-        </div>
-        <div class="chat-input-area">
-          <input type="text" id="chatInput" placeholder="Type your message here..." disabled>
-          <button class="btn btn-primary btn-sm" id="sendChatBtn" disabled><i class="fas fa-paper-plane"></i> Send</button>
-        </div>
+        <div class="chat-header"><div class="section-title" style="font-size:1.3rem;"><i class="fas fa-comment-dots"></i> Live Chat</div><div id="currentChatBook" class="current-book-chat">Select a book</div></div>
+        <div class="info-note"><i class="fas fa-info-circle"></i> Click "Ask Question" on any book to chat</div>
+        <div class="chat-messages" id="chatMessagesContainer"><div style="text-align:center; padding:30px;">✨ Click "Ask Question" to start</div></div>
+        <div class="chat-input-area"><input type="text" id="chatInput" placeholder="Type message..." disabled><button class="btn btn-primary btn-sm" id="sendChatBtn" disabled><i class="fas fa-paper-plane"></i> Send</button></div>
       </div>
     </div>
   </div>
 
   <!-- SELLER PAGE -->
-  <div id="sellerPage" class="page">
-    <div id="sellerProfileContent"></div>
-  </div>
+  <div id="sellerPage" class="page"><div id="sellerProfileContent"></div></div>
 
-  <footer>🎓 KitabSansar | 10% Commission After Sale | Click "Ask Question" on any book to chat with seller</footer>
+  <footer>🎓 KitabSansar | 10% Commission After Sale | Sellers pay commission when marking book as sold</footer>
 </div>
 
-<!-- Modals (simplified for brevity - same functionality as before) -->
-<div id="sellerAuthModal" class="modal">...</div>
-<div id="sellModal" class="modal">...</div>
-<div id="commissionModal" class="modal">...</div>
+<!-- Auth Modal -->
+<div id="sellerAuthModal" class="modal"><div class="modal-content"><h3>Seller Login</h3><div class="input-group"><input type="email" id="signinEmail" placeholder="Email"></div><div class="input-group"><input type="password" id="signinPassword" placeholder="Password"></div><button class="btn btn-primary" id="signinBtn">Sign In</button><div style="text-align:center; margin:1rem;">or</div><button class="social-btn btn-google" id="googleAuthBtn"><i class="fab fa-google"></i> Google</button><button class="social-btn btn-mobile" id="mobileSignupBtn"><i class="fas fa-mobile-alt"></i> Mobile Number</button><button class="btn btn-outline" id="closeSellerAuthModalBtn" style="margin-top:1rem;">Cancel</button></div></div>
+
+<!-- Sell Modal -->
+<div id="sellModal" class="modal"><div class="modal-content"><h3>List Your Book</h3><form id="sellBookForm"><div class="input-group"><input type="text" id="bookTitle" placeholder="Book Title *" required></div><div class="input-group"><input type="text" id="bookAuthor" placeholder="Author"></div><div class="input-group"><input type="number" id="bookPrice" placeholder="Price (NPR)" required></div><div class="input-group"><textarea id="bookDesc" rows="2" placeholder="Description"></textarea></div><div class="input-group"><select id="bookCategory"><option>Textbook</option><option>Novel</option><option>Reference</option></select></div><div class="input-group"><input type="file" id="bookImageInput" accept="image/*"><div id="imagePreviewContainer"></div></div><button type="submit" class="btn btn-primary">List Book</button><button type="button" class="btn btn-outline" id="closeSellModalBtn">Cancel</button></form></div></div>
+
+<!-- Commission Payment Modal -->
+<div id="commissionModal" class="modal"><div class="modal-content"><h3><i class="fas fa-percent"></i> Pay 10% Commission</h3><div id="commissionDetails"></div><div class="qr-container"><p>Scan QR code to pay commission</p><img id="qrCodeImage" class="qr-image" src="qr.jpg" alt="Payment QR" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 200 200\'%3E%3Crect width=\'200\' height=\'200\' fill=\'%23ff8c42\'/%3E%3Ctext x=\'100\' y=\'115\' font-size=\'20\' text-anchor=\'middle\' fill=\'white\'%3E10%25%3C/text%3E%3C/svg%3E'"><br><button class="download-btn" id="downloadQRBtn"><i class="fas fa-download"></i> Download QR Code</button><button class="btn btn-primary" id="confirmCommissionPaymentBtn" style="margin-top:1rem; width:100%;"><i class="fas fa-check-circle"></i> I've Paid & Confirm Sale</button></div><button class="btn btn-outline" id="closeCommissionModalBtn">Cancel</button></div></div>
 
 <script>
-  // Data storage
   let sellers = [];
   let currentSeller = null;
   let books = [];
   let messages = {};
   let currentChatBookId = null;
+  let pendingSaleBook = null;
   let currentSearchQuery = '';
+  const defaultCover = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23fff0e0'/%3E%3Ctext x='50' y='55' font-size='44' text-anchor='middle' fill='%23ff8c42'%3E📘%3C/text%3E%3C/svg%3E";
 
-  // Load data from localStorage
-  function loadSellers() {
-    const stored = localStorage.getItem('kitab_sellers');
-    if(stored) sellers = JSON.parse(stored);
-    else sellers = [{ id: '1', firstName: 'Ram', lastName: 'Sharma', email: 'ram@example.com', mobile: '+9779812345678', city: 'Kathmandu', password: 'password123', totalCommissionPaid: 0 }];
-    saveSellers();
-  }
-  
+  function loadSellers() { const s = localStorage.getItem('kitab_sellers'); if(s) sellers = JSON.parse(s); else sellers = [{ id: '1', firstName: 'Ram', lastName: 'Sharma', email: 'ram@example.com', city: 'Kathmandu', password: 'password123', totalCommissionPaid: 0 }]; saveSellers(); }
   function saveSellers() { localStorage.setItem('kitab_sellers', JSON.stringify(sellers)); }
   function saveSellerAuth() { if(currentSeller) localStorage.setItem('kitab_current_seller', JSON.stringify(currentSeller)); else localStorage.removeItem('kitab_current_seller'); }
-  function loadSellerAuth() { const stored = localStorage.getItem('kitab_current_seller'); if(stored) { currentSeller = JSON.parse(stored); updateUI(); } }
-  
-  const defaultCover = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23fff0e0'/%3E%3Ctext x='50' y='55' font-size='44' text-anchor='middle' fill='%23ff8c42'%3E📘%3C/text%3E%3C/svg%3E";
-  
+  function loadSellerAuth() { const s = localStorage.getItem('kitab_current_seller'); if(s) { currentSeller = JSON.parse(s); updateUI(); } }
   function saveToLocal() { localStorage.setItem('kitab_books', JSON.stringify(books)); localStorage.setItem('kitab_messages', JSON.stringify(messages)); }
-  
+
   function loadData() {
-    const storedBooks = localStorage.getItem('kitab_books');
-    if(storedBooks) books = JSON.parse(storedBooks);
-    const storedMessages = localStorage.getItem('kitab_messages');
-    if(storedMessages) messages = JSON.parse(storedMessages);
-    else messages = {};
-    if(!books.length) {
-      books = [
-        { id: '1', title: 'Engineering Mathematics III', author: 'Dr. K.C. Rajbanshi', price: '550 NPR', priceRaw: 550, description: '3rd semester, good condition', seller: 'Ram Sharma', sellerId: '1', imageDataUrl: defaultCover, interestCount: 3, isSold: false, createdAt: Date.now() - 86400000 },
-        { id: '2', title: 'Physics for Scientists', author: 'Serway', price: '1200 NPR', priceRaw: 1200, description: '9th Edition, like new', seller: 'Ram Sharma', sellerId: '1', imageDataUrl: defaultCover, interestCount: 2, isSold: false, createdAt: Date.now() - 172800000 }
-      ];
-      saveToLocal();
-    }
-    books.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+    const sb = localStorage.getItem('kitab_books'); if(sb) books = JSON.parse(sb);
+    const sm = localStorage.getItem('kitab_messages'); if(sm) messages = JSON.parse(sm); else messages = {};
+    if(!books.length) books = [
+      { id: '1', title: 'Engineering Mathematics III', author: 'Dr. K.C. Rajbanshi', price: '550 NPR', priceRaw: 550, description: '3rd semester', seller: 'Ram Sharma', sellerId: '1', imageDataUrl: defaultCover, interestCount: 3, isSold: false, createdAt: Date.now() - 86400000 },
+      { id: '2', title: 'Physics for Scientists', author: 'Serway', price: '1200 NPR', priceRaw: 1200, description: '9th Edition', seller: 'Ram Sharma', sellerId: '1', imageDataUrl: defaultCover, interestCount: 2, isSold: false, createdAt: Date.now() - 172800000 }
+    ];
+    books.sort((a,b) => (b.createdAt||0) - (a.createdAt||0));
     renderBooks();
     if(currentSeller) renderSellerProfile();
   }
-  
-  function updateUI() {
-    const sellerInfo = document.getElementById('sellerInfoSection');
-    const buyerInfo = document.getElementById('buyerInfoSection');
-    if(currentSeller) {
-      sellerInfo.style.display = 'flex';
-      buyerInfo.style.display = 'none';
-      document.getElementById('sellerNameDisplay').innerText = `${currentSeller.firstName || ''} ${currentSeller.lastName || ''}`.trim() || currentSeller.email;
-      document.getElementById('sellerCityDisplay').innerText = currentSeller.city ? `📍 ${currentSeller.city}` : '';
-      document.getElementById('sellerAvatar').innerHTML = (currentSeller.firstName ? currentSeller.firstName.charAt(0) : '📖').toUpperCase();
-      renderSellerProfile();
-    } else {
-      sellerInfo.style.display = 'none';
-      buyerInfo.style.display = 'flex';
-      document.getElementById('sellerProfileContent').innerHTML = '<div class="profile-card" style="text-align:center; padding:3rem;"><i class="fas fa-store" style="font-size:3rem;"></i><p style="margin-top:1rem;">Please login as a seller to view your dashboard</p><button class="btn btn-primary" onclick="document.getElementById(\'showSellerAuthBtn\').click()">Login as Seller</button></div>';
-    }
-    renderBooks();
+
+  function calculateCommission(price) { return Math.round(price * 0.1); }
+
+  function markAsSold(book) {
+    if(book.isSold) { alert('Book already sold!'); return; }
+    const commission = calculateCommission(book.priceRaw);
+    pendingSaleBook = book;
+    document.getElementById('commissionDetails').innerHTML = `<div class="commission-box"><p><strong>${escapeHtml(book.title)}</strong></p><p>Price: ${book.price}</p><p><strong>Commission (10%): रू ${commission}</strong></p></div>`;
+    document.getElementById('commissionModal').style.display = 'flex';
   }
-  
+
+  function confirmCommissionAndRemove() {
+    if(pendingSaleBook && currentSeller) {
+      const commission = calculateCommission(pendingSaleBook.priceRaw);
+      currentSeller.totalCommissionPaid = (currentSeller.totalCommissionPaid || 0) + commission;
+      const idx = sellers.findIndex(s => s.id === currentSeller.id);
+      if(idx !== -1) sellers[idx] = currentSeller;
+      saveSellers();
+      const bookIdx = books.findIndex(b => b.id === pendingSaleBook.id);
+      if(bookIdx !== -1) books.splice(bookIdx, 1);
+      saveToLocal();
+      document.getElementById('commissionModal').style.display = 'none';
+      pendingSaleBook = null;
+      renderBooks();
+      if(currentSeller) renderSellerProfile();
+      alert(`✅ Book sold! Commission of रू ${commission} paid successfully.\n\nBook removed from listings.`);
+    }
+  }
+
+  function downloadQR() {
+    const qrImg = document.getElementById('qrCodeImage');
+    const link = document.createElement('a');
+    link.download = 'kitabsansar_commission_qr.png';
+    link.href = qrImg.src;
+    link.click();
+  }
+
+  function addNewBook(title, author, price, description, category, imageDataUrl) {
+    if(!currentSeller) { alert('Please sign in as seller'); return; }
+    const newBook = {
+      id: Date.now().toString(), title: title.trim(), author: author.trim() || 'Unknown',
+      price: price + ' NPR', priceRaw: parseFloat(price), description: description.trim() || 'Well-maintained',
+      seller: `${currentSeller.firstName} ${currentSeller.lastName}`.trim() || currentSeller.email,
+      sellerId: currentSeller.id, category: category, imageDataUrl: imageDataUrl || defaultCover,
+      interestCount: 0, isSold: false, createdAt: Date.now()
+    };
+    books.unshift(newBook);
+    saveToLocal();
+    renderBooks();
+    if(currentSeller) renderSellerProfile();
+  }
+
+  function renderBooks() {
+    const grid = document.getElementById('booksGrid');
+    if(!grid) return;
+    let filtered = books.filter(b => !b.isSold);
+    if(currentSearchQuery) { const q = currentSearchQuery.toLowerCase(); filtered = filtered.filter(b => b.title.toLowerCase().includes(q) || (b.author && b.author.toLowerCase().includes(q))); }
+    document.getElementById('bookCountBadge').innerText = filtered.length;
+    if(filtered.length === 0) { grid.innerHTML = '<div class="no-results">No books found</div>'; return; }
+    grid.innerHTML = filtered.map(book => `
+      <div class="book-card">
+        <img class="book-image" src="${escapeHtml(book.imageDataUrl || defaultCover)}">
+        <div class="book-info">
+          <div class="book-title">📘 ${escapeHtml(book.title)}<span class="commission-badge">10% Commission</span></div>
+          <div class="book-author">✍️ ${escapeHtml(book.author)}</div>
+          <div class="book-price">💰 ${escapeHtml(book.price)}</div>
+          <div class="book-seller"><i class="fas fa-store"></i> ${escapeHtml(book.seller)}</div>
+          <div class="card-actions">
+            <button class="btn btn-primary btn-sm interest-btn" data-id="${book.id}" data-title="${escapeHtml(book.title)}" data-seller="${escapeHtml(book.seller)}"><i class="fas fa-hands-helping"></i> I'm interested</button>
+            <button class="btn btn-outline btn-sm chat-btn" data-id="${book.id}"><i class="fas fa-comment"></i> Ask Question</button>
+          </div>
+          <div class="interest-badge"><i class="fas fa-heart"></i> ${book.interestCount || 0} interested</div>
+        </div>
+      </div>
+    `).join('');
+    document.querySelectorAll('.interest-btn').forEach(btn => { btn.onclick = () => sendInterest(btn.dataset.id, btn.dataset.title, btn.dataset.seller); });
+    document.querySelectorAll('.chat-btn').forEach(btn => { btn.onclick = () => loadChatForBook(btn.dataset.id); });
+  }
+
   function renderSellerProfile() {
     if(!currentSeller) return;
     const sellerBooks = books.filter(b => b.sellerId === currentSeller.id);
@@ -859,199 +847,110 @@
             <div class="seller-book-info">
               <h4>${escapeHtml(book.title)}</h4>
               <p class="book-price" style="font-size:1rem;">💰 ${book.price}</p>
-              ${!book.isSold ? `<button class="btn btn-success btn-sm mark-sold-from-profile" data-id="${book.id}"><i class="fas fa-tag"></i> Mark as Sold</button>` : '<span class="sold-badge" style="background:#28a745; color:white; padding:5px; border-radius:20px;">✓ Sold</span>'}
+              ${!book.isSold ? `<button class="btn btn-success btn-sm mark-sold-from-profile" data-id="${book.id}" data-price="${book.priceRaw}"><i class="fas fa-tag"></i> Mark as Sold & Pay Commission</button>` : '<span style="background:#28a745; color:white; padding:5px; border-radius:20px;">✓ Sold</span>'}
             </div>
           </div>
         `).join('')}
-        ${sellerBooks.length === 0 ? '<div class="no-results">No books listed yet</div>' : ''}
+        ${sellerBooks.length === 0 ? '<div class="no-results">No books listed yet. Click "List New Book" to start selling!</div>' : ''}
       </div>
     `;
     document.getElementById('sellerProfileContent').innerHTML = html;
     document.getElementById('quickAddSellerBtn')?.addEventListener('click', () => document.getElementById('sellModal').style.display = 'flex');
     document.querySelectorAll('.mark-sold-from-profile').forEach(btn => {
-      btn.onclick = () => { const book = books.find(b => b.id === btn.dataset.id); if(book) markAsSold(book); };
+      btn.onclick = () => { const book = books.find(b => b.id === btn.dataset.id); if(book && !book.isSold) markAsSold(book); };
     });
   }
-  
-  // Chat Functions - Automatically connects when book is selected
-  function loadChatForBook(bookId) {
-    const book = books.find(b => b.id === bookId);
-    if(!book) return;
-    
-    currentChatBookId = bookId;
-    const chatTitle = document.getElementById('currentChatBook');
-    const chatInput = document.getElementById('chatInput');
-    const sendBtn = document.getElementById('sendChatBtn');
-    const container = document.getElementById('chatMessagesContainer');
-    
-    chatTitle.innerHTML = `<i class="fas fa-book"></i> Chatting about: ${escapeHtml(book.title)}`;
-    chatInput.disabled = false;
-    sendBtn.disabled = false;
-    chatInput.placeholder = `Ask about "${book.title}"...`;
-    
-    const msgs = messages[bookId] || [];
-    if(msgs.length === 0) {
-      container.innerHTML = `<div style="text-align:center; padding:20px;">💬 No messages yet. Start the conversation with ${escapeHtml(book.seller)}!</div>`;
-    } else {
-      container.innerHTML = msgs.map(msg => `
-        <div class="chat-bubble ${msg.senderName === 'Buyer' ? 'sent' : ''}">
-          <div class="chat-meta"><strong>${escapeHtml(msg.senderName)}</strong> · ${new Date(msg.timestamp).toLocaleTimeString()}</div>
-          <div>${escapeHtml(msg.text)}</div>
-        </div>
-      `).join('');
-      container.scrollTop = container.scrollHeight;
-    }
+
+  function sendInterest(bookId, title, seller) {
+    alert(`📩 Interest sent to seller: ${seller}\n\nStart chatting in the chat box!`);
+    if(!messages[bookId]) messages[bookId] = [];
+    messages[bookId].push({ senderName: 'Buyer', text: `💌 I'm interested in "${title}"! Please share details.`, timestamp: Date.now() });
+    saveToLocal();
+    loadChatForBook(bookId);
   }
-  
+
+  function loadChatForBook(bookId) {
+    currentChatBookId = bookId;
+    const book = books.find(b => b.id === bookId);
+    if(book) document.getElementById('currentChatBook').innerHTML = `<i class="fas fa-book"></i> ${escapeHtml(book.title)}`;
+    const container = document.getElementById('chatMessagesContainer');
+    const msgs = messages[bookId] || [];
+    document.getElementById('chatInput').disabled = false;
+    document.getElementById('sendChatBtn').disabled = false;
+    if(msgs.length === 0) container.innerHTML = '<div style="text-align:center; padding:20px;">💬 No messages yet. Start the conversation!</div>';
+    else container.innerHTML = msgs.map(m => `<div class="chat-bubble"><div class="chat-meta"><strong>${escapeHtml(m.senderName)}</strong> · ${new Date(m.timestamp).toLocaleTimeString()}</div><div>${escapeHtml(m.text)}</div></div>`).join('');
+    container.scrollTop = container.scrollHeight;
+  }
+
   function sendChatMessage() {
     const msg = document.getElementById('chatInput').value.trim();
     if(!currentChatBookId || !msg) return;
-    
     if(!messages[currentChatBookId]) messages[currentChatBookId] = [];
-    const senderName = currentSeller ? `Seller: ${currentSeller.firstName}` : 'Buyer';
-    messages[currentChatBookId].push({
-      senderName: senderName,
-      text: msg,
-      timestamp: Date.now()
-    });
+    messages[currentChatBookId].push({ senderName: currentSeller ? `Seller: ${currentSeller.firstName}` : 'Buyer', text: msg, timestamp: Date.now() });
     saveToLocal();
     loadChatForBook(currentChatBookId);
     document.getElementById('chatInput').value = '';
   }
-  
-  function sendInterestRequest(bookId, bookTitle, sellerName) {
-    alert(`📩 Interest sent to seller: ${sellerName}\n\nYou can now chat with them in the chat box!`);
-    if(!messages[bookId]) messages[bookId] = [];
-    messages[bookId].push({
-      senderName: 'Buyer',
-      text: `💌 I'm interested in "${bookTitle}"! Please let me know more details.`,
-      timestamp: Date.now()
-    });
-    saveToLocal();
-    loadChatForBook(bookId);
-  }
-  
-  function renderBooks() {
-    const grid = document.getElementById('booksGrid');
-    if(!grid) return;
-    let filtered = books.filter(b => !b.isSold);
-    if(currentSearchQuery) {
-      const q = currentSearchQuery.toLowerCase();
-      filtered = filtered.filter(b => b.title.toLowerCase().includes(q) || (b.author && b.author.toLowerCase().includes(q)));
+
+  function updateUI() {
+    const sellerInfo = document.getElementById('sellerInfoSection');
+    const buyerInfo = document.getElementById('buyerInfoSection');
+    if(currentSeller) {
+      sellerInfo.style.display = 'flex';
+      buyerInfo.style.display = 'none';
+      document.getElementById('sellerNameDisplay').innerText = `${currentSeller.firstName} ${currentSeller.lastName || ''}`.trim() || currentSeller.email;
+      document.getElementById('sellerCityDisplay').innerText = currentSeller.city ? `📍 ${currentSeller.city}` : '';
+      document.getElementById('sellerAvatar').innerHTML = (currentSeller.firstName ? currentSeller.firstName.charAt(0) : '📖').toUpperCase();
+      renderSellerProfile();
+    } else {
+      sellerInfo.style.display = 'none';
+      buyerInfo.style.display = 'flex';
+      document.getElementById('sellerProfileContent').innerHTML = '<div class="profile-card" style="text-align:center;"><i class="fas fa-store" style="font-size:3rem;"></i><p>Login to sell books and manage listings</p><button class="btn btn-primary" onclick="document.getElementById(\'showSellerAuthBtn\').click()">Login as Seller</button></div>';
     }
-    document.getElementById('bookCountBadge').innerText = filtered.length;
-    if(filtered.length === 0) { grid.innerHTML = '<div class="no-results">No books found</div>'; return; }
-    grid.innerHTML = filtered.map(book => `
-      <div class="book-card">
-        <img class="book-image" src="${escapeHtml(book.imageDataUrl || defaultCover)}">
-        <div class="book-info">
-          <div class="book-title">📘 ${escapeHtml(book.title)}<span class="commission-badge">10% Commission</span></div>
-          <div class="book-author">✍️ ${escapeHtml(book.author || 'Unknown')}</div>
-          <div class="book-price">💰 ${escapeHtml(book.price)}</div>
-          <div class="book-seller"><i class="fas fa-store"></i> ${escapeHtml(book.seller)}</div>
-          <div class="card-actions">
-            <button class="btn btn-primary btn-sm interest-btn" data-id="${book.id}" data-title="${escapeHtml(book.title)}" data-seller="${escapeHtml(book.seller)}"><i class="fas fa-hands-helping"></i> I'm interested</button>
-            <button class="btn btn-outline btn-sm chat-btn" data-id="${book.id}" data-title="${escapeHtml(book.title)}"><i class="fas fa-comment"></i> Ask Question</button>
-          </div>
-          <div class="interest-badge"><i class="fas fa-heart"></i> ${book.interestCount || 0} interested</div>
-        </div>
-      </div>
-    `).join('');
-    
-    document.querySelectorAll('.interest-btn').forEach(btn => {
-      btn.onclick = () => sendInterestRequest(btn.dataset.id, btn.dataset.title, btn.dataset.seller);
-    });
-    document.querySelectorAll('.chat-btn').forEach(btn => {
-      btn.onclick = () => loadChatForBook(btn.dataset.id);
-    });
-  }
-  
-  function markAsSold(book) {
-    if(book.isSold) return;
-    book.isSold = true;
-    saveToLocal();
     renderBooks();
-    renderSellerProfile();
-    alert(`✅ Book "${book.title}" marked as sold!`);
   }
-  
-  function addNewBook(title, author, price, description, category, imageDataUrl) {
-    if(!currentSeller) { alert('Please sign in'); return; }
-    const newBook = {
-      id: Date.now().toString(),
-      title: title.trim(),
-      author: author.trim() || 'Unknown',
-      price: price + ' NPR',
-      priceRaw: parseFloat(price),
-      description: description.trim(),
-      seller: `${currentSeller.firstName} ${currentSeller.lastName}`.trim() || currentSeller.email,
-      sellerId: currentSeller.id,
-      category: category,
-      imageDataUrl: imageDataUrl || defaultCover,
-      interestCount: 0,
-      isSold: false,
-      createdAt: Date.now()
-    };
-    books.unshift(newBook);
-    saveToLocal();
-    renderBooks();
-    renderSellerProfile();
-  }
-  
-  function escapeHtml(str) { if(!str) return ''; return String(str).replace(/[&<>]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[m])); }
-  
-  // Auth functions (simplified)
-  function regularSignIn(email, pass) {
-    const seller = sellers.find(s => s.email === email && s.password === pass);
-    if(seller) { currentSeller = seller; saveSellerAuth(); updateUI(); closeAuthModal(); return true; }
-    return false;
-  }
-  
+
+  function regularSignIn(email, pass) { const s = sellers.find(s => s.email === email && s.password === pass); if(s) { currentSeller = s; saveSellerAuth(); updateUI(); closeAuthModal(); return true; } return false; }
+  function googleSignUp() { const email = prompt('Enter Gmail:'); if(email) { let s = sellers.find(s => s.email === email); if(!s) { s = { id: Date.now().toString(), firstName: email.split('@')[0], email: email, totalCommissionPaid: 0 }; sellers.push(s); saveSellers(); } currentSeller = s; saveSellerAuth(); updateUI(); closeAuthModal(); } }
+  function mobileSignup() { const mobile = prompt('Enter mobile (+977XXXXXXXXXX):'); if(mobile) { let s = sellers.find(s => s.mobile === mobile); if(!s) { s = { id: Date.now().toString(), firstName: 'User', mobile: mobile, totalCommissionPaid: 0 }; sellers.push(s); saveSellers(); } currentSeller = s; saveSellerAuth(); updateUI(); closeAuthModal(); } }
   function logout() { currentSeller = null; saveSellerAuth(); updateUI(); document.querySelector('.nav-tab[data-page="buyer"]').click(); }
-  
-  // Modal handling (simplified)
+  function escapeHtml(str) { if(!str) return ''; return String(str).replace(/[&<>]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[m])); }
+
   const authModal = document.getElementById('sellerAuthModal');
   const sellModal = document.getElementById('sellModal');
+  const commissionModal = document.getElementById('commissionModal');
   function showAuthModal() { authModal.style.display = 'flex'; }
   function closeAuthModal() { authModal.style.display = 'none'; }
-  
-  // Page navigation
-  document.querySelectorAll('.nav-tab').forEach(tab => {
-    tab.onclick = () => {
-      document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
-      tab.classList.add('active');
-      const page = tab.dataset.page;
-      document.getElementById('buyerPage').classList.toggle('active', page === 'buyer');
-      document.getElementById('sellerPage').classList.toggle('active', page === 'seller');
-      if(page === 'seller' && currentSeller) renderSellerProfile();
-    };
-  });
-  
-  // Event listeners
+
   document.getElementById('showSellerAuthBtn').onclick = showAuthModal;
+  document.getElementById('closeSellerAuthModalBtn').onclick = closeAuthModal;
+  document.getElementById('closeCommissionModalBtn').onclick = () => commissionModal.style.display = 'none';
+  document.getElementById('confirmCommissionPaymentBtn').onclick = confirmCommissionAndRemove;
+  document.getElementById('downloadQRBtn').onclick = downloadQR;
   document.getElementById('logoutBtn').onclick = logout;
+  document.getElementById('signinBtn').onclick = () => { if(regularSignIn(document.getElementById('signinEmail').value, document.getElementById('signinPassword').value)) closeAuthModal(); else alert('Invalid credentials'); };
+  document.getElementById('googleAuthBtn').onclick = () => { googleSignUp(); closeAuthModal(); };
+  document.getElementById('mobileSignupBtn').onclick = () => { mobileSignup(); closeAuthModal(); };
+  document.getElementById('closeSellModalBtn').onclick = () => sellModal.style.display = 'none';
   document.getElementById('sendChatBtn').onclick = sendChatMessage;
   document.getElementById('chatInput').addEventListener('keypress', e => { if(e.key === 'Enter') sendChatMessage(); });
   document.getElementById('searchBtn').onclick = () => { currentSearchQuery = document.getElementById('searchInput').value; renderBooks(); };
   document.getElementById('searchInput').addEventListener('keypress', e => { if(e.key === 'Enter') { currentSearchQuery = e.target.value; renderBooks(); } });
-  
-  // Simple auth modal content (for demo)
-  authModal.innerHTML = `<div class="modal-content"><h3>Seller Login</h3><div class="input-group"><input type="email" id="signinEmail" placeholder="Email"></div><div class="input-group"><input type="password" id="signinPassword" placeholder="Password"></div><button class="btn btn-primary" id="signinBtn">Sign In</button><button class="btn btn-outline" id="closeSellerAuthModalBtn">Cancel</button></div>`;
-  document.getElementById('signinBtn').onclick = () => { if(regularSignIn(document.getElementById('signinEmail').value, document.getElementById('signinPassword').value)) closeAuthModal(); else alert('Invalid'); };
-  document.getElementById('closeSellerAuthModalBtn').onclick = closeAuthModal;
-  
-  // Sell modal
-  sellModal.innerHTML = `<div class="modal-content"><h3>List Your Book</h3><form id="sellBookForm"><input type="text" id="bookTitle" placeholder="Title" class="input-group" style="width:100%; margin-bottom:1rem;"><input type="text" id="bookAuthor" placeholder="Author" style="width:100%; margin-bottom:1rem;"><input type="number" id="bookPrice" placeholder="Price" style="width:100%; margin-bottom:1rem;"><textarea id="bookDesc" rows="2" placeholder="Description" style="width:100%; margin-bottom:1rem;"></textarea><select id="bookCategory" style="width:100%; margin-bottom:1rem;"><option>Textbook</option><option>Novel</option></select><input type="file" id="bookImageInput" accept="image/*"><div id="imagePreviewContainer"></div><button type="submit" class="btn btn-primary">List Book</button><button type="button" class="btn btn-outline" id="closeSellModalBtn">Cancel</button></form></div>`;
-  document.getElementById('closeSellModalBtn').onclick = () => sellModal.style.display = 'none';
+
   let selectedImage = null;
-  document.getElementById('bookImageInput')?.addEventListener('change', (e) => { const f = e.target.files[0]; if(f) { const r = new FileReader(); r.onload = ev => { selectedImage = ev.target.result; document.getElementById('imagePreviewContainer').innerHTML = `<img src="${selectedImage}" style="width:60px;">`; }; r.readAsDataURL(f); } });
-  document.getElementById('sellBookForm')?.addEventListener('submit', (e) => { e.preventDefault(); addNewBook(document.getElementById('bookTitle').value, document.getElementById('bookAuthor').value, document.getElementById('bookPrice').value, document.getElementById('bookDesc').value, document.getElementById('bookCategory').value, selectedImage); sellModal.style.display = 'none'; document.getElementById('sellBookForm').reset(); selectedImage = null; });
-  
-  // Commission modal placeholder
-  const commissionModal = document.getElementById('commissionModal');
-  if(commissionModal) commissionModal.innerHTML = `<div class="modal-content"><h3>Pay Commission</h3><div class="qr-container"><img class="qr-image" src="qr.jpg"><button class="download-btn">Download QR</button><button class="btn btn-primary" id="closeCommissionModalBtn">Close</button></div></div>`;
-  document.getElementById('closeCommissionModalBtn')?.addEventListener('click', () => commissionModal.style.display = 'none');
-  
+  document.getElementById('bookImageInput').onchange = (e) => { const f = e.target.files[0]; if(f) { const r = new FileReader(); r.onload = ev => { selectedImage = ev.target.result; document.getElementById('imagePreviewContainer').innerHTML = `<img src="${selectedImage}" style="width:60px;border-radius:12px;">`; }; r.readAsDataURL(f); } };
+  document.getElementById('sellBookForm').onsubmit = (e) => { e.preventDefault(); addNewBook(document.getElementById('bookTitle').value, document.getElementById('bookAuthor').value, document.getElementById('bookPrice').value, document.getElementById('bookDesc').value, document.getElementById('bookCategory').value, selectedImage); sellModal.style.display = 'none'; document.getElementById('sellBookForm').reset(); selectedImage = null; document.getElementById('imagePreviewContainer').innerHTML = ''; };
+
+  document.querySelectorAll('.nav-tab').forEach(tab => {
+    tab.onclick = () => {
+      document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      document.getElementById('buyerPage').classList.toggle('active', tab.dataset.page === 'buyer');
+      document.getElementById('sellerPage').classList.toggle('active', tab.dataset.page === 'seller');
+      if(tab.dataset.page === 'seller' && currentSeller) renderSellerProfile();
+    };
+  });
+
   loadSellers();
   loadSellerAuth();
   loadData();
