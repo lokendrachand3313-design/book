@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
   <title>KitabSansar | OLDBOOKS — Buy & Sell Used Books</title>
-  <!-- Font Awesome 6 (minimal usage) -->
+  <!-- Font Awesome 6 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
@@ -517,23 +517,10 @@
       padding: 1rem;
     }
     
-    .seller-book-info h4 {
-      font-size: 1rem;
-      margin-bottom: 0.3rem;
-    }
-    
     .expiry-note {
       font-size: 0.7rem;
       color: #e67e22;
       margin-top: 5px;
-    }
-    
-    .quick-add-section {
-      background: rgba(255, 255, 255, 0.95);
-      border-radius: 1rem;
-      padding: 1rem;
-      margin-bottom: 1.5rem;
-      border: 1px dashed #ffd966;
     }
     
     .modal {
@@ -765,9 +752,7 @@
   let pendingSaleBook = null;
   let currentSearchQuery = '';
   
-  // 15 days in milliseconds
   const FIFTEEN_DAYS = 15 * 24 * 60 * 60 * 1000;
-  
   const defaultCover = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23e9dfd1'/%3E%3Ctext x='50' y='55' font-size='44' text-anchor='middle' fill='%23997b55'%3E📖%3C/text%3E%3C/svg%3E";
 
   function loadSellers() { 
@@ -784,11 +769,9 @@
     localStorage.setItem('kitab_messages', JSON.stringify(messages)); 
   }
 
-  // Remove expired books (older than 15 days and not sold)
   function removeExpiredBooks() {
     const now = Date.now();
     let removedCount = 0;
-    
     books = books.filter(book => {
       if (!book.isSold && book.createdAt && (now - book.createdAt) > FIFTEEN_DAYS) {
         removedCount++;
@@ -796,10 +779,7 @@
       }
       return true;
     });
-    
-    if (removedCount > 0) {
-      saveToLocal();
-    }
+    if (removedCount > 0) saveToLocal();
     return removedCount;
   }
 
@@ -807,11 +787,9 @@
     const sb = localStorage.getItem('kitab_books'); 
     if(sb) books = JSON.parse(sb); 
     else books = [];
-    
     const sm = localStorage.getItem('kitab_messages'); 
     if(sm) messages = JSON.parse(sm); 
     else messages = {};
-    
     removeExpiredBooks();
     books.sort((a,b) => (b.createdAt||0) - (a.createdAt||0));
     renderBooks();
@@ -875,15 +853,7 @@
     saveToLocal();
     renderBooks();
     if(currentSeller) renderSellerProfile();
-    alert(`✅ Book "${title}" listed successfully! It will be automatically removed if not sold within 15 days.`);
-  }
-
-  // Get sender display name
-  function getSenderDisplayName(senderId, senderName) {
-    if (currentSeller && senderId === currentSeller.id) {
-      return 'You (Seller)';
-    }
-    return senderName;
+    alert(`✅ Book "${title}" listed successfully!`);
   }
 
   function renderBooks() {
@@ -913,7 +883,7 @@
           ${expiryWarning}
           <div class="card-actions">
             <button class="btn btn-primary btn-sm interest-btn" data-id="${book.id}" data-title="${escapeHtml(book.title)}" data-seller="${escapeHtml(book.seller)}">I'm interested</button>
-            <button class="btn btn-outline btn-sm chat-btn" data-id="${book.id}">Ask Question</button>
+            <button class="btn btn-outline btn-sm chat-btn" data-id="${book.id}" data-title="${escapeHtml(book.title)}">Ask Question</button>
           </div>
           <div class="interest-badge">${book.interestCount || 0} interested</div>
         </div>
@@ -962,7 +932,7 @@
               <p class="book-price" style="font-size:1rem;">${book.price}</p>
               <p style="font-size:0.8rem; margin:5px 0;">${book.description || 'No description'}</p>
               <p style="font-size:0.7rem; color:#e67e22;">${expiryText}</p>
-              ${!book.isSold ? `<button class="btn btn-success btn-sm mark-sold-from-profile" data-id="${book.id}" data-price="${book.priceRaw}">Mark as Sold & Pay Commission</button>` : '<span style="background:#28a745; color:white; padding:5px; border-radius:20px; display:inline-block;">Sold</span>'}
+              ${!book.isSold ? `<button class="btn btn-success btn-sm mark-sold-from-profile" data-id="${book.id}">Mark as Sold & Pay Commission</button>` : '<span style="background:#28a745; color:white; padding:5px; border-radius:20px;">Sold</span>'}
             </div>
           </div>
         `}).join('')}
@@ -993,7 +963,7 @@
     currentChatBookId = bookId;
     const book = books.find(b => b.id === bookId);
     if(book) {
-      document.getElementById('currentChatBook').innerHTML = `Chatting about: ${escapeHtml(book.title)} with ${escapeHtml(book.seller)}`;
+      document.getElementById('currentChatBook').innerHTML = `Chatting with: ${escapeHtml(book.seller)} about "${escapeHtml(book.title)}"`;
     }
     const container = document.getElementById('chatMessagesContainer');
     const msgs = messages[bookId] || [];
@@ -1008,16 +978,18 @@
       container.innerHTML = '<div style="text-align:center; padding:20px;">No messages yet. Start the conversation!</div>';
     } else {
       container.innerHTML = msgs.map(msg => {
-        // Determine if message is from current user (seller or buyer)
         let isSent = false;
-        if (currentSeller && msg.senderId === currentSeller.id) {
-          isSent = true;
-        } else if (!currentSeller && msg.senderName === 'Buyer') {
-          isSent = true;
-        } else if (currentSeller && msg.senderName === 'Buyer') {
-          isSent = false;
-        } else if (!currentSeller && msg.senderId === 'seller') {
-          isSent = false;
+        // Check if current user is the sender
+        if (currentSeller) {
+          // Seller is logged in
+          if (msg.senderId === currentSeller.id) {
+            isSent = true;
+          }
+        } else {
+          // Buyer (guest) - messages from 'Buyer' are sent by current user
+          if (msg.senderName === 'Buyer') {
+            isSent = true;
+          }
         }
         
         return `
@@ -1046,7 +1018,7 @@
     let senderName, senderId;
     if (currentSeller) {
       // Seller is logged in
-      senderName = currentSeller.firstName;
+      senderName = `${currentSeller.firstName} (Seller)`;
       senderId = currentSeller.id;
     } else {
       // Buyer (guest)
@@ -1147,7 +1119,6 @@
     saveSellerAuth(); 
     updateUI(); 
     document.querySelector('.nav-tab[data-page="buyer"]').click(); 
-    // Clear current chat
     currentChatBookId = null;
     document.getElementById('currentChatBook').innerHTML = 'Select a book';
     document.getElementById('chatMessagesContainer').innerHTML = '<div style="text-align:center; padding:30px;">Click "Ask Question" to start</div>';
@@ -1233,7 +1204,6 @@
     };
   });
 
-  // Run expiry check every hour
   setInterval(() => {
     const removed = removeExpiredBooks();
     if(removed > 0) {
