@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>KitabSansar |二手书集市 - Buy & Sell Used Books</title>
-  <!-- Font Awesome 6 (free) -->
+  <title>KitabSansar | किताब संसार - Buy & Sell Used Books with Photos</title>
+  <!-- Font Awesome 6 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <!-- Google Fonts: Inter + fallback -->
+  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
   <style>
     * {
@@ -16,11 +16,11 @@
     }
 
     body {
-      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-      background: #f9f7f2;
-      color: #1e2a1f;
-      line-height: 1.4;
-      padding: 1.8rem 1.2rem;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: #faf8f3;
+      color: #2c2a24;
+      line-height: 1.5;
+      padding: 1.5rem;
     }
 
     .container {
@@ -28,7 +28,7 @@
       margin: 0 auto;
     }
 
-    /* header & nav */
+    /* Header */
     .top-bar {
       display: flex;
       flex-wrap: wrap;
@@ -36,31 +36,29 @@
       align-items: center;
       margin-bottom: 2rem;
       gap: 1rem;
-      border-bottom: 2px solid #e0d9cc;
-      padding-bottom: 1rem;
+      border-bottom: 3px solid #e8dfd1;
+      padding-bottom: 1.2rem;
     }
 
     .logo h1 {
       font-size: 2rem;
       font-weight: 800;
-      letter-spacing: -0.5px;
-      background: linear-gradient(135deg, #2c6e2f, #b87333);
+      background: linear-gradient(135deg, #2d6a2f, #c27e4a);
       background-clip: text;
       -webkit-background-clip: text;
       color: transparent;
     }
     .logo p {
       font-size: 0.75rem;
-      color: #5a6e4a;
+      color: #6b5a44;
       margin-top: 4px;
     }
     .lang-badge {
-      background: #ece5d8;
-      padding: 0.2rem 0.7rem;
+      background: #e8dfd1;
+      padding: 0.2rem 0.8rem;
       border-radius: 30px;
       font-size: 0.7rem;
       font-weight: 500;
-      display: inline-block;
     }
 
     .btn-group {
@@ -72,45 +70,42 @@
     .btn {
       border: none;
       background: white;
-      padding: 0.6rem 1.2rem;
-      border-radius: 40px;
+      padding: 0.65rem 1.3rem;
+      border-radius: 50px;
       font-weight: 600;
       font-size: 0.9rem;
       cursor: pointer;
-      transition: 0.2s;
-      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+      transition: all 0.2s ease;
       display: inline-flex;
       align-items: center;
       gap: 8px;
       font-family: inherit;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
     }
 
     .btn-primary {
       background: #2a6b2f;
       color: white;
-      box-shadow: 0 2px 8px rgba(42,107,47,0.2);
     }
     .btn-primary:hover {
-      background: #1f5423;
-      transform: translateY(-1px);
+      background: #1e5422;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 14px rgba(42,107,47,0.25);
     }
     .btn-outline {
-      border: 1px solid #cbc0ae;
-      background: #fffef7;
+      border: 1px solid #d6ccbc;
+      background: #fffef9;
     }
     .btn-outline:hover {
-      background: #f0ebdf;
-      border-color: #b38f6b;
+      background: #f0eadf;
+      border-color: #b88f64;
     }
-    .btn-danger {
-      background: #c56a4b;
-      color: white;
-    }
-    .btn-danger:hover {
-      background: #a75338;
+    .btn-sm {
+      padding: 0.4rem 1rem;
+      font-size: 0.75rem;
     }
 
-    /* main two-column layout */
+    /* Dashboard layout */
     .dashboard {
       display: flex;
       flex-wrap: wrap;
@@ -118,19 +113,17 @@
       margin-top: 1rem;
     }
     .listings-panel {
-      flex: 2;
-      min-width: 260px;
+      flex: 2.5;
+      min-width: 280px;
     }
     .chat-panel {
       flex: 1.2;
-      min-width: 280px;
-      background: #ffffffdd;
-      backdrop-filter: blur(2px);
+      min-width: 300px;
       background: #fffef8;
       border-radius: 28px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.05);
       padding: 1.2rem;
-      border: 1px solid #ece2d4;
+      border: 1px solid #e9e0d2;
       height: fit-content;
       position: sticky;
       top: 1rem;
@@ -139,31 +132,41 @@
     .section-title {
       font-size: 1.5rem;
       font-weight: 700;
-      margin-bottom: 1rem;
+      margin-bottom: 1.2rem;
       display: flex;
       align-items: center;
-      gap: 8px;
-      border-left: 5px solid #b87333;
-      padding-left: 12px;
+      gap: 10px;
+      border-left: 5px solid #c27e4a;
+      padding-left: 14px;
     }
 
-    /* book grid */
+    /* Book Grid */
     .books-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 1.3rem;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
     }
     .book-card {
       background: white;
       border-radius: 24px;
-      padding: 1rem;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.04);
-      transition: 0.2s;
-      border: 1px solid #ede5d9;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+      transition: 0.25s ease;
+      border: 1px solid #ece2d4;
     }
     .book-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 12px 22px rgba(0,0,0,0.08);
+      transform: translateY(-5px);
+      box-shadow: 0 16px 28px rgba(0,0,0,0.1);
+    }
+    .book-image {
+      width: 100%;
+      height: 190px;
+      object-fit: cover;
+      background: #e9e2d4;
+      display: block;
+    }
+    .book-info {
+      padding: 1rem 1rem 1rem 1rem;
     }
     .book-title {
       font-weight: 800;
@@ -172,7 +175,7 @@
     }
     .book-author {
       font-size: 0.8rem;
-      color: #6f5e47;
+      color: #8b765a;
       margin-bottom: 0.5rem;
     }
     .book-price {
@@ -182,15 +185,15 @@
     }
     .book-seller {
       font-size: 0.7rem;
-      background: #f3efe8;
+      background: #f3efe6;
       display: inline-block;
-      padding: 2px 10px;
-      border-radius: 20px;
+      padding: 3px 12px;
+      border-radius: 30px;
       margin: 8px 0;
     }
     .book-desc {
       font-size: 0.8rem;
-      color: #4e4b44;
+      color: #5c5546;
       margin: 8px 0;
       display: -webkit-box;
       -webkit-line-clamp: 2;
@@ -200,69 +203,77 @@
     .card-actions {
       display: flex;
       gap: 8px;
-      margin-top: 12px;
-    }
-    .btn-sm {
-      padding: 0.4rem 0.9rem;
-      font-size: 0.75rem;
+      margin: 12px 0 8px;
     }
     .interest-badge {
-      background: #e8f0e6;
-      color: #1f5423;
+      background: #eef3ea;
+      color: #2a6b2f;
       font-size: 0.7rem;
       border-radius: 50px;
-      padding: 0.2rem 0.6rem;
+      padding: 0.2rem 0.7rem;
       display: inline-flex;
       align-items: center;
-      gap: 4px;
+      gap: 5px;
     }
 
-    /* modal form */
+    /* Modal for selling */
     .modal {
       display: none;
       position: fixed;
       top: 0; left: 0;
       width: 100%; height: 100%;
-      background: rgba(0,0,0,0.6);
+      background: rgba(0,0,0,0.65);
       align-items: center;
       justify-content: center;
       z-index: 1000;
     }
     .modal-content {
-      background: #fffcf5;
-      max-width: 480px;
+      background: #fffdf7;
+      max-width: 520px;
       width: 90%;
-      border-radius: 32px;
+      border-radius: 36px;
       padding: 1.8rem;
-      box-shadow: 0 20px 35px rgba(0,0,0,0.2);
+      max-height: 90vh;
+      overflow-y: auto;
     }
     .modal-content h3 {
       font-size: 1.6rem;
-      margin-bottom: 1rem;
+      margin-bottom: 1.2rem;
     }
     .form-group {
-      margin-bottom: 1rem;
+      margin-bottom: 1.2rem;
     }
     .form-group label {
       display: block;
       font-weight: 600;
-      margin-bottom: 5px;
+      margin-bottom: 6px;
     }
-    input, textarea {
+    input, textarea, select {
       width: 100%;
-      padding: 10px 14px;
-      border-radius: 20px;
-      border: 1px solid #ddd2c0;
+      padding: 12px 14px;
+      border-radius: 28px;
+      border: 1px solid #ddd0bd;
       font-family: inherit;
       background: white;
     }
-    textarea {
-      resize: vertical;
+    .image-preview {
+      margin-top: 10px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
     }
+    .preview-img {
+      width: 70px;
+      height: 70px;
+      object-fit: cover;
+      border-radius: 12px;
+      border: 2px solid #e0d3c2;
+    }
+    /* Chat area */
     .chat-messages {
       background: #faf6ef;
       border-radius: 24px;
-      height: 340px;
+      height: 360px;
       overflow-y: auto;
       padding: 12px;
       margin: 12px 0;
@@ -273,14 +284,14 @@
     .chat-bubble {
       background: white;
       border-radius: 18px;
-      padding: 8px 12px;
+      padding: 8px 14px;
       max-width: 90%;
       font-size: 0.85rem;
       box-shadow: 0 1px 2px rgba(0,0,0,0.05);
-      border: 1px solid #e7dfd3;
+      border: 1px solid #e6dccc;
     }
     .chat-bubble.sent {
-      background: #e3f0e0;
+      background: #e0f0dc;
       align-self: flex-end;
       border-bottom-right-radius: 4px;
     }
@@ -290,9 +301,9 @@
       border-bottom-left-radius: 4px;
     }
     .chat-meta {
-      font-size: 0.65rem;
-      color: #8f7a62;
-      margin-bottom: 3px;
+      font-size: 0.6rem;
+      color: #9b876b;
+      margin-bottom: 4px;
     }
     .chat-input-area {
       display: flex;
@@ -303,37 +314,32 @@
       flex: 1;
       border-radius: 40px;
     }
+    .book-selector {
+      margin: 8px 0;
+      border-radius: 40px;
+      background: white;
+    }
     .empty-chat {
       text-align: center;
-      color: #ae9f89;
+      color: #b9aa91;
+      padding: 30px 10px;
       font-style: italic;
-      padding: 20px;
-    }
-    .book-selector {
-      margin-bottom: 12px;
-    }
-    select {
-      padding: 8px;
-      border-radius: 30px;
-      border: 1px solid #cfc5b4;
-      background: white;
-      width: 100%;
     }
     hr {
       margin: 12px 0;
-      border-color: #e2d9ce;
+      border-color: #e6ddcf;
     }
     footer {
       margin-top: 3rem;
       text-align: center;
       font-size: 0.75rem;
-      color: #9b8e7a;
-      border-top: 1px solid #e1d9ce;
+      color: #a29178;
+      border-top: 1px solid #e3d9cc;
       padding-top: 1.5rem;
     }
     @media (max-width: 780px) {
       body { padding: 1rem; }
-      .chat-panel { position: static; margin-top: 1rem; }
+      .chat-panel { position: static; margin-top: 1.2rem; }
     }
   </style>
 </head>
@@ -342,62 +348,58 @@
   <div class="top-bar">
     <div class="logo">
       <h1>📖 KitabSansar <span class="lang-badge">किताब संसार</span></h1>
-      <p>Buy & Sell Used Books | पुरानो किताब किन्न र बेच्नुहोस्</p>
+      <p>Buy & Sell Used Books | पुरानो किताब किन्न र बेच्नुहोस् | 📸 Upload photos</p>
     </div>
     <div class="btn-group">
-      <button class="btn btn-primary" id="showSellModalBtn"><i class="fas fa-plus-circle"></i> <span data-en="Sell a Book" data-ne="पुस्तक बेच्नुहोस्">Sell a Book</span></button>
+      <button class="btn btn-primary" id="showSellModalBtn"><i class="fas fa-plus-circle"></i> <span data-en="Sell a Book + Photo" data-ne="पुस्तक र फोटो बेच्नुहोस्">Sell a Book + Photo</span></button>
       <button class="btn btn-outline" id="toggleLangBtn"><i class="fas fa-language"></i> नेपाली / English</button>
     </div>
   </div>
 
   <div class="dashboard">
-    <!-- Left: Books listings -->
+    <!-- Left: Books listings with images -->
     <div class="listings-panel">
       <div class="section-title">
         <i class="fas fa-book-open"></i> 
         <span id="listingsTitle" data-en="Available Books" data-ne="उपलब्ध पुस्तकहरू">Available Books</span>
-        <span id="bookCountBadge" style="font-size:0.9rem; background:#e3d9ce; padding:2px 10px; border-radius:40px;">0</span>
+        <span id="bookCountBadge" style="font-size:0.8rem; background:#e6ddcf; padding:2px 12px; border-radius:40px;">0</span>
       </div>
-      <div id="booksGrid" class="books-grid">
-        <!-- dynamic cards -->
-      </div>
+      <div id="booksGrid" class="books-grid"></div>
     </div>
 
-    <!-- Right: Chat & Interest Requests -->
+    <!-- Right: Chat & Interests -->
     <div class="chat-panel">
-      <div class="section-title" style="font-size:1.2rem; margin-bottom: 0.5rem;">
-        <i class="fas fa-comments"></i> <span data-en="Chat & Interests" data-ne="कुराकानी र रुचि">Chat & Interests</span>
+      <div class="section-title" style="font-size:1.2rem;">
+        <i class="fas fa-comments"></i> <span data-en="Chat & Interest" data-ne="कुराकानी र रुचि">Chat & Interest</span>
       </div>
       <div>
-        <label style="font-size:0.8rem; font-weight:600;"><i class="fas fa-book"></i> <span data-en="Select a book to chat about" data-ne="कुराकानीको लागि पुस्तक छान्नुहोस्">Select a book to chat about</span></label>
+        <label style="font-weight:600; font-size:0.8rem;"><i class="fas fa-book"></i> <span data-en="Select a book to chat" data-ne="कुराकानीको लागि पुस्तक छान्नुहोस्">Select a book to chat</span></label>
         <select id="chatBookSelect" class="book-selector"></select>
       </div>
       <div class="chat-messages" id="chatMessagesContainer">
-        <div class="empty-chat">✨ <span data-en="Pick a book and start conversation" data-ne="पुस्तक छान्नुहोस् र कुराकानी सुरु गर्नुहोस्">Pick a book and start conversation</span></div>
+        <div class="empty-chat">✨ <span data-en="Pick a book & start conversation" data-ne="पुस्तक छान्नुहोस् र कुराकानी सुरु गर्नुहोस्">Pick a book & start conversation</span></div>
       </div>
       <div class="chat-input-area">
         <input type="text" id="chatInput" placeholder="Type message / सन्देश लेख्नुहोस्..." disabled>
         <button class="btn btn-primary btn-sm" id="sendChatBtn" disabled><i class="fas fa-paper-plane"></i></button>
       </div>
       <hr>
-      <div style="font-size:0.75rem; background:#f2ede4; border-radius: 28px; padding: 8px 12px;">
-        <i class="fas fa-envelope-open-text"></i> <span data-en="Interest requests appear when buyer clicks 'I'm interested'. Sellers can respond via chat." data-ne="खरीददारले 'रुचि छ' क्लिक गरेपछि अनुरोध आउँछ। विक्रेताले च्याटमार्फत जवाफ दिन सक्नुहुन्छ।">Interest requests appear when buyer clicks "I'm interested". Sellers can respond via chat.</span>
+      <div style="font-size:0.7rem; background:#f2ede4; border-radius: 24px; padding: 8px 12px;">
+        <i class="fas fa-info-circle"></i> <span data-en="Click 'I'm interested' → seller gets notification. Upload book photos while listing!" data-ne="'रुचि छ' क्लिक गर्नुहोस् → विक्रेतालाई सूचना। पुस्तक सूचीकरण गर्दा फोटो अपलोड गर्नुहोस्!">Click 'I'm interested' → seller gets notification. Upload book photos while listing!</span>
       </div>
     </div>
   </div>
-  <footer>
-    <span>📚 KitabSansar |二手书 marketplace —  पुस्तक प्रेमीहरूको लागि </span>
-  </footer>
+  <footer>📚 KitabSansar — Free marketplace | Upload real book images, connect with buyers & sellers.</footer>
 </div>
 
-<!-- Modal for selling book -->
+<!-- SELL MODAL with PHOTO UPLOAD -->
 <div id="sellModal" class="modal">
   <div class="modal-content">
-    <h3><i class="fas fa-plus-circle"></i> <span data-en="Sell your book" data-ne="पुस्तक बिक्री गर्नुहोस्">Sell your book</span></h3>
+    <h3><i class="fas fa-camera"></i> <span data-en="Sell your book with photo" data-ne="फोटो सहित पुस्तक बेच्नुहोस्">Sell your book with photo</span></h3>
     <form id="sellBookForm">
       <div class="form-group">
         <label><span data-en="Book Title *" data-ne="पुस्तकको शीर्षक *">Book Title *</span></label>
-        <input type="text" id="bookTitle" required placeholder="e.g., The Alchemist / पाउलो कोइल्हो">
+        <input type="text" id="bookTitle" required placeholder="e.g., The Alchemist, Sapiens">
       </div>
       <div class="form-group">
         <label><span data-en="Author" data-ne="लेखक">Author</span></label>
@@ -405,15 +407,21 @@
       </div>
       <div class="form-group">
         <label><span data-en="Price (NPR / USD)" data-ne="मूल्य (रुपैयाँ / डलर)">Price (NPR / USD)</span></label>
-        <input type="text" id="bookPrice" placeholder="e.g., 450 NPR / $5" required>
+        <input type="text" id="bookPrice" placeholder="e.g., 550 NPR" required>
       </div>
       <div class="form-group">
         <label><span data-en="Description / Condition" data-ne="विवरण / अवस्था">Description / Condition</span></label>
-        <textarea id="bookDesc" rows="2" placeholder="Like new, some highlights, etc."></textarea>
+        <textarea id="bookDesc" rows="2" placeholder="Like new, minor notes, etc."></textarea>
       </div>
       <div class="form-group">
         <label><span data-en="Seller Name" data-ne="विक्रेताको नाम">Seller Name</span></label>
-        <input type="text" id="sellerName" placeholder="e.g., Ram / Sita" required value="BookLover">
+        <input type="text" id="sellerName" placeholder="Your name" value="BookLover" required>
+      </div>
+      <div class="form-group">
+        <label><span data-en="Upload Book Photo (JPG/PNG)" data-ne="पुस्तकको फोटो अपलोड गर्नुहोस्">Upload Book Photo (JPG/PNG)</span></label>
+        <input type="file" id="bookImageInput" accept="image/jpeg,image/png,image/webp">
+        <div class="image-preview" id="imagePreviewContainer"></div>
+        <small style="color:#856e4a;">📸 Optional: Default book cover will be shown if no photo.</small>
       </div>
       <div style="display: flex; gap: 12px; justify-content: flex-end; margin-top: 20px;">
         <button type="button" class="btn btn-outline" id="closeModalBtn"><span data-en="Cancel" data-ne="रद्द गर्नुहोस्">Cancel</span></button>
@@ -424,29 +432,34 @@
 </div>
 
 <script>
-  // ---------- DATA STORAGE ----------
-  let books = [];          // each book: { id, title, author, price, description, seller, createdAt, interestCount, chats: { userId: [...] } but we use simple messages per book: array of {sender, text, timestamp} }
-  let messages = {};      // key: bookId => array of { senderName, text, timestamp, isBuyer? (just display) }
-  // For simplicity we treat each conversation per book: any user can send message, we store senderName.
-  // Also interest requests will just be reflected as a system message when someone clicks "I'm interested"
-  
-  // Helper: load from localStorage
+  // ---------- DATA MODEL ----------
+  let books = [];      // each: { id, title, author, price, description, seller, imageDataUrl (base64), interestCount, createdAt }
+  let messages = {};   // key: bookId => array of { senderName, text, timestamp, isSystem }
+
+  // Helper: save/load localStorage
+  function saveToLocal() {
+    localStorage.setItem('kitab_books_v2', JSON.stringify(books));
+    localStorage.setItem('kitab_messages_v2', JSON.stringify(messages));
+  }
+
   function loadData() {
-    const storedBooks = localStorage.getItem('kitab_books');
+    const storedBooks = localStorage.getItem('kitab_books_v2');
     if(storedBooks) books = JSON.parse(storedBooks);
-    const storedMessages = localStorage.getItem('kitab_messages');
+    const storedMessages = localStorage.getItem('kitab_messages_v2');
     if(storedMessages) messages = JSON.parse(storedMessages);
     else messages = {};
+    
     if(!books.length) {
-      // seed sample books
+      // Seed with sample books including demo images (placeholder images from unsplash but we use local emoji style? we'll use generated placeholder dataURLs)
+      const defaultCover = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23e0d6c6'/%3E%3Ctext x='50' y='55' font-size='40' text-anchor='middle' fill='%23997b55'%3E📚%3C/text%3E%3C/svg%3E";
       books = [
-        { id: '1', title: 'The Alchemist', author: 'Paulo Coelho', price: '550 NPR', description: 'Inspiring classic, good condition', seller: 'Aarav', createdAt: Date.now() - 86400000, interestCount: 1 },
-        { id: '2', title: 'Sapiens', author: 'Yuval Harari', price: '800 NPR', description: 'Brief history of humankind, like new', seller: 'Bikram', createdAt: Date.now() - 172800000, interestCount: 0 },
-        { id: '3', title: 'मुनामदन (Munamadan)', author: 'Laxmi Prasad Devkota', price: '250 NPR', description: 'Nepali epic poetry, softcover', seller: 'Kavita', createdAt: Date.now() - 345600000, interestCount: 2 }
+        { id: '1', title: 'The Alchemist', author: 'Paulo Coelho', price: '550 NPR', description: 'Inspiring classic, good condition', seller: 'Aarav', imageDataUrl: defaultCover, interestCount: 2, createdAt: Date.now() - 86400000 },
+        { id: '2', title: 'Sapiens', author: 'Yuval Harari', price: '800 NPR', description: 'Brief history of humankind, like new', seller: 'Bikram', imageDataUrl: defaultCover, interestCount: 1, createdAt: Date.now() - 172800000 },
+        { id: '3', title: 'मुनामदन (Munamadan)', author: 'Laxmi Prasad Devkota', price: '250 NPR', description: 'Nepali epic poetry, softcover', seller: 'Kavita', imageDataUrl: defaultCover, interestCount: 3, createdAt: Date.now() - 345600000 }
       ];
       messages = {
-        '1': [{ senderName: 'Aarav', text: 'Welcome! Interested? Let me know.', timestamp: Date.now() - 3600000, isSystem: false }],
-        '3': [{ senderName: 'Kavita', text: 'This book is a masterpiece. DM for details', timestamp: Date.now() - 7200000, isSystem: false }]
+        '1': [{ senderName: 'Aarav', text: 'Hello! This book is in excellent shape. Feel free to ask.', timestamp: Date.now() - 3600000, isSystem: false }],
+        '3': [{ senderName: 'Kavita', text: 'Nepali classic, pristine condition. DM me.', timestamp: Date.now() - 7200000, isSystem: false }]
       };
       saveToLocal();
     }
@@ -454,36 +467,34 @@
     renderBooks();
   }
 
-  function saveToLocal() {
-    localStorage.setItem('kitab_books', JSON.stringify(books));
-    localStorage.setItem('kitab_messages', JSON.stringify(messages));
-  }
-
   function renderBooks() {
     const grid = document.getElementById('booksGrid');
     if(!grid) return;
     if(books.length === 0) {
-      grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:40px;">📭 No books yet. Click "Sell a Book" to add first listing.</div>`;
+      grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:50px;">📭 No books listed yet. Click "Sell a Book + Photo" to add your first listing with image.</div>`;
       document.getElementById('bookCountBadge').innerText = '0';
       return;
     }
     document.getElementById('bookCountBadge').innerText = books.length;
     grid.innerHTML = books.map(book => `
       <div class="book-card" data-book-id="${book.id}">
-        <div class="book-title">📘 ${escapeHtml(book.title)}</div>
-        <div class="book-author">✍️ ${escapeHtml(book.author || 'Unknown')}</div>
-        <div class="book-price">💰 ${escapeHtml(book.price)}</div>
-        <div class="book-seller"><i class="fas fa-user"></i> ${escapeHtml(book.seller)}</div>
-        <div class="book-desc">📖 ${escapeHtml(book.description || 'No description')}</div>
-        <div class="card-actions">
-          <button class="btn btn-primary btn-sm interest-btn" data-id="${book.id}"><i class="fas fa-hand-paper"></i> I'm interested</button>
-          <button class="btn btn-outline btn-sm chat-from-card" data-id="${book.id}"><i class="fas fa-comment-dots"></i> Chat</button>
+        <img class="book-image" src="${escapeHtml(book.imageDataUrl) || 'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'%3E%3Crect width=\'100\' height=\'100\' fill=\'%23ddd2c0\'/%3E%3Ctext x=\'50\' y=\'55\' font-size=\'36\' text-anchor=\'middle\' fill=\'%23987b56\'%3E📖%3C/text%3E%3C/svg%3E'}" alt="book cover">
+        <div class="book-info">
+          <div class="book-title">📘 ${escapeHtml(book.title)}</div>
+          <div class="book-author">✍️ ${escapeHtml(book.author || 'Unknown')}</div>
+          <div class="book-price">💰 ${escapeHtml(book.price)}</div>
+          <div class="book-seller"><i class="fas fa-user-circle"></i> ${escapeHtml(book.seller)}</div>
+          <div class="book-desc">📖 ${escapeHtml(book.description || 'No description')}</div>
+          <div class="card-actions">
+            <button class="btn btn-primary btn-sm interest-btn" data-id="${book.id}"><i class="fas fa-hand-peace"></i> I'm interested</button>
+            <button class="btn btn-outline btn-sm chat-from-card" data-id="${book.id}"><i class="fas fa-comment-dots"></i> Chat</button>
+          </div>
+          <div class="interest-badge"><i class="fas fa-users"></i> ${book.interestCount || 0} interested</div>
         </div>
-        <div class="interest-badge" style="margin-top:6px;"><i class="fas fa-users"></i> ${book.interestCount || 0} interested</div>
       </div>
     `).join('');
     
-    // attach event listeners to interest buttons & chat buttons
+    // Attach events
     document.querySelectorAll('.interest-btn').forEach(btn => {
       btn.addEventListener('click', (e) => {
         const bookId = btn.getAttribute('data-id');
@@ -493,7 +504,8 @@
     document.querySelectorAll('.chat-from-card').forEach(btn => {
       btn.addEventListener('click', (e) => {
         const bookId = btn.getAttribute('data-id');
-        document.getElementById('chatBookSelect').value = bookId;
+        const select = document.getElementById('chatBookSelect');
+        if(select) { select.value = bookId; }
         loadChatForBook(bookId);
         document.querySelector('.chat-panel').scrollIntoView({ behavior: 'smooth' });
       });
@@ -504,43 +516,40 @@
   function sendInterestRequest(bookId) {
     const book = books.find(b => b.id === bookId);
     if(!book) return;
-    // increase interest count
     book.interestCount = (book.interestCount || 0) + 1;
-    // add system message in chat
     if(!messages[bookId]) messages[bookId] = [];
-    const systemMsg = {
+    messages[bookId].push({
       senderName: '📢 System',
-      text: `🔔 NEW INTEREST: Someone is interested in "${book.title}"! Seller please reply via chat.`,
+      text: `🔔 NEW INTEREST: Someone is interested in "${book.title}"! Seller, please reply via chat.`,
       timestamp: Date.now(),
       isSystem: true
-    };
-    messages[bookId].push(systemMsg);
+    });
     saveToLocal();
     renderBooks();
-    // if chat currently selected that book, reload
     const selected = document.getElementById('chatBookSelect').value;
     if(selected === bookId) loadChatForBook(bookId);
-    alert(`✅ Interest sent to seller of "${book.title}". Seller will see request in chat.`);
+    alert(`✅ Interest sent to ${book.seller}. Check chat for response.`);
   }
 
-  function addNewBook(title, author, price, description, seller) {
+  function addNewBook(title, author, price, description, seller, imageDataUrl) {
     const newId = Date.now().toString();
+    const defaultImg = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23e2d7c6'/%3E%3Ctext x='50' y='55' font-size='38' text-anchor='middle' fill='%23977952'%3E📚%3C/text%3E%3C/svg%3E";
     const newBook = {
       id: newId,
       title: title.trim(),
-      author: author.trim() || 'Unknown',
+      author: author.trim() || 'Anonymous',
       price: price.trim(),
-      description: description.trim(),
+      description: description.trim() || 'Well-maintained used book',
       seller: seller.trim() || 'BookLover',
-      createdAt: Date.now(),
-      interestCount: 0
+      imageDataUrl: imageDataUrl || defaultImg,
+      interestCount: 0,
+      createdAt: Date.now()
     };
     books.unshift(newBook);
     if(!messages[newId]) messages[newId] = [];
-    // optional welcome message from seller
     messages[newId].push({
       senderName: newBook.seller,
-      text: `📚 I listed this book. Feel free to ask any questions!`,
+      text: `📚 I just listed "${newBook.title}". Feel free to ask anything or make an offer!`,
       timestamp: Date.now(),
       isSystem: false
     });
@@ -552,7 +561,7 @@
     const select = document.getElementById('chatBookSelect');
     if(!select) return;
     select.innerHTML = '<option value="">-- Choose a book to chat --</option>' + 
-      books.map(book => `<option value="${book.id}">📕 ${escapeHtml(book.title)} (${escapeHtml(book.seller)})</option>`).join('');
+      books.map(book => `<option value="${book.id}">📖 ${escapeHtml(book.title)} (${escapeHtml(book.seller)})</option>`).join('');
     select.onchange = () => {
       const bookId = select.value;
       if(bookId) loadChatForBook(bookId);
@@ -573,19 +582,22 @@
     if(!book) return;
     const msgs = messages[bookId] || [];
     if(msgs.length === 0) {
-      container.innerHTML = `<div class="empty-chat">💬 No messages yet. Start the conversation!</div>`;
+      container.innerHTML = `<div class="empty-chat">💬 No messages yet. Start the conversation about "${escapeHtml(book.title)}"</div>`;
     } else {
-      container.innerHTML = msgs.map(msg => `
-        <div class="chat-bubble ${msg.isSystem ? 'received' : (msg.senderName === book.seller ? 'sent' : 'received')}">
-          <div class="chat-meta"><strong>${escapeHtml(msg.senderName)}</strong> · ${new Date(msg.timestamp).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})}</div>
-          <div>${escapeHtml(msg.text)}</div>
-        </div>
-      `).join('');
+      container.innerHTML = msgs.map(msg => {
+        const isSenderSeller = (msg.senderName === book.seller);
+        const bubbleClass = (msg.isSystem ? 'received' : (isSenderSeller ? 'sent' : 'received'));
+        return `
+          <div class="chat-bubble ${bubbleClass}">
+            <div class="chat-meta"><strong>${escapeHtml(msg.senderName)}</strong> · ${new Date(msg.timestamp).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})}</div>
+            <div>${escapeHtml(msg.text)}</div>
+          </div>
+        `;
+      }).join('');
       container.scrollTop = container.scrollHeight;
     }
     chatInput.disabled = false;
     sendBtn.disabled = false;
-    // store current book context
     window.currentChatBookId = bookId;
   }
 
@@ -593,10 +605,9 @@
     if(!text.trim()) return;
     const book = books.find(b => b.id === bookId);
     if(!book) return;
-    if(!messages[bookId]) messages[bookId] = [];
-    // Use generic "You" as sender (since no login, we use "You: Buyer/Seller") but we let user pick name: actually we can set default "Reader"
-    let sender = prompt("Your name (for chat):", "BookEnthusiast");
+    let sender = prompt("💬 Your name (for chat):", "BookEnthusiast");
     if(!sender) sender = "Guest";
+    if(!messages[bookId]) messages[bookId] = [];
     messages[bookId].push({
       senderName: sender,
       text: text.trim(),
@@ -605,14 +616,32 @@
     });
     saveToLocal();
     if(window.currentChatBookId === bookId) loadChatForBook(bookId);
-    // also update any other open views not needed
   }
 
-  function escapeHtml(str) { if(!str) return ''; return str.replace(/[&<>]/g, function(m){if(m==='&') return '&amp;'; if(m==='<') return '&lt;'; if(m==='>') return '&gt;'; return m;}); }
+  function escapeHtml(str) { if(!str) return ''; return String(str).replace(/[&<>]/g, function(m){if(m==='&') return '&amp;'; if(m==='<') return '&lt;'; if(m==='>') return '&gt;'; return m;}); }
 
-  // MODAL handlers
+  // ----- IMAGE UPLOAD PREVIEW -----
+  const imageInput = document.getElementById('bookImageInput');
+  const previewContainer = document.getElementById('imagePreviewContainer');
+  let selectedImageDataUrl = null;
+  imageInput.addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if(file && file.type.startsWith('image/')) {
+      const reader = new FileReader();
+      reader.onload = function(ev) {
+        selectedImageDataUrl = ev.target.result;
+        previewContainer.innerHTML = `<img class="preview-img" src="${selectedImageDataUrl}" alt="preview"> <span style="font-size:12px;">✓ Photo ready</span>`;
+      };
+      reader.readAsDataURL(file);
+    } else {
+      selectedImageDataUrl = null;
+      previewContainer.innerHTML = '';
+    }
+  });
+
+  // MODAL HANDLERS
   const modal = document.getElementById('sellModal');
-  document.getElementById('showSellModalBtn').onclick = () => { modal.style.display = 'flex'; };
+  document.getElementById('showSellModalBtn').onclick = () => { modal.style.display = 'flex'; selectedImageDataUrl = null; previewContainer.innerHTML = ''; imageInput.value = ''; };
   document.getElementById('closeModalBtn').onclick = () => { modal.style.display = 'none'; };
   window.onclick = (e) => { if(e.target === modal) modal.style.display = 'none'; };
   document.getElementById('sellBookForm').onsubmit = (e) => {
@@ -623,10 +652,12 @@
     const desc = document.getElementById('bookDesc').value;
     const seller = document.getElementById('sellerName').value;
     if(!title || !price) { alert("Title and price are required."); return; }
-    addNewBook(title, author, price, desc, seller);
+    addNewBook(title, author, price, desc, seller, selectedImageDataUrl);
     modal.style.display = 'none';
     document.getElementById('sellBookForm').reset();
     document.getElementById('sellerName').value = "BookLover";
+    selectedImageDataUrl = null;
+    previewContainer.innerHTML = '';
   };
   document.getElementById('sendChatBtn').onclick = () => {
     const bookId = document.getElementById('chatBookSelect').value;
@@ -635,29 +666,21 @@
     if(msg.trim()) sendChatMessage(bookId, msg);
     document.getElementById('chatInput').value = '';
   };
-  document.getElementById('chatInput').addEventListener('keypress', (e) => {
-    if(e.key === 'Enter') document.getElementById('sendChatBtn').click();
-  });
+  document.getElementById('chatInput').addEventListener('keypress', (e) => { if(e.key === 'Enter') document.getElementById('sendChatBtn').click(); });
 
-  // bilingual toggle: simple (swap texts for static elements)
-  let lang = 'en'; // en or ne
+  // Bilingual Toggle
+  let lang = 'en';
   function updateLanguage() {
-    const elements = document.querySelectorAll('[data-en][data-ne]');
-    elements.forEach(el => {
+    document.querySelectorAll('[data-en][data-ne]').forEach(el => {
       if(lang === 'en') el.innerText = el.getAttribute('data-en');
       else el.innerText = el.getAttribute('data-ne');
     });
-    // also for placeholder texts not dynamic: simple update for sell modal
-    const titleInput = document.querySelector('#bookTitle');
-    if(titleInput && lang==='ne') titleInput.placeholder = "पुस्तकको शीर्षक, उदा: पालो कोइल्हो";
-    else if(titleInput && lang==='en') titleInput.placeholder = "e.g., The Alchemist";
-    document.getElementById('toggleLangBtn').innerHTML = lang === 'en' ? '<i class="fas fa-language"></i> नेपाली / English' : '<i class="fas fa-language"></i> English / नेपाली';
+    const toggleBtn = document.getElementById('toggleLangBtn');
+    if(toggleBtn) toggleBtn.innerHTML = lang === 'en' ? '<i class="fas fa-language"></i> नेपाली / English' : '<i class="fas fa-language"></i> English / नेपाली';
+    const phTitle = document.querySelector('#bookTitle');
+    if(phTitle) phTitle.placeholder = lang === 'en' ? "e.g., The Alchemist, Sapiens" : "जस्तै: पालो कोइल्हो, सेपियन्स";
   }
-  document.getElementById('toggleLangBtn').onclick = () => {
-    lang = lang === 'en' ? 'ne' : 'en';
-    updateLanguage();
-  };
-  // initial language
+  document.getElementById('toggleLangBtn').onclick = () => { lang = lang === 'en' ? 'ne' : 'en'; updateLanguage(); };
   updateLanguage();
   loadData();
 </script>
