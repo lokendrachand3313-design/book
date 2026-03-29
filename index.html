@@ -41,7 +41,7 @@
       padding: 1.5rem;
     }
 
-    /* Header with custom logo */
+    /* Header with custom logo image */
     .top-bar {
       display: flex;
       flex-wrap: wrap;
@@ -59,20 +59,25 @@
       gap: 1rem;
     }
     
-    .logo-icon {
-      background: linear-gradient(135deg, #c17b4c, #9b5e32);
-      width: 55px;
-      height: 55px;
-      border-radius: 18px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 8px 16px rgba(193, 123, 76, 0.25);
+    /* Custom Logo Image */
+    .logo-image {
+      width: 65px;
+      height: 65px;
+      object-fit: contain;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #fef5e8, #fffaf2);
+      padding: 6px;
+      box-shadow: 0 6px 14px rgba(193, 123, 76, 0.2);
+      transition: transform 0.3s ease;
     }
     
-    .logo-icon i {
-      font-size: 32px;
-      color: white;
+    .logo-image:hover {
+      transform: scale(1.05);
+    }
+    
+    .logo-text {
+      display: flex;
+      flex-direction: column;
     }
     
     .logo-text h1 {
@@ -83,6 +88,7 @@
       background-clip: text;
       -webkit-background-clip: text;
       color: transparent;
+      letter-spacing: -0.5px;
     }
     
     .oldbooks-badge {
@@ -94,6 +100,11 @@
       font-weight: 600;
       display: inline-block;
       margin-top: 4px;
+      letter-spacing: 1px;
+    }
+    
+    .oldbooks-badge i {
+      margin-right: 4px;
     }
     
     .user-info {
@@ -461,6 +472,13 @@
         flex-direction: column;
         gap: 0;
       }
+      .logo-image {
+        width: 50px;
+        height: 50px;
+      }
+      .logo-text h1 {
+        font-size: 1.5rem;
+      }
     }
     
     .quick-add-section {
@@ -482,13 +500,12 @@
 <div class="container">
   <div class="top-bar">
     <div class="logo-area">
-      <div class="logo-icon">
-        <i class="fas fa-book-open"></i>
-      </div>
+      <!-- Custom Logo Image (PNG) - Using embedded SVG that matches "KitabSansar OLD BOOKS" design -->
+      <img class="logo-image" src="image.png' viewBox='0 0 200 200'%3E%3Crect width='200' height='200' fill='%23fef0e4' rx='30'/%3E%3Cpath d='M60 50 L140 50 L140 150 L60 150 Z' fill='%23c17b4c' opacity='0.2'/%3E%3Ctext x='100' y='85' font-size='36' font-family='monospace' font-weight='bold' text-anchor='middle' fill='%233b2a1f'%3E📚%3C/text%3E%3Ctext x='100' y='125' font-size='22' font-family='Playfair Display, serif' font-weight='bold' text-anchor='middle' fill='%23b56a3c'%3EKitab%3C/text%3E%3Ctext x='100' y='152' font-size='22' font-family='Playfair Display, serif' font-weight='bold' text-anchor='middle' fill='%23b56a3c'%3ESansar%3C/text%3E%3Ctext x='100' y='180' font-size='14' font-weight='bold' text-anchor='middle' fill='%232c241a'%3EOLD BOOKS%3C/text%3E%3C/svg%3E" alt="KitabSansar Logo">
       <div class="logo-text">
         <h1>KitabSansar</h1>
         <div class="oldbooks-badge">
-          <i class="fas fa-book"></i> OLDBOOKS
+          <i class="fas fa-book"></i> OLD BOOKS
         </div>
       </div>
     </div>
@@ -621,7 +638,6 @@
             <option value="Dharan">Dharan</option>
             <option value="Nepalgunj">Nepalgunj</option>
             <option value="Janakpur">Janakpur</option>
-             <option value="Dang">Dang</option>
           </select>
         </div>
         <div class="input-group">
@@ -691,14 +707,13 @@
 
 <script>
   // ==================== USER DATABASE ====================
-  let users = []; // stored in localStorage
+  let users = [];
   let currentUser = null;
   
   function loadUsers() {
     const stored = localStorage.getItem('kitab_users');
     if(stored) users = JSON.parse(stored);
     else {
-      // Demo user
       users = [{
         id: '1',
         firstName: 'Ram',
@@ -747,7 +762,7 @@
       const fullName = `${currentUser.firstName || ''} ${currentUser.lastName || ''}`.trim();
       document.getElementById('userNameDisplay').innerText = fullName || currentUser.email || currentUser.mobile;
       document.getElementById('userCityDisplay').innerText = currentUser.city ? `📍 ${currentUser.city}` : '';
-      document.getElementById('userAvatar').innerHTML = (currentUser.firstName? currentUser.firstName.charAt(0): '📖').toUpperCase();
+      document.getElementById('userAvatar').innerHTML = (currentUser.firstName ? currentUser.firstName.charAt(0) : '📖').toUpperCase();
       if(chatSelect) chatSelect.disabled = false;
       if(chatInput) chatInput.disabled = false;
       if(sendBtn) sendBtn.disabled = false;
@@ -768,11 +783,9 @@
     }
   }
   
-  // Social auth handlers - create/sign in user
   function socialAuth(provider, identifier, nameHint = '') {
     let existingUser = users.find(u => u.email === identifier || u.mobile === identifier);
     if(!existingUser) {
-      // Auto-create account
       const newUser = {
         id: Date.now().toString(),
         firstName: nameHint || provider,
@@ -839,7 +852,7 @@
     localStorage.setItem('kitab_messages', JSON.stringify(messages));
   }
   
-  const defaultCover = "image.png' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23f3e9df'/%3E%3Ctext x='50' y='55' font-size='44' text-anchor='middle' fill='%23c58f64'%3E📘%3C/text%3E%3C/svg%3E";
+  const defaultCover = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23f3e9df'/%3E%3Ctext x='50' y='55' font-size='44' text-anchor='middle' fill='%23c58f64'%3E📘%3C/text%3E%3C/svg%3E";
   
   function loadData() {
     const storedBooks = localStorage.getItem('kitab_books');
@@ -981,7 +994,6 @@
   function showAuthModal() { authModal.style.display = 'flex'; }
   function closeAuthModal() { authModal.style.display = 'none'; }
   
-  // Tab switching
   document.querySelectorAll('.auth-tab').forEach(tab => {
     tab.onclick = () => {
       document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
@@ -994,7 +1006,6 @@
   document.getElementById('showAuthModalBtn').onclick = showAuthModal;
   document.getElementById('closeAuthModalBtn').onclick = closeAuthModal;
   
-  // Sign Up
   document.getElementById('signupBtn').onclick = () => {
     const firstName = document.getElementById('firstName').value;
     const lastName = document.getElementById('lastName').value;
@@ -1012,7 +1023,6 @@
     else alert(result.error);
   };
   
-  // Sign In
   document.getElementById('signinBtn').onclick = () => {
     const identifier = document.getElementById('signinIdentifier').value;
     const password = document.getElementById('signinPassword').value;
@@ -1021,7 +1031,6 @@
     else alert('Invalid email/mobile or password');
   };
   
-  // Social auth
   document.getElementById('googleAuthBtn').onclick = () => socialAuth('google', prompt('Enter your Gmail:'), 'GoogleUser');
   document.getElementById('facebookAuthBtn').onclick = () => socialAuth('facebook', prompt('Enter Facebook email:'), 'FBUser');
   document.getElementById('whatsappAuthBtn').onclick = () => socialAuth('whatsapp', prompt('Enter WhatsApp number:'), 'WhatsAppUser');
@@ -1029,11 +1038,7 @@
   
   document.getElementById('logoutBtn').onclick = () => { currentUser = null; saveAuth(); updateUIForUser(); loadData(); };
   
-  // Sell modal
-  document.getElementById('showSellModalBtn')?.addEventListener('click', () => {
-    if(!currentUser) { alert('Please sign in'); showAuthModal(); return; }
-    sellModal.style.display = 'flex';
-  });
+  // Sell button
   const sellBtn = document.createElement('button');
   sellBtn.id = 'showSellModalBtn';
   sellBtn.className = 'btn btn-primary';
