@@ -41,7 +41,6 @@
       padding: 1.5rem;
     }
 
-    /* Header with custom logo image */
     .top-bar {
       display: flex;
       flex-wrap: wrap;
@@ -57,26 +56,22 @@
       display: flex;
       align-items: center;
       gap: 1rem;
+      cursor: pointer;
     }
     
     .logo-image {
-      width: 65px;
-      height: 65px;
+      width: 70px;
+      height: 70px;
       object-fit: contain;
       border-radius: 16px;
       background: linear-gradient(135deg, #fef5e8, #fffaf2);
-      padding: 6px;
+      padding: 8px;
       box-shadow: 0 6px 14px rgba(193, 123, 76, 0.2);
       transition: transform 0.3s ease;
     }
     
     .logo-image:hover {
       transform: scale(1.05);
-    }
-    
-    .logo-text {
-      display: flex;
-      flex-direction: column;
     }
     
     .logo-text h1 {
@@ -120,6 +115,14 @@
       justify-content: center;
       color: white;
       font-weight: bold;
+    }
+    
+    .guest-badge {
+      background: #9e8b72;
+      color: white;
+      font-size: 0.7rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 20px;
     }
     
     .btn {
@@ -168,19 +171,6 @@
       color: white;
     }
     
-    .btn-success:hover {
-      background: #1f5423;
-    }
-    
-    .btn-danger {
-      background: #9e5a3a;
-      color: white;
-    }
-    
-    .btn-danger:hover {
-      background: #7e452b;
-    }
-    
     .sold-badge {
       background: #2c6e2f;
       color: white;
@@ -193,7 +183,6 @@
       gap: 5px;
     }
     
-    /* Dashboard */
     .dashboard {
       display: flex;
       flex-wrap: wrap;
@@ -230,7 +219,6 @@
       font-family: 'Playfair Display', serif;
     }
     
-    /* Book Grid */
     .books-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -244,7 +232,6 @@
       transition: all 0.35s ease;
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
       border: 1px solid #f2e5d8;
-      position: relative;
     }
     
     .book-card.sold-card {
@@ -294,7 +281,6 @@
       flex-wrap: wrap;
     }
     
-    /* Modal */
     .modal {
       display: none;
       position: fixed;
@@ -346,11 +332,6 @@
       margin-bottom: 1rem;
     }
     
-    .form-row .input-group {
-      flex: 1;
-      margin: 0;
-    }
-    
     .input-group {
       margin-bottom: 1rem;
     }
@@ -372,6 +353,21 @@
       border: 1px solid #eedbcb;
       font-family: inherit;
       background: white;
+    }
+    
+    .mobile-input-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .country-code {
+      background: #f5efe8;
+      padding: 12px 16px;
+      border-radius: 60px;
+      font-weight: 600;
+      color: #5e4530;
+      border: 1px solid #eedbcb;
     }
     
     .social-buttons {
@@ -397,6 +393,7 @@
     .btn-facebook { background: #1877f2; color: white; }
     .btn-whatsapp { background: #25D366; color: white; }
     .btn-mobile { background: #6c5ce7; color: white; }
+    .btn-guest { background: #9e8b72; color: white; }
     
     .chat-messages {
       background: #fef9f2;
@@ -465,7 +462,7 @@
     @media (max-width: 780px) {
       .chat-panel { position: static; margin-top: 1rem; }
       .form-row { flex-direction: column; gap: 0; }
-      .logo-image { width: 50px; height: 50px; }
+      .logo-image { width: 55px; height: 55px; }
     }
     
     .quick-add-section {
@@ -481,7 +478,7 @@
 <div class="container">
   <div class="top-bar">
     <div class="logo-area">
-      <img class="logo-image" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Crect width='200' height='200' fill='%23fef0e4' rx='30'/%3E%3Ctext x='100' y='85' font-size='36' text-anchor='middle' fill='%233b2a1f'%3E📚%3C/text%3E%3Ctext x='100' y='125' font-size='22' font-family='monospace' font-weight='bold' text-anchor='middle' fill='%23b56a3c'%3EKitab%3C/text%3E%3Ctext x='100' y='152' font-size='22' font-weight='bold' text-anchor='middle' fill='%23b56a3c'%3ESansar%3C/text%3E%3Ctext x='100' y='180' font-size='14' font-weight='bold' text-anchor='middle' fill='%232c241a'%3EOLD BOOKS%3C/text%3E%3C/svg%3E" alt="KitabSansar Logo">
+      <img class="logo-image" src="image.png" alt="KitabSansar Logo" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 200 200\'%3E%3Crect width=\'200\' height=\'200\' fill=\'%23fef0e4\' rx=\'30\'/%3E%3Ctext x=\'100\' y=\'85\' font-size=\'36\' text-anchor=\'middle\' fill=\'%233b2a1f\'%3E📚%3C/text%3E%3Ctext x=\'100\' y=\'125\' font-size=\'22\' font-weight=\'bold\' text-anchor=\'middle\' fill=\'%23b56a3c\'%3EKitab%3C/text%3E%3Ctext x=\'100\' y=\'152\' font-size=\'22\' font-weight=\'bold\' text-anchor=\'middle\' fill=\'%23b56a3c\'%3ESansar%3C/text%3E%3Ctext x=\'100\' y=\'180\' font-size=\'14\' font-weight=\'bold\' text-anchor=\'middle\' fill=\'%232c241a\'%3EOLD BOOKS%3C/text%3E%3C/svg%3E'">
       <div class="logo-text">
         <h1>KitabSansar</h1>
         <div class="oldbooks-badge">
@@ -546,11 +543,11 @@
       </div>
       <hr>
       <div style="font-size:0.7rem; background:#f7efe6; border-radius: 20px; padding: 0.7rem; text-align:center;">
-        <i class="fas fa-heart" style="color:#c17b4c;"></i> Click "I'm interested" → seller gets notification
+        <i class="fas fa-heart" style="color:#c17b4c;"></i> Sellers can mark books as SOLD
       </div>
     </div>
   </div>
-  <footer>🎓 KitabSansar | OLDBOOKS — Student Textbook Marketplace | Sellers can mark books as SOLD</footer>
+  <footer>🎓 KitabSansar | OLDBOOKS — Student Textbook Marketplace | Connect with students across Nepal</footer>
 </div>
 
 <!-- AUTH MODAL -->
@@ -563,20 +560,22 @@
     
     <div id="signinForm">
       <div class="input-group">
-        <label>Email / Mobile Number</label>
-        <input type="text" id="signinIdentifier" placeholder="Enter email or mobile number">
+        <label>Email or Mobile Number</label>
+        <input type="text" id="signinIdentifier" placeholder="Enter email or mobile number (e.g., 9812345678)">
       </div>
       <div class="input-group">
         <label>Password</label>
         <input type="password" id="signinPassword" placeholder="Enter password">
       </div>
       <button class="btn btn-primary" id="signinBtn" style="width:100%;">Sign In</button>
+      
       <div style="text-align: center; margin: 1rem 0; color: #a18464;">or continue with</div>
+      
       <div class="social-buttons">
         <button class="social-btn btn-google" id="googleAuthBtn"><i class="fab fa-google"></i> Continue with Google</button>
-        <button class="social-btn btn-facebook" id="facebookAuthBtn"><i class="fab fa-facebook-f"></i> Continue with Facebook</button>
         <button class="social-btn btn-whatsapp" id="whatsappAuthBtn"><i class="fab fa-whatsapp"></i> Continue with WhatsApp</button>
-        <button class="social-btn btn-mobile" id="mobileOnlyAuthBtn"><i class="fas fa-mobile-alt"></i> Continue with Mobile Number</button>
+        <button class="social-btn btn-mobile" id="mobileAuthBtn"><i class="fas fa-mobile-alt"></i> Continue with Mobile Number (+977)</button>
+        <button class="social-btn btn-guest" id="guestAuthBtn"><i class="fas fa-user-friends"></i> Continue as Guest</button>
       </div>
     </div>
     
@@ -586,16 +585,23 @@
         <div class="input-group"><label>Last Name</label><input type="text" id="lastName" placeholder="Last name"></div>
       </div>
       <div class="input-group"><label>Email Address *</label><input type="email" id="signupEmail" placeholder="your@email.com"></div>
-      <div class="input-group"><label>Mobile Number *</label><input type="tel" id="signupMobile" placeholder="98XXXXXXXX"></div>
+      <div class="input-group">
+        <label>Mobile Number *</label>
+        <div class="mobile-input-wrapper">
+          <span class="country-code">+977</span>
+          <input type="tel" id="signupMobile" placeholder="9812345678" style="flex:1">
+        </div>
+      </div>
       <div class="form-row">
         <div class="input-group"><label>City (Nepal) *</label><select id="city"><option value="">Select City</option><option>Kathmandu</option><option>Pokhara</option><option>Lalitpur</option><option>Biratnagar</option><option>Bharatpur</option><option>Bhaktapur</option><option>Butwal</option><option>Dharan</option><option>Nepalgunj</option><option>Janakpur</option></select></div>
         <div class="input-group"><label>Gender</label><select id="gender"><option value="">Select</option><option>Male</option><option>Female</option><option>Other</option></select></div>
       </div>
       <div class="input-group"><label>Date of Birth</label><input type="date" id="dob"></div>
-      <div class="input-group"><label>Password *</label><input type="password" id="signupPassword" placeholder="Create password"></div>
+      <div class="input-group"><label>Password *</label><input type="password" id="signupPassword" placeholder="Create password (min 6 characters)"></div>
       <div class="input-group"><label>Confirm Password *</label><input type="password" id="confirmPassword" placeholder="Confirm password"></div>
       <button class="btn btn-primary" id="signupBtn" style="width:100%;">Create Account</button>
     </div>
+    
     <button class="btn btn-outline" id="closeAuthModalBtn" style="margin-top:1rem; width:100%;">Cancel</button>
   </div>
 </div>
@@ -628,8 +634,15 @@
   function loadUsers() {
     const stored = localStorage.getItem('kitab_users');
     if(stored) users = JSON.parse(stored);
-    else { users = [{ id: '1', firstName: 'Ram', lastName: 'Sharma', email: 'ram@example.com', mobile: '9812345678', city: 'Kathmandu', password: 'password123' }]; saveUsers(); }
+    else { 
+      users = [{ 
+        id: '1', firstName: 'Ram', lastName: 'Sharma', email: 'ram@example.com', 
+        mobile: '9812345678', city: 'Kathmandu', password: 'password123' 
+      }]; 
+      saveUsers(); 
+    }
   }
+  
   function saveUsers() { localStorage.setItem('kitab_users', JSON.stringify(users)); }
   function saveAuth() { if(currentUser) localStorage.setItem('kitab_current_user', JSON.stringify(currentUser)); else localStorage.removeItem('kitab_current_user'); }
   function loadAuth() { const stored = localStorage.getItem('kitab_current_user'); if(stored) { currentUser = JSON.parse(stored); updateUIForUser(); } }
@@ -642,17 +655,21 @@
     const sendBtn = document.getElementById('sendChatBtn');
     const chatWarning = document.getElementById('chatAuthWarning');
     const quickAdd = document.getElementById('quickAddSection');
+    
     if(currentUser) {
       userInfo.style.display = 'flex';
       showAuth.style.display = 'none';
-      document.getElementById('userNameDisplay').innerText = `${currentUser.firstName || ''} ${currentUser.lastName || ''}`.trim() || currentUser.email;
-      document.getElementById('userCityDisplay').innerText = currentUser.city ? `📍 ${currentUser.city}` : '';
-      document.getElementById('userAvatar').innerHTML = (currentUser.firstName ? currentUser.firstName.charAt(0) : '📖').toUpperCase();
+      const displayName = currentUser.isGuest ? `👤 Guest (${currentUser.guestId})` : `${currentUser.firstName || ''} ${currentUser.lastName || ''}`.trim() || currentUser.email || currentUser.mobile;
+      document.getElementById('userNameDisplay').innerHTML = displayName;
+      if(currentUser.isGuest) document.getElementById('userCityDisplay').innerHTML = '<span class="guest-badge"><i class="fas fa-user-friends"></i> Guest Mode</span>';
+      else document.getElementById('userCityDisplay').innerHTML = currentUser.city ? `📍 ${currentUser.city}` : '';
+      document.getElementById('userAvatar').innerHTML = currentUser.isGuest ? '👤' : (currentUser.firstName ? currentUser.firstName.charAt(0) : '📖').toUpperCase();
       if(chatSelect) chatSelect.disabled = false;
       if(chatInput) chatInput.disabled = false;
       if(sendBtn) sendBtn.disabled = false;
       if(chatWarning) chatWarning.style.display = 'none';
-      if(quickAdd) quickAdd.style.display = 'block';
+      if(quickAdd && !currentUser.isGuest) quickAdd.style.display = 'block';
+      else if(quickAdd && currentUser.isGuest) quickAdd.style.display = 'none';
       updateChatSelect();
       renderBooks();
     } else {
@@ -668,24 +685,87 @@
     }
   }
   
-  function socialAuth(provider, identifier, nameHint) {
-    let existing = users.find(u => u.email === identifier || u.mobile === identifier);
-    if(!existing) {
-      existing = { id: Date.now().toString(), firstName: nameHint || provider, lastName: '', email: provider === 'google' || provider === 'facebook' ? identifier : '', mobile: provider === 'mobile' || provider === 'whatsapp' ? identifier : '', city: '', password: '', provider: provider };
-      users.push(existing);
-      saveUsers();
-    }
-    currentUser = existing;
+  // Guest Login
+  function guestLogin() {
+    const guestId = 'GUEST_' + Math.random().toString(36).substr(2, 6);
+    currentUser = {
+      id: guestId,
+      isGuest: true,
+      guestId: guestId,
+      firstName: 'Guest',
+      lastName: '',
+      city: '',
+      createdAt: Date.now()
+    };
     saveAuth();
     updateUIForUser();
     closeAuthModal();
     loadData();
   }
   
+  // Google OAuth - redirect to Google login
+  function googleLogin() {
+    window.open('https://accounts.google.com/o/oauth2/v2/auth?client_id=YOUR_GOOGLE_CLIENT_ID&redirect_uri=' + encodeURIComponent(window.location.href) + '&response_type=token&scope=email%20profile', '_blank');
+    // For demo, simulate Google login
+    const email = prompt('Demo: Enter your Gmail address (will be stored):');
+    if(email && email.includes('@')) {
+      let existing = users.find(u => u.email === email);
+      if(!existing) {
+        existing = { id: Date.now().toString(), firstName: email.split('@')[0], lastName: '', email: email, mobile: '', city: '', password: '', provider: 'google' };
+        users.push(existing);
+        saveUsers();
+      }
+      currentUser = existing;
+      saveAuth();
+      updateUIForUser();
+      closeAuthModal();
+      loadData();
+    }
+  }
+  
+  // WhatsApp Login
+  function whatsappLogin() {
+    const number = prompt('Enter your WhatsApp number with country code (e.g., +9779812345678):');
+    if(number) {
+      let existing = users.find(u => u.mobile === number);
+      if(!existing) {
+        existing = { id: Date.now().toString(), firstName: 'WhatsAppUser', lastName: '', email: '', mobile: number, city: '', password: '', provider: 'whatsapp' };
+        users.push(existing);
+        saveUsers();
+      }
+      currentUser = existing;
+      saveAuth();
+      updateUIForUser();
+      closeAuthModal();
+      loadData();
+    }
+  }
+  
+  // Mobile Login (with +977)
+  function mobileLogin() {
+    const number = prompt('Enter your mobile number (without +977, e.g., 9812345678):');
+    if(number && /^[0-9]{10}$/.test(number)) {
+      const fullNumber = '+977' + number;
+      let existing = users.find(u => u.mobile === fullNumber);
+      if(!existing) {
+        existing = { id: Date.now().toString(), firstName: 'MobileUser', lastName: '', email: '', mobile: fullNumber, city: '', password: '', provider: 'mobile' };
+        users.push(existing);
+        saveUsers();
+      }
+      currentUser = existing;
+      saveAuth();
+      updateUIForUser();
+      closeAuthModal();
+      loadData();
+    } else {
+      alert('Please enter a valid 10-digit mobile number');
+    }
+  }
+  
   function regularSignUp(first, last, email, mobile, city, gender, dob, pass) {
     if(users.find(u => u.email === email)) return { success: false, error: 'Email already registered' };
-    if(users.find(u => u.mobile === mobile)) return { success: false, error: 'Mobile number already registered' };
-    const newUser = { id: Date.now().toString(), firstName: first, lastName: last, email, mobile, city, gender, dob, password: pass };
+    if(users.find(u => u.mobile === '+977' + mobile)) return { success: false, error: 'Mobile number already registered' };
+    const newUser = { id: Date.now().toString(), firstName: first, lastName: last, email, mobile: '+977' + mobile, city, gender, dob, password: pass };
     users.push(newUser);
     saveUsers();
     currentUser = newUser;
@@ -694,7 +774,9 @@
   }
   
   function regularSignIn(identifier, pass) {
-    const user = users.find(u => (u.email === identifier || u.mobile === identifier) && u.password === pass);
+    const isMobile = /^[0-9]{10}$/.test(identifier);
+    const searchValue = isMobile ? '+977' + identifier : identifier;
+    const user = users.find(u => (u.email === searchValue || u.mobile === searchValue) && u.password === pass);
     if(user) { currentUser = user; saveAuth(); return { success: true }; }
     return { success: false };
   }
@@ -726,7 +808,9 @@
   function markAsSold(bookId) {
     const book = books.find(b => b.id === bookId);
     if(!book) return;
+    if(currentUser.isGuest) { alert('Please create an account to mark books as sold'); showAuthModal(); return; }
     if(book.sellerId !== currentUser?.id) { alert('You can only mark your own books as sold'); return; }
+    if(book.isSold) { alert('This book is already marked as sold'); return; }
     book.isSold = true;
     if(!messages[bookId]) messages[bookId] = [];
     messages[bookId].push({
@@ -737,7 +821,7 @@
     });
     saveToLocal();
     renderBooks();
-    alert('✅ Book marked as SOLD! It will appear with "SOLD" badge.');
+    alert('✅ Book marked as SOLD!');
   }
   
   function renderBooks() {
@@ -750,7 +834,7 @@
     }
     document.getElementById('bookCountBadge').innerText = books.length;
     grid.innerHTML = books.map(book => {
-      const isOwner = currentUser && book.sellerId === currentUser.id;
+      const isOwner = currentUser && !currentUser.isGuest && book.sellerId === currentUser.id;
       const isSold = book.isSold === true;
       return `
         <div class="book-card ${isSold ? 'sold-card' : ''}">
@@ -764,7 +848,7 @@
             <div class="book-seller" style="font-size:0.7rem; margin:5px 0;"><i class="fas fa-user"></i> ${escapeHtml(book.seller)}</div>
             <div class="book-desc" style="font-size:0.8rem;">${escapeHtml(book.description || 'Good condition')}</div>
             <div class="card-actions">
-              ${!isSold ? `<button class="btn ${currentUser ? 'btn-primary' : 'btn-outline'} btn-sm interest-btn" data-id="${book.id}" ${!currentUser || isSold ? 'disabled' : ''}><i class="fas fa-hands-helping"></i> I'm interested</button>` : '<button class="btn btn-outline btn-sm" disabled><i class="fas fa-check"></i> Sold Out</button>'}
+              ${!isSold ? `<button class="btn ${currentUser ? 'btn-primary' : 'btn-outline'} btn-sm interest-btn" data-id="${book.id}" ${!currentUser || isSold ? 'disabled' : ''}><i class="fas fa-hands-helping"></i> I'm interested</button>` : '<button class="btn btn-outline btn-sm" disabled><i class="fas fa-check-circle"></i> Sold Out</button>'}
               <button class="btn btn-outline btn-sm chat-from-card" data-id="${book.id}" ${!currentUser ? 'disabled' : ''}><i class="fas fa-comment"></i> Chat</button>
               ${isOwner && !isSold ? `<button class="btn btn-success btn-sm mark-sold-btn" data-id="${book.id}"><i class="fas fa-tag"></i> Mark as Sold</button>` : ''}
             </div>
@@ -799,9 +883,10 @@
     if(!book || book.isSold) { alert('This book is already sold!'); return; }
     book.interestCount = (book.interestCount || 0) + 1;
     if(!messages[bookId]) messages[bookId] = [];
+    const senderName = currentUser.isGuest ? `Guest (${currentUser.guestId})` : `${currentUser.firstName} ${currentUser.lastName}`.trim() || currentUser.email || currentUser.mobile;
     messages[bookId].push({
-      senderName: `${currentUser.firstName} ${currentUser.lastName}`.trim() || currentUser.email,
-      text: `💌 Interested in "${book.title}"! Price: ${book.price}. Contact: ${currentUser.email || currentUser.mobile}`,
+      senderName: senderName,
+      text: `💌 Interested in "${book.title}"! Price: ${book.price}.`,
       timestamp: Date.now()
     });
     saveToLocal();
@@ -810,7 +895,7 @@
   }
   
   function addNewBook(title, author, price, description, category, imageDataUrl) {
-    if(!currentUser) return;
+    if(!currentUser || currentUser.isGuest) { alert('Please create an account to sell books'); showAuthModal(); return; }
     const newBook = {
       id: Date.now().toString(),
       title: title.trim(),
@@ -843,7 +928,7 @@
     if(msgs.length === 0) container.innerHTML = '<div style="text-align:center; padding:2rem;">💬 No messages yet.</div>';
     else {
       container.innerHTML = msgs.map(msg => `
-        <div class="chat-bubble ${msg.senderName === currentUser?.firstName ? 'sent' : ''}">
+        <div class="chat-bubble">
           <div class="chat-meta" style="font-size:0.6rem;"><strong>${escapeHtml(msg.senderName)}</strong> · ${new Date(msg.timestamp).toLocaleTimeString()}</div>
           <div>${escapeHtml(msg.text)}</div>
         </div>
@@ -855,8 +940,9 @@
   function sendChatMessage(bookId, text) {
     if(!currentUser || !text.trim()) return;
     if(!messages[bookId]) messages[bookId] = [];
+    const senderName = currentUser.isGuest ? `Guest (${currentUser.guestId})` : `${currentUser.firstName} ${currentUser.lastName}`.trim() || currentUser.email || currentUser.mobile;
     messages[bookId].push({
-      senderName: `${currentUser.firstName} ${currentUser.lastName}`.trim() || currentUser.email,
+      senderName: senderName,
       text: text.trim(),
       timestamp: Date.now()
     });
@@ -901,14 +987,16 @@
   };
   
   document.getElementById('signinBtn').onclick = () => {
-    const result = regularSignIn(document.getElementById('signinIdentifier').value, document.getElementById('signinPassword').value);
-    if(result.success) { closeAuthModal(); loadData(); } else alert('Invalid credentials');
+    const identifier = document.getElementById('signinIdentifier').value;
+    const password = document.getElementById('signinPassword').value;
+    const result = regularSignIn(identifier, password);
+    if(result.success) { closeAuthModal(); loadData(); } else alert('Invalid email/mobile or password');
   };
   
-  document.getElementById('googleAuthBtn').onclick = () => socialAuth('google', prompt('Enter your Gmail:'), 'GoogleUser');
-  document.getElementById('facebookAuthBtn').onclick = () => socialAuth('facebook', prompt('Enter Facebook email:'), 'FBUser');
-  document.getElementById('whatsappAuthBtn').onclick = () => socialAuth('whatsapp', prompt('Enter WhatsApp number:'), 'WhatsAppUser');
-  document.getElementById('mobileOnlyAuthBtn').onclick = () => socialAuth('mobile', prompt('Enter mobile number:'), 'MobileUser');
+  document.getElementById('googleAuthBtn').onclick = googleLogin;
+  document.getElementById('whatsappAuthBtn').onclick = whatsappLogin;
+  document.getElementById('mobileAuthBtn').onclick = mobileLogin;
+  document.getElementById('guestAuthBtn').onclick = guestLogin;
   document.getElementById('logoutBtn').onclick = () => { currentUser = null; saveAuth(); updateUIForUser(); loadData(); };
   
   const sellBtn = document.createElement('button');
@@ -918,7 +1006,7 @@
   sellBtn.style.marginRight = '10px';
   const userArea = document.getElementById('userDisplayArea');
   if(userArea && !document.getElementById('showSellModalBtn')) userArea.insertBefore(sellBtn, userArea.firstChild);
-  sellBtn.onclick = () => { if(!currentUser) { alert('Please sign in'); showAuthModal(); } else sellModal.style.display = 'flex'; };
+  sellBtn.onclick = () => { if(!currentUser) { alert('Please sign in'); showAuthModal(); } else if(currentUser.isGuest) { alert('Please create an account to sell books'); showAuthModal(); } else sellModal.style.display = 'flex'; };
   
   document.getElementById('closeSellModalBtn').onclick = () => sellModal.style.display = 'none';
   window.onclick = (e) => { if(e.target === authModal) closeAuthModal(); if(e.target === sellModal) sellModal.style.display = 'none'; };
@@ -926,7 +1014,7 @@
   let selectedImage = null;
   document.getElementById('bookImageInput').onchange = (e) => {
     const file = e.target.files[0];
-    if(file) { const reader = new FileReader(); reader.onload = ev => { selectedImage = ev.target.result; document.getElementById('imagePreviewContainer').innerHTML = `<img src="${selectedImage}" style="width:60px;height:60px;border-radius:12px;">`; }; reader.readAsDataURL(file); }
+    if(file) { const reader = new FileReader(); reader.onload = ev => { selectedImage = ev.target.result; document.getElementById('imagePreviewContainer').innerHTML = `<img src="${selectedImage}" style="width:60px;height:60px;border-radius:12px;object-fit:cover;">`; }; reader.readAsDataURL(file); }
   };
   
   document.getElementById('sellBookForm').onsubmit = (e) => {
@@ -948,12 +1036,14 @@
   
   document.getElementById('quickAddBtn').onclick = () => {
     if(!currentUser) { alert('Please sign in'); showAuthModal(); return; }
+    if(currentUser.isGuest) { alert('Please create an account to sell books'); showAuthModal(); return; }
     const title = document.getElementById('quickBookTitle').value;
     const price = document.getElementById('quickBookPrice').value;
     if(!title || !price) { alert('Enter title and price'); return; }
     addNewBook(title, '', price, 'Quick listing', 'Textbook', null);
     document.getElementById('quickBookTitle').value = '';
     document.getElementById('quickBookPrice').value = '';
+    alert('✅ Book listed successfully!');
   };
   
   loadUsers();
