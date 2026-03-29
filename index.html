@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>📚 KitabSansar | पुस्तक बजार — Sign in with Mobile, WhatsApp, Gmail</title>
+  <title>📚 KitabSansar | Student Textbook Marketplace — Buy & Sell Used Books</title>
   <!-- Font Awesome 6 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <!-- Google Fonts -->
@@ -66,6 +66,13 @@
       color: #a18464;
       margin-top: 4px;
     }
+    .student-badge {
+      background: #e8dfd1;
+      padding: 0.3rem 1rem;
+      border-radius: 40px;
+      font-size: 0.7rem;
+      font-weight: 600;
+    }
     .user-info {
       display: flex;
       align-items: center;
@@ -121,6 +128,10 @@
       padding: 0.45rem 1.1rem;
       font-size: 0.75rem;
     }
+    .btn-success {
+      background: #2c6e2f;
+      color: white;
+    }
 
     /* Dashboard */
     .dashboard {
@@ -160,7 +171,7 @@
     /* Book Grid */
     .books-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
       gap: 1.8rem;
     }
     .book-card {
@@ -187,6 +198,9 @@
     .book-title {
       font-weight: 800;
       font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }
     .book-price {
       font-weight: 800;
@@ -197,13 +211,21 @@
       padding: 0.2rem 1rem;
       border-radius: 40px;
     }
+    .book-tag {
+      display: inline-block;
+      background: #e8dfd1;
+      padding: 0.2rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.65rem;
+      margin-left: 8px;
+    }
     .card-actions {
       display: flex;
       gap: 10px;
       margin: 14px 0 10px;
     }
 
-    /* Modal - Auth & Sell */
+    /* Modal */
     .modal {
       display: none;
       position: fixed;
@@ -217,11 +239,13 @@
     }
     .modal-content {
       background: #fffef8;
-      max-width: 480px;
+      max-width: 520px;
       width: 90%;
       border-radius: 2rem;
       padding: 2rem;
       box-shadow: 0 30px 45px rgba(0,0,0,0.2);
+      max-height: 90vh;
+      overflow-y: auto;
     }
     .auth-methods {
       display: flex;
@@ -244,17 +268,20 @@
     .auth-btn:hover {
       border-color: #c17b4c;
       background: #fffaf2;
-      transform: translateX(5px);
     }
     .input-group {
       margin: 1rem 0;
     }
-    .input-group input {
+    .input-group input, .input-group textarea, .input-group select {
       width: 100%;
       padding: 12px 16px;
       border-radius: 60px;
       border: 1px solid #eedbcb;
       font-family: inherit;
+    }
+    .input-group textarea {
+      border-radius: 24px;
+      resize: vertical;
     }
     .chat-messages {
       background: #fef9f2;
@@ -315,14 +342,21 @@
     @media (max-width: 780px) {
       .chat-panel { position: static; margin-top: 1rem; }
     }
+    .quick-add-section {
+      background: #fef7ef;
+      border-radius: 1rem;
+      padding: 1rem;
+      margin-bottom: 1.5rem;
+      border: 1px dashed #dcc9b2;
+    }
   </style>
 </head>
 <body>
 <div class="container">
   <div class="top-bar">
     <div class="logo">
-      <h1>📖 KitabSansar <span style="font-size:0.8rem;">किताब संसार</span></h1>
-      <p>where stories find new homes</p>
+      <h1>📖 KitabSansar <span class="student-badge"><i class="fas fa-graduation-cap"></i> Student Textbook Hub</span></h1>
+      <p>sell your textbooks · buy used books · connect with classmates</p>
     </div>
     <div id="userDisplayArea">
       <div class="user-info" id="userInfoSection" style="display: none;">
@@ -330,7 +364,7 @@
         <span id="userNameDisplay"></span>
         <button class="btn btn-outline btn-sm" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</button>
       </div>
-      <button class="btn btn-primary" id="showAuthModalBtn" style="display: flex;"><i class="fas fa-user-circle"></i> Sign In / Sign Up</button>
+      <button class="btn btn-primary" id="showAuthModalBtn"><i class="fas fa-user-circle"></i> Sign In / Sign Up</button>
     </div>
   </div>
 
@@ -338,9 +372,26 @@
     <div class="listings-panel">
       <div class="section-title">
         <i class="fas fa-book-open"></i> 
-        <span>📚 Available Books</span>
+        <span>📚 Textbooks & Used Books</span>
         <span id="bookCountBadge" style="font-size:0.8rem; background:#efe2d2; padding:0.2rem 0.9rem; border-radius:40px;">0</span>
       </div>
+      
+      <!-- Quick Add for Students -->
+      <div class="quick-add-section" id="quickAddSection" style="display: none;">
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+          <i class="fas fa-plus-circle" style="color:#c17b4c;"></i>
+          <strong>Quick List Your Textbook</strong>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+          <input type="text" id="quickBookTitle" placeholder="Book/Textbook name" style="flex:2; min-width:150px; padding:10px; border-radius:40px; border:1px solid #eedbcb;">
+          <input type="text" id="quickBookPrice" placeholder="Price (e.g., 350 NPR)" style="flex:1; min-width:100px; padding:10px; border-radius:40px; border:1px solid #eedbcb;">
+          <button class="btn btn-primary btn-sm" id="quickAddBtn"><i class="fas fa-bolt"></i> List Now</button>
+        </div>
+        <div style="font-size:0.7rem; color:#a18464; margin-top:8px;">
+          <i class="fas fa-info-circle"></i> Add photo & full details later via "Sell a Book"
+        </div>
+      </div>
+      
       <div id="booksGrid" class="books-grid"></div>
     </div>
 
@@ -365,18 +416,18 @@
       </div>
       <hr>
       <div style="font-size:0.7rem; background:#f7efe6; border-radius: 20px; padding: 0.7rem; color:#a57c59; text-align:center;">
-        <i class="fas fa-heart" style="color:#c17b4c;"></i> Click "I'm interested" → seller gets alert
+        <i class="fas fa-heart" style="color:#c17b4c;"></i> Click "I'm interested" → seller gets instant notification
       </div>
     </div>
   </div>
-  <footer>📚 KitabSansar — Sign in with Mobile, WhatsApp, or Gmail to buy/sell books</footer>
+  <footer>🎓 For Students: List your textbooks with price & connect with buyers | Sign in with Mobile, WhatsApp, or Gmail</footer>
 </div>
 
-<!-- AUTH MODAL (Sign In / Sign Up) -->
+<!-- AUTH MODAL -->
 <div id="authModal" class="modal">
   <div class="modal-content">
     <h3 style="font-family:'Playfair Display';"><i class="fas fa-user-plus"></i> Welcome to KitabSansar</h3>
-    <p style="color:#a18464; margin-bottom:1rem;">Sign in to list books, chat, and show interest</p>
+    <p style="color:#a18464; margin-bottom:1rem;">Sign in to list textbooks, chat, and connect with other students</p>
     <div class="auth-methods">
       <button class="auth-btn" id="mobileAuthBtn"><i class="fas fa-mobile-alt" style="font-size:1.3rem;"></i> Continue with Mobile Number</button>
       <button class="auth-btn" id="whatsappAuthBtn"><i class="fab fa-whatsapp" style="font-size:1.3rem; color:#25D366;"></i> Continue with WhatsApp</button>
@@ -392,22 +443,31 @@
   </div>
 </div>
 
-<!-- SELL MODAL -->
+<!-- SELL MODAL with full details + photo -->
 <div id="sellModal" class="modal">
   <div class="modal-content">
-    <h3><i class="fas fa-camera-retro"></i> List Your Book</h3>
+    <h3><i class="fas fa-camera-retro"></i> List Your Textbook / Book</h3>
     <form id="sellBookForm">
       <div class="input-group">
-        <input type="text" id="bookTitle" placeholder="Book Title *" required>
+        <input type="text" id="bookTitle" placeholder="Book / Textbook Title *" required>
       </div>
       <div class="input-group">
-        <input type="text" id="bookAuthor" placeholder="Author">
+        <input type="text" id="bookAuthor" placeholder="Author / Edition (e.g., 5th Edition)">
       </div>
       <div class="input-group">
-        <input type="text" id="bookPrice" placeholder="Price (e.g., 450 NPR)" required>
+        <input type="text" id="bookPrice" placeholder="Price (e.g., 450 NPR, $8)" required>
       </div>
       <div class="input-group">
-        <textarea id="bookDesc" rows="2" placeholder="Description / Condition"></textarea>
+        <textarea id="bookDesc" rows="3" placeholder="Description: Condition, highlights, course name, semester, etc."></textarea>
+      </div>
+      <div class="input-group">
+        <label style="font-size:0.8rem;"><i class="fas fa-tag"></i> Category (optional)</label>
+        <select id="bookCategory">
+          <option value="Textbook">📘 Textbook</option>
+          <option value="Novel">📖 Novel</option>
+          <option value="Reference">📚 Reference</option>
+          <option value="Guide">📝 Guide/Notes</option>
+        </select>
       </div>
       <div class="input-group">
         <input type="file" id="bookImageInput" accept="image/jpeg,image/png,image/webp">
@@ -415,7 +475,7 @@
       </div>
       <div style="display: flex; gap: 12px; margin-top: 20px;">
         <button type="button" class="btn btn-outline" id="closeSellModalBtn">Cancel</button>
-        <button type="submit" class="btn btn-primary">Publish Book</button>
+        <button type="submit" class="btn btn-primary"><i class="fas fa-store"></i> Publish Book</button>
       </div>
     </form>
   </div>
@@ -423,7 +483,7 @@
 
 <script>
   // ==================== AUTH SYSTEM ====================
-  let currentUser = null; // { id, name, contact, method }
+  let currentUser = null;
   
   function saveAuth() {
     if(currentUser) localStorage.setItem('kitab_user', JSON.stringify(currentUser));
@@ -445,6 +505,7 @@
     const chatInput = document.getElementById('chatInput');
     const sendBtn = document.getElementById('sendChatBtn');
     const chatWarning = document.getElementById('chatAuthWarning');
+    const quickAddSection = document.getElementById('quickAddSection');
     
     if(currentUser) {
       userInfoSection.style.display = 'flex';
@@ -455,9 +516,8 @@
       if(chatInput) chatInput.disabled = false;
       if(sendBtn) sendBtn.disabled = false;
       if(chatWarning) chatWarning.style.display = 'none';
-      // populate chat select options
+      if(quickAddSection) quickAddSection.style.display = 'block';
       updateChatSelect();
-      // re-render books with interest buttons enabled
       renderBooks();
     } else {
       userInfoSection.style.display = 'none';
@@ -466,8 +526,9 @@
       if(chatInput) chatInput.disabled = true;
       if(sendBtn) sendBtn.disabled = true;
       if(chatWarning) chatWarning.style.display = 'block';
+      if(quickAddSection) quickAddSection.style.display = 'none';
       document.getElementById('chatMessagesContainer').innerHTML = '<div style="text-align:center; padding:30px;">✨ Sign in to join conversations</div>';
-      renderBooks(); // will show disabled interest buttons
+      renderBooks();
     }
   }
   
@@ -475,7 +536,7 @@
     let userName = nameHint;
     if(!userName) {
       if(method === 'mobile') userName = contact.slice(-6);
-      else if(method === 'whatsapp') userName = contact.split('@')[0];
+      else if(method === 'whatsapp') userName = contact.split('@')[0] || contact.slice(-8);
       else userName = contact.split('@')[0];
     }
     currentUser = {
@@ -488,7 +549,6 @@
     saveAuth();
     updateUIForUser();
     closeAuthModal();
-    // refresh data
     loadData();
   }
   
@@ -504,27 +564,30 @@
   let messages = {};
   
   function saveToLocal() {
-    localStorage.setItem('kitab_v4_books', JSON.stringify(books));
-    localStorage.setItem('kitab_v4_messages', JSON.stringify(messages));
+    localStorage.setItem('kitab_v5_books', JSON.stringify(books));
+    localStorage.setItem('kitab_v5_messages', JSON.stringify(messages));
   }
   
   const defaultCover = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23f3e9df'/%3E%3Ctext x='50' y='55' font-size='44' text-anchor='middle' fill='%23c58f64'%3E📘%3C/text%3E%3C/svg%3E";
   
   function loadData() {
-    const storedBooks = localStorage.getItem('kitab_v4_books');
+    const storedBooks = localStorage.getItem('kitab_v5_books');
     if(storedBooks) books = JSON.parse(storedBooks);
-    const storedMessages = localStorage.getItem('kitab_v4_messages');
+    const storedMessages = localStorage.getItem('kitab_v5_messages');
     if(storedMessages) messages = JSON.parse(storedMessages);
     else messages = {};
+    
     if(!books.length) {
+      // Sample student textbooks
       books = [
-        { id: '1', title: 'The House of Spirits', author: 'Isabel Allende', price: '620 NPR', description: 'Magical realism masterpiece', seller: 'Maya', sellerContact: 'maya@example.com', imageDataUrl: defaultCover, interestCount: 2, createdAt: Date.now() - 86400000 },
-        { id: '2', title: 'राधा (Radha)', author: 'Krishna Dharabasi', price: '390 NPR', description: 'Nepali modern classic', seller: 'Sujan', sellerContact: 'sujan@example.com', imageDataUrl: defaultCover, interestCount: 3, createdAt: Date.now() - 172800000 },
-        { id: '3', title: 'Norwegian Wood', author: 'Haruki Murakami', price: '540 NPR', description: 'Bittersweet nostalgia', seller: 'Priya', sellerContact: 'priya@example.com', imageDataUrl: defaultCover, interestCount: 1, createdAt: Date.now() - 345600000 }
+        { id: '1', title: 'Engineering Mathematics III', author: 'Dr. K.C. Rajbanshi', price: '550 NPR', description: 'Used for BE Civil/Computer, 3rd semester, good condition, few highlights', seller: 'Rahul Thapa', sellerContact: 'rahul@example.com', category: 'Textbook', imageDataUrl: defaultCover, interestCount: 3, createdAt: Date.now() - 86400000 },
+        { id: '2', title: 'Physics for Scientists and Engineers', author: 'Serway & Jewett', price: '1200 NPR', description: '9th Edition, like new, no markings, perfect for BSc Physics', seller: 'Sneha Sharma', sellerContact: 'sneha@example.com', category: 'Textbook', imageDataUrl: defaultCover, interestCount: 2, createdAt: Date.now() - 172800000 },
+        { id: '3', title: 'The Alchemist', author: 'Paulo Coelho', price: '250 NPR', description: 'Inspiring novel, great condition', seller: 'Aarav Basnet', sellerContact: 'aarav@example.com', category: 'Novel', imageDataUrl: defaultCover, interestCount: 5, createdAt: Date.now() - 345600000 },
+        { id: '4', title: 'C Programming Language', author: 'Brian Kernighan', price: '400 NPR', description: 'Classic book, used for BSc CSIT, good condition', seller: 'Bikram Thapa', sellerContact: 'bikram@example.com', category: 'Textbook', imageDataUrl: defaultCover, interestCount: 1, createdAt: Date.now() - 500000000 }
       ];
       messages = {
-        '1': [{ senderName: 'Maya', text: 'Lovely copy! Let me know if interested.', timestamp: Date.now() - 3600000, isSystem: false }],
-        '3': [{ senderName: 'Priya', text: 'One of my favorites 🌸', timestamp: Date.now() - 7200000, isSystem: false }]
+        '1': [{ senderName: 'Rahul Thapa', text: 'Available! Perfect for TU engineering students.', timestamp: Date.now() - 3600000, isSystem: false }],
+        '2': [{ senderName: 'Sneha Sharma', text: 'Barely used, great deal!', timestamp: Date.now() - 7200000, isSystem: false }]
       };
       saveToLocal();
     }
@@ -536,7 +599,7 @@
     const grid = document.getElementById('booksGrid');
     if(!grid) return;
     if(books.length === 0) {
-      grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:3rem;"><i class="fas fa-book-open" style="font-size:3rem;"></i><p>No books yet — be the first to list!</p></div>`;
+      grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:3rem;"><i class="fas fa-book-open" style="font-size:3rem; color:#c79a6e;"></i><p style="margin-top:1rem;">📚 No textbooks listed yet. Be the first student to sell your books!</p></div>`;
       document.getElementById('bookCountBadge').innerText = '0';
       return;
     }
@@ -545,11 +608,14 @@
       <div class="book-card">
         <img class="book-image" src="${escapeHtml(book.imageDataUrl || defaultCover)}" alt="cover">
         <div class="book-info">
-          <div class="book-title">📘 ${escapeHtml(book.title)}</div>
-          <div class="book-author">✍️ ${escapeHtml(book.author || 'Anonymous')}</div>
-          <div class="book-price">${escapeHtml(book.price)}</div>
-          <div class="book-seller" style="font-size:0.7rem; color:#8b7358;"><i class="fas fa-user"></i> ${escapeHtml(book.seller)}</div>
-          <div class="book-desc" style="font-size:0.8rem; margin:8px 0;">${escapeHtml(book.description || 'Well-loved copy')}</div>
+          <div class="book-title">
+            📘 ${escapeHtml(book.title)}
+            <span class="book-tag">${escapeHtml(book.category || 'Book')}</span>
+          </div>
+          <div class="book-author">✍️ ${escapeHtml(book.author || 'Various')}</div>
+          <div class="book-price">💰 ${escapeHtml(book.price)}</div>
+          <div class="book-seller" style="font-size:0.7rem; color:#8b7358; margin:5px 0;"><i class="fas fa-user-graduate"></i> Seller: ${escapeHtml(book.seller)}</div>
+          <div class="book-desc" style="font-size:0.8rem; margin:8px 0; line-height:1.4;">📖 ${escapeHtml(book.description || 'Well-maintained used book')}</div>
           <div class="card-actions">
             <button class="btn ${currentUser ? 'btn-primary' : 'btn-outline'} btn-sm interest-btn" data-id="${book.id}" ${!currentUser ? 'disabled' : ''}><i class="fas fa-hands-helping"></i> I'm interested</button>
             <button class="btn btn-outline btn-sm chat-from-card" data-id="${book.id}" ${!currentUser ? 'disabled' : ''}><i class="fas fa-comment"></i> Chat</button>
@@ -585,7 +651,7 @@
     if(!messages[bookId]) messages[bookId] = [];
     messages[bookId].push({
       senderName: currentUser.name,
-      text: `💌 Interested in "${book.title}"! (Contact: ${currentUser.contact})`,
+      text: `💌 Interested in "${book.title}"! Price: ${book.price}. My contact: ${currentUser.contact} (via ${currentUser.method})`,
       timestamp: Date.now(),
       isSystem: false
     });
@@ -596,17 +662,18 @@
     alert(`✨ Interest sent to ${book.seller}! They'll see your message in chat.`);
   }
   
-  function addNewBook(title, author, price, description, imageDataUrl) {
+  function addNewBook(title, author, price, description, category, imageDataUrl) {
     if(!currentUser) { alert('Please sign in to sell books'); return; }
     const newId = Date.now().toString();
     const newBook = {
       id: newId,
       title: title.trim(),
-      author: author.trim() || 'Anonymous',
+      author: author.trim() || 'Not specified',
       price: price.trim(),
       description: description.trim() || 'Gently used, good condition',
       seller: currentUser.name,
       sellerContact: currentUser.contact,
+      category: category || 'Book',
       imageDataUrl: imageDataUrl || defaultCover,
       interestCount: 0,
       createdAt: Date.now()
@@ -615,7 +682,7 @@
     if(!messages[newId]) messages[newId] = [];
     messages[newId].push({
       senderName: currentUser.name,
-      text: `📖 Just listed "${newBook.title}". Feel free to ask questions!`,
+      text: `📖 Just listed "${newBook.title}" for ${newBook.price}. Feel free to ask questions!`,
       timestamp: Date.now(),
       isSystem: false
     });
@@ -687,58 +754,4 @@
   
   document.getElementById('showAuthModalBtn').onclick = showAuthModal;
   document.getElementById('closeAuthModalBtn').onclick = closeAuthModal;
-  document.getElementById('mobileAuthBtn').onclick = () => { currentAuthMethod = 'mobile'; document.getElementById('authInputContainer').style.display = 'block'; document.getElementById('authInputField').placeholder = 'Enter mobile number (e.g., 98XXXXXXXX)'; };
-  document.getElementById('whatsappAuthBtn').onclick = () => { currentAuthMethod = 'whatsapp'; document.getElementById('authInputContainer').style.display = 'block'; document.getElementById('authInputField').placeholder = 'WhatsApp number with country code'; };
-  document.getElementById('gmailAuthBtn').onclick = () => { currentAuthMethod = 'gmail'; document.getElementById('authInputContainer').style.display = 'block'; document.getElementById('authInputField').placeholder = 'Enter Gmail address'; };
-  document.getElementById('submitAuthBtn').onclick = () => {
-    const contact = document.getElementById('authInputField').value.trim();
-    if(!contact) { alert('Please enter your contact'); return; }
-    if(currentAuthMethod === 'gmail' && !contact.includes('@')) { alert('Enter valid email'); return; }
-    signIn(contact, currentAuthMethod);
-  };
-  document.getElementById('logoutBtn').onclick = () => { logout(); };
-  
-  // Sell modal
-  document.getElementById('showSellModalBtn')?.addEventListener('click', () => {
-    if(!currentUser) { alert('Please sign in to sell books'); showAuthModal(); return; }
-    sellModal.style.display = 'flex';
-  });
-  document.getElementById('closeSellModalBtn').onclick = () => { sellModal.style.display = 'none'; };
-  window.onclick = (e) => { if(e.target === authModal) closeAuthModal(); if(e.target === sellModal) sellModal.style.display = 'none'; };
-  
-  let selectedImageDataUrl = null;
-  document.getElementById('bookImageInput').addEventListener('change', (e) => {
-    const file = e.target.files[0];
-    if(file && file.type.startsWith('image/')) {
-      const reader = new FileReader();
-      reader.onload = (ev) => { selectedImageDataUrl = ev.target.result; document.getElementById('imagePreviewContainer').innerHTML = `<img src="${selectedImageDataUrl}" style="width:60px; height:60px; border-radius:12px;">`; };
-      reader.readAsDataURL(file);
-    }
-  });
-  
-  document.getElementById('sellBookForm').onsubmit = (e) => {
-    e.preventDefault();
-    const title = document.getElementById('bookTitle').value;
-    const price = document.getElementById('bookPrice').value;
-    if(!title || !price) { alert('Title and price required'); return; }
-    addNewBook(title, document.getElementById('bookAuthor').value, price, document.getElementById('bookDesc').value, selectedImageDataUrl);
-    sellModal.style.display = 'none';
-    document.getElementById('sellBookForm').reset();
-    selectedImageDataUrl = null;
-    document.getElementById('imagePreviewContainer').innerHTML = '';
-  };
-  
-  document.getElementById('sendChatBtn').onclick = () => {
-    const bookId = document.getElementById('chatBookSelect').value;
-    const msg = document.getElementById('chatInput').value;
-    if(!bookId) { alert('Select a book'); return; }
-    if(msg.trim()) sendChatMessage(bookId, msg);
-    document.getElementById('chatInput').value = '';
-  };
-  document.getElementById('chatInput').addEventListener('keypress', (e) => { if(e.key === 'Enter') document.getElementById('sendChatBtn').click(); });
-  
-  loadAuth();
-  loadData();
-</script>
-</body>
-</html>
+  document.getElementById('mobileAuthBtn').onclick = () => { currentAuthMethod = 'mobile'; document.getElementById('authInputContainer').style.display = 'block'; document.getElementById('authInputField
