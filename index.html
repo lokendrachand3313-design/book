@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>KitabSansar | OLDBOOKS — Student Textbook Marketplace</title>
+  <title>KitabSansar | OLDBOOKS — Seller Marketplace</title>
   <!-- Font Awesome 6 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <!-- Google Fonts -->
@@ -169,15 +169,6 @@
     .btn-success {
       background: #2c6e2f;
       color: white;
-    }
-    
-    .btn-esewa {
-      background: #00a859;
-      color: white;
-    }
-    
-    .btn-esewa:hover {
-      background: #008a4a;
     }
     
     .sold-badge {
@@ -429,6 +420,49 @@
       text-align: center;
       margin-top: 0.5rem;
     }
+    
+    .auth-tabs {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      border-bottom: 2px solid #eedbcb;
+    }
+    
+    .auth-tab {
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      font-weight: 600;
+      color: #a18464;
+      border-bottom: 3px solid transparent;
+    }
+    
+    .auth-tab.active {
+      color: #c17b4c;
+      border-bottom-color: #c17b4c;
+    }
+    
+    .social-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      margin-top: 1rem;
+    }
+    
+    .social-btn {
+      padding: 0.8rem;
+      border-radius: 60px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    
+    .btn-google { background: white; border: 1px solid #ddd; color: #5e3e2a; }
+    .btn-google:hover { background: #f8f8f8; border-color: #c17b4c; }
+    .btn-mobile { background: #6c5ce7; color: white; }
   </style>
 </head>
 <body>
@@ -455,8 +489,8 @@
       <div class="seller-info" id="buyerInfoSection" style="display: flex; background: #f0ebe2;">
         <div class="seller-avatar" style="background: #9e8b72;">👋</div>
         <div>
-          <div style="font-weight:600;">Buyer Mode</div>
-          <div style="font-size:0.7rem; color:#a18464;"><i class="fas fa-eye"></i> Browse & Buy</div>
+          <div style="font-weight:600;">Browse Mode</div>
+          <div style="font-size:0.7rem; color:#a18464;"><i class="fas fa-eye"></i> Buy books here</div>
         </div>
         <button class="btn btn-primary btn-sm" id="showSellerAuthBtn"><i class="fas fa-store"></i> Seller Login</button>
       </div>
@@ -488,7 +522,7 @@
 
     <div class="chat-panel">
       <div class="section-title" style="font-size:1.3rem;">
-        <i class="fas fa-comment-dots"></i> <span>💬 Inquire about Books</span>
+        <i class="fas fa-comment-dots"></i> <span>💬 Ask About Books</span>
       </div>
       <div class="info-note">
         <i class="fas fa-info-circle"></i> Buyers: Select a book to ask questions. Sellers will respond!
@@ -507,34 +541,41 @@
       </div>
       <hr>
       <div style="font-size:0.7rem; background:#f7efe6; border-radius: 20px; padding: 0.7rem; text-align:center;">
-        <i class="fas fa-heart" style="color:#c17b4c;"></i> Click "I'm interested" → See eSewa QR to pay
+        <i class="fas fa-heart" style="color:#c17b4c;"></i> Click "I'm interested" to contact seller
       </div>
     </div>
   </div>
-  <footer>🎓 KitabSansar | OLDBOOKS — Buyers browse freely | Sellers: Sign in to list books | Payment via eSewa</footer>
+  <footer>🎓 KitabSansar | OLDBOOKS — Buyers browse freely | Sellers: Sign in to list books</footer>
 </div>
 
-<!-- SELLER AUTH MODAL (Only for sellers) -->
+<!-- SELLER AUTH MODAL (Email/Password + Google) -->
 <div id="sellerAuthModal" class="modal">
   <div class="modal-content">
     <h3><i class="fas fa-store"></i> Seller Account</h3>
-    <p style="color:#a18464; margin-bottom:1rem;">Create an account to list your books for sale</p>
+    <p style="color:#a18464; margin-bottom:1rem;">Sign in to list your books for sale</p>
     
-    <div class="auth-tabs" style="display: flex; gap: 1rem; margin-bottom: 1.5rem; border-bottom: 2px solid #eedbcb;">
+    <div class="auth-tabs">
       <div class="auth-tab active" data-tab="signin">Sign In</div>
       <div class="auth-tab" data-tab="signup">Register as Seller</div>
     </div>
     
     <div id="signinForm">
       <div class="input-group">
-        <label>Email or Mobile Number</label>
-        <input type="text" id="signinIdentifier" placeholder="Enter email or mobile number">
+        <label>Email Address</label>
+        <input type="email" id="signinEmail" placeholder="your@email.com">
       </div>
       <div class="input-group">
         <label>Password</label>
         <input type="password" id="signinPassword" placeholder="Enter password">
       </div>
       <button class="btn btn-primary" id="signinBtn" style="width:100%;">Sign In</button>
+      
+      <div style="text-align: center; margin: 1rem 0; color: #a18464;">or continue with</div>
+      
+      <div class="social-buttons">
+        <button class="social-btn btn-google" id="googleAuthBtn"><i class="fab fa-google"></i> Continue with Google</button>
+        <button class="social-btn btn-mobile" id="mobileSignupBtn"><i class="fas fa-mobile-alt"></i> Register with Mobile Number</button>
+      </div>
     </div>
     
     <div id="signupForm" style="display: none;">
@@ -544,7 +585,7 @@
       </div>
       <div class="input-group"><label>Email Address *</label><input type="email" id="signupEmail" placeholder="your@email.com"></div>
       <div class="input-group">
-        <label>Mobile Number *</label>
+        <label>Mobile Number (Optional)</label>
         <div style="display: flex; align-items: center; gap: 8px;">
           <span style="background:#f5efe8; padding:12px 16px; border-radius:60px;">+977</span>
           <input type="tel" id="signupMobile" placeholder="9812345678" style="flex:1">
@@ -554,26 +595,30 @@
       <div class="input-group"><label>Password *</label><input type="password" id="signupPassword" placeholder="Create password (min 6 characters)"></div>
       <div class="input-group"><label>Confirm Password *</label><input type="password" id="confirmPassword" placeholder="Confirm password"></div>
       <button class="btn btn-primary" id="signupBtn" style="width:100%;">Create Seller Account</button>
+      <div class="info-note" style="margin-top: 1rem;">
+        <i class="fas fa-qrcode"></i> After registration, sellers can pay listing fee via QR below
+      </div>
     </div>
     
     <button class="btn btn-outline" id="closeSellerAuthModalBtn" style="margin-top:1rem; width:100%;">Cancel</button>
   </div>
 </div>
 
-<!-- eSewa Payment Modal with QR -->
+<!-- PAYMENT MODAL for Seller Listing Fee (QR code) -->
 <div id="paymentModal" class="modal">
   <div class="modal-content">
-    <h3><i class="fas fa-qrcode"></i> Complete Payment via eSewa</h3>
+    <h3><i class="fas fa-qrcode"></i> Listing Fee Payment</h3>
     <div class="qr-container">
-      <p style="margin-bottom: 0.5rem;">Scan QR code to pay with eSewa</p>
-      <img class="qr-image" src="qr.jpeg" alt="eSewa QR Code" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 200 200\'%3E%3Crect width=\'200\' height=\'200\' fill=\'%2300a859\'/%3E%3Ctext x=\'100\' y=\'115\' font-size=\'20\' text-anchor=\'middle\' fill=\'white\'%3EeSewa QR%3C/text%3E%3Ctext x=\'100\' y=\'145\' font-size=\'14\' text-anchor=\'middle\' fill=\'white\'%3EScan to Pay%3C/text%3E%3C/svg%3E'">
-      <p style="margin: 1rem 0; font-size: 0.9rem;"><strong id="paymentBookTitle"></strong></p>
-      <p style="color: #c56a2e; font-size: 1.2rem; font-weight: bold;" id="paymentAmount"></p>
+      <p style="margin-bottom: 0.5rem;">Scan QR code to pay listing fee (Rs. 50)</p>
+      <img class="qr-image" src="qr.jpg" alt="Payment QR Code" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 200 200\'%3E%3Crect width=\'200\' height=\'200\' fill=\'%23c17b4c\'/%3E%3Ctext x=\'100\' y=\'115\' font-size=\'20\' text-anchor=\'middle\' fill=\'white\'%3E₹ 50%3C/text%3E%3Ctext x=\'100\' y=\'145\' font-size=\'14\' text-anchor=\'middle\' fill=\'white\'%3EPayment QR%3C/text%3E%3C/svg%3E'">
+      <p style="margin: 1rem 0; font-size: 0.9rem;"><strong>KitabSansar Listing Fee</strong></p>
+      <p style="color: #c56a2e; font-size: 1.2rem; font-weight: bold;">Rs. 50 NPR</p>
       <div class="info-note" style="margin-top: 1rem;">
-        <i class="fas fa-info-circle"></i> After payment, notify the seller in chat
+        <i class="fas fa-info-circle"></i> After payment, click "I've Paid" to activate your seller account
       </div>
+      <button class="btn btn-primary" id="confirmPaymentBtn" style="margin-top: 1rem; width:100%;"><i class="fas fa-check-circle"></i> I've Paid</button>
     </div>
-    <button class="btn btn-outline" id="closePaymentModalBtn" style="width:100%; margin-top:1rem;">Close</button>
+    <button class="btn btn-outline" id="closePaymentModalBtn" style="width:100%; margin-top:1rem;">Cancel</button>
   </div>
 </div>
 
@@ -602,6 +647,7 @@
   let currentSeller = null;
   let books = [];
   let messages = {};
+  let pendingSeller = null; // For pending payment verification
 
   function loadSellers() {
     const stored = localStorage.getItem('kitab_sellers');
@@ -609,7 +655,7 @@
     else { 
       sellers = [{ 
         id: '1', firstName: 'Ram', lastName: 'Sharma', email: 'ram@example.com', 
-        mobile: '+9779812345678', city: 'Kathmandu', password: 'password123' 
+        mobile: '+9779812345678', city: 'Kathmandu', password: 'password123', isActive: true 
       }]; 
       saveSellers(); 
     }
@@ -643,22 +689,83 @@
     updateChatSelect();
   }
   
-  function regularSignUp(first, last, email, mobile, city, pass) {
-    if(sellers.find(s => s.email === email)) return { success: false, error: 'Email already registered' };
-    if(sellers.find(s => s.mobile === '+977' + mobile)) return { success: false, error: 'Mobile number already registered' };
-    const newSeller = { id: Date.now().toString(), firstName: first, lastName: last, email, mobile: '+977' + mobile, city, password: pass };
-    sellers.push(newSeller);
-    saveSellers();
-    currentSeller = newSeller;
-    saveSellerAuth();
-    return { success: true };
+  // Google Auth - Simulated (in real app would use OAuth)
+  function googleSignUp() {
+    const email = prompt('Enter your Gmail address:');
+    if(email && email.includes('@')) {
+      const existing = sellers.find(s => s.email === email);
+      if(existing) {
+        currentSeller = existing;
+        saveSellerAuth();
+        updateUIForSeller();
+        closeSellerAuthModal();
+        alert('Welcome back!');
+      } else {
+        pendingSeller = { email: email, firstName: email.split('@')[0], lastName: '', mobile: '', city: '', password: '', provider: 'google', isActive: false };
+        showPaymentModal();
+        closeSellerAuthModal();
+      }
+    }
   }
   
-  function regularSignIn(identifier, pass) {
-    const isMobile = /^[0-9]{10}$/.test(identifier);
-    const searchValue = isMobile ? '+977' + identifier : identifier;
-    const seller = sellers.find(s => (s.email === searchValue || s.mobile === searchValue) && s.password === pass);
-    if(seller) { currentSeller = seller; saveSellerAuth(); return { success: true }; }
+  // Mobile registration
+  function mobileSignup() {
+    const mobile = prompt('Enter your mobile number (without +977, e.g., 9812345678):');
+    if(mobile && /^[0-9]{10}$/.test(mobile)) {
+      const existing = sellers.find(s => s.mobile === '+977' + mobile);
+      if(existing) {
+        alert('Mobile number already registered. Please sign in.');
+      } else {
+        pendingSeller = { id: Date.now().toString(), firstName: 'MobileUser', lastName: '', email: '', mobile: '+977' + mobile, city: '', password: '', provider: 'mobile', isActive: false };
+        showPaymentModal();
+        closeSellerAuthModal();
+      }
+    } else alert('Please enter a valid 10-digit mobile number');
+  }
+  
+  function showPaymentModal() {
+    document.getElementById('paymentModal').style.display = 'flex';
+  }
+  
+  function confirmPaymentAndActivate() {
+    if(pendingSeller) {
+      // Activate seller account
+      const newSeller = { ...pendingSeller, id: Date.now().toString(), isActive: true };
+      sellers.push(newSeller);
+      saveSellers();
+      currentSeller = newSeller;
+      saveSellerAuth();
+      updateUIForSeller();
+      document.getElementById('paymentModal').style.display = 'none';
+      pendingSeller = null;
+      alert('✅ Payment confirmed! Your seller account is now active. You can list books now.');
+    }
+  }
+  
+  function regularSignUp(first, last, email, mobile, city, pass) {
+    if(sellers.find(s => s.email === email)) return { success: false, error: 'Email already registered' };
+    const fullMobile = mobile ? '+977' + mobile : '';
+    if(mobile && sellers.find(s => s.mobile === fullMobile)) return { success: false, error: 'Mobile number already registered' };
+    
+    pendingSeller = { firstName: first, lastName: last, email: email, mobile: fullMobile, city: city, password: pass, isActive: false };
+    showPaymentModal();
+    closeSellerAuthModal();
+    return { success: true, requiresPayment: true };
+  }
+  
+  function regularSignIn(email, pass) {
+    const seller = sellers.find(s => s.email === email && s.password === pass);
+    if(seller) { 
+      if(!seller.isActive) {
+        alert('Please complete payment to activate your seller account');
+        pendingSeller = seller;
+        showPaymentModal();
+        return { success: false };
+      }
+      currentSeller = seller; 
+      saveSellerAuth(); 
+      return { success: true }; 
+    }
     return { success: false };
   }
   
@@ -695,17 +802,18 @@
     if(book.isSold) { alert('This book is already marked as sold'); return; }
     book.isSold = true;
     if(!messages[bookId]) messages[bookId] = [];
-    messages[bookId].push({ senderName: '📢 System', text: `✅ This book has been marked as SOLD. Thank you!`, timestamp: Date.now() });
+    messages[bookId].push({ senderName: '📢 System', text: `✅ This book has been marked as SOLD.`, timestamp: Date.now() });
     saveToLocal();
     renderBooks();
     alert('✅ Book marked as SOLD!');
   }
   
-  function showPaymentQR(book) {
-    if(book.isSold) { alert('Sorry, this book is already sold!'); return; }
-    document.getElementById('paymentBookTitle').innerText = `Pay for: ${book.title}`;
-    document.getElementById('paymentAmount').innerText = `Amount: ${book.price}`;
-    document.getElementById('paymentModal').style.display = 'flex';
+  function sendInterestRequest(bookId, bookTitle, sellerName) {
+    alert(`📩 Interest sent to seller: ${sellerName}\n\nThey will see your message in chat. You can also chat directly above!`);
+    if(!messages[bookId]) messages[bookId] = [];
+    messages[bookId].push({ senderName: 'Buyer', text: `💌 I'm interested in "${bookTitle}"! Please let me know more details.`, timestamp: Date.now() });
+    saveToLocal();
+    if(document.getElementById('chatBookSelect').value === bookId) loadChatForBook(bookId);
   }
   
   function renderBooks() {
@@ -729,7 +837,7 @@
             <div class="book-seller" style="font-size:0.7rem; margin:5px 0;"><i class="fas fa-store"></i> Seller: ${escapeHtml(book.seller)}</div>
             <div class="book-desc" style="font-size:0.8rem;">${escapeHtml(book.description || 'Good condition')}</div>
             <div class="card-actions">
-              ${!isSold ? `<button class="btn btn-esewa btn-sm pay-btn" data-id="${book.id}" data-title="${escapeHtml(book.title)}" data-price="${escapeHtml(book.price)}"><i class="fas fa-qrcode"></i> Buy via eSewa</button>` : '<button class="btn btn-outline btn-sm" disabled><i class="fas fa-check-circle"></i> Sold Out</button>'}
+              ${!isSold ? `<button class="btn btn-primary btn-sm interest-btn" data-id="${book.id}" data-title="${escapeHtml(book.title)}" data-seller="${escapeHtml(book.seller)}"><i class="fas fa-hands-helping"></i> I'm interested</button>` : '<button class="btn btn-outline btn-sm" disabled>Sold Out</button>'}
               <button class="btn btn-outline btn-sm chat-from-card" data-id="${book.id}"><i class="fas fa-comment"></i> Ask Question</button>
               ${isOwner && !isSold ? `<button class="btn btn-success btn-sm mark-sold-btn" data-id="${book.id}"><i class="fas fa-tag"></i> Mark as Sold</button>` : ''}
             </div>
@@ -739,11 +847,12 @@
       `;
     }).join('');
     
-    document.querySelectorAll('.pay-btn').forEach(btn => {
+    document.querySelectorAll('.interest-btn').forEach(btn => {
       btn.onclick = () => {
         const bookId = btn.getAttribute('data-id');
-        const book = books.find(b => b.id === bookId);
-        if(book) showPaymentQR(book);
+        const bookTitle = btn.getAttribute('data-title');
+        const sellerName = btn.getAttribute('data-seller');
+        sendInterestRequest(bookId, bookTitle, sellerName);
       };
     });
     document.querySelectorAll('.mark-sold-btn').forEach(btn => {
@@ -816,6 +925,7 @@
   document.getElementById('showSellerAuthBtn').onclick = showSellerAuthModal;
   document.getElementById('closeSellerAuthModalBtn').onclick = closeSellerAuthModal;
   document.getElementById('closePaymentModalBtn').onclick = () => paymentModal.style.display = 'none';
+  document.getElementById('confirmPaymentBtn').onclick = confirmPaymentAndActivate;
   
   document.querySelectorAll('.auth-tab').forEach(tab => {
     tab.onclick = () => {
@@ -834,17 +944,23 @@
     const city = document.getElementById('city').value;
     const pass = document.getElementById('signupPassword').value;
     const confirm = document.getElementById('confirmPassword').value;
-    if(!first || !email || !mobile || !city || !pass) { alert('Please fill all required fields'); return; }
+    if(!first || !email || !city || !pass) { alert('Please fill all required fields'); return; }
     if(pass !== confirm) { alert('Passwords do not match'); return; }
     const result = regularSignUp(first, last, email, mobile, city, pass);
-    if(result.success) { closeSellerAuthModal(); } else alert(result.error);
+    if(result.success) { closeSellerAuthModal(); }
+    else if(result.error) alert(result.error);
   };
   
   document.getElementById('signinBtn').onclick = () => {
-    const result = regularSignIn(document.getElementById('signinIdentifier').value, document.getElementById('signinPassword').value);
-    if(result.success) { closeSellerAuthModal(); } else alert('Invalid email/mobile or password');
+    const email = document.getElementById('signinEmail').value;
+    const pass = document.getElementById('signinPassword').value;
+    const result = regularSignIn(email, pass);
+    if(result.success) { closeSellerAuthModal(); }
+    else if(!result.success && !result?.requiresPayment) alert('Invalid email or password');
   };
   
+  document.getElementById('googleAuthBtn').onclick = googleSignUp;
+  document.getElementById('mobileSignupBtn').onclick = mobileSignup;
   document.getElementById('logoutBtn').onclick = logout;
   
   const sellBtn = document.createElement('button');
