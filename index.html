@@ -59,7 +59,6 @@
       gap: 1rem;
     }
     
-    /* Custom Logo Image */
     .logo-image {
       width: 65px;
       height: 65px;
@@ -88,7 +87,6 @@
       background-clip: text;
       -webkit-background-clip: text;
       color: transparent;
-      letter-spacing: -0.5px;
     }
     
     .oldbooks-badge {
@@ -100,11 +98,6 @@
       font-weight: 600;
       display: inline-block;
       margin-top: 4px;
-      letter-spacing: 1px;
-    }
-    
-    .oldbooks-badge i {
-      margin-right: 4px;
     }
     
     .user-info {
@@ -170,36 +163,34 @@
       font-size: 0.75rem;
     }
     
-    .btn-google {
-      background: white;
-      border: 1px solid #ddd;
-      color: #5e3e2a;
-    }
-    .btn-google:hover {
-      background: #f8f8f8;
-      border-color: #c17b4c;
-    }
-    .btn-facebook {
-      background: #1877f2;
-      color: white;
-      border: none;
-    }
-    .btn-facebook:hover {
-      background: #0e63d4;
-    }
-    .btn-whatsapp {
-      background: #25D366;
+    .btn-success {
+      background: #2c6e2f;
       color: white;
     }
-    .btn-whatsapp:hover {
-      background: #1da851;
+    
+    .btn-success:hover {
+      background: #1f5423;
     }
-    .btn-mobile {
-      background: #6c5ce7;
+    
+    .btn-danger {
+      background: #9e5a3a;
       color: white;
     }
-    .btn-mobile:hover {
-      background: #5b4bc4;
+    
+    .btn-danger:hover {
+      background: #7e452b;
+    }
+    
+    .sold-badge {
+      background: #2c6e2f;
+      color: white;
+      padding: 0.2rem 0.8rem;
+      border-radius: 40px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
     }
     
     /* Dashboard */
@@ -242,7 +233,7 @@
     /* Book Grid */
     .books-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
       gap: 1.8rem;
     }
     
@@ -253,6 +244,12 @@
       transition: all 0.35s ease;
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
       border: 1px solid #f2e5d8;
+      position: relative;
+    }
+    
+    .book-card.sold-card {
+      opacity: 0.75;
+      background: #f5f0e8;
     }
     
     .book-card:hover {
@@ -294,6 +291,7 @@
       display: flex;
       gap: 10px;
       margin: 14px 0 10px;
+      flex-wrap: wrap;
     }
     
     /* Modal */
@@ -376,10 +374,6 @@
       background: white;
     }
     
-    .input-group select {
-      cursor: pointer;
-    }
-    
     .social-buttons {
       display: flex;
       flex-direction: column;
@@ -398,6 +392,11 @@
       cursor: pointer;
       transition: all 0.2s;
     }
+    
+    .btn-google { background: white; border: 1px solid #ddd; color: #5e3e2a; }
+    .btn-facebook { background: #1877f2; color: white; }
+    .btn-whatsapp { background: #25D366; color: white; }
+    .btn-mobile { background: #6c5ce7; color: white; }
     
     .chat-messages {
       background: #fef9f2;
@@ -464,21 +463,9 @@
     }
     
     @media (max-width: 780px) {
-      .chat-panel {
-        position: static;
-        margin-top: 1rem;
-      }
-      .form-row {
-        flex-direction: column;
-        gap: 0;
-      }
-      .logo-image {
-        width: 50px;
-        height: 50px;
-      }
-      .logo-text h1 {
-        font-size: 1.5rem;
-      }
+      .chat-panel { position: static; margin-top: 1rem; }
+      .form-row { flex-direction: column; gap: 0; }
+      .logo-image { width: 50px; height: 50px; }
     }
     
     .quick-add-section {
@@ -488,20 +475,13 @@
       margin-bottom: 1.5rem;
       border: 1px dashed #dcc9b2;
     }
-    
-    .error-msg {
-      color: #e74c3c;
-      font-size: 0.7rem;
-      margin-top: 4px;
-    }
   </style>
 </head>
 <body>
 <div class="container">
   <div class="top-bar">
     <div class="logo-area">
-      <!-- Custom Logo Image (PNG) - Using embedded SVG that matches "KitabSansar OLD BOOKS" design -->
-      <img class="logo-image" src="image.png' viewBox='0 0 200 200'%3E%3Crect width='200' height='200' fill='%23fef0e4' rx='30'/%3E%3Cpath d='M60 50 L140 50 L140 150 L60 150 Z' fill='%23c17b4c' opacity='0.2'/%3E%3Ctext x='100' y='85' font-size='36' font-family='monospace' font-weight='bold' text-anchor='middle' fill='%233b2a1f'%3E📚%3C/text%3E%3Ctext x='100' y='125' font-size='22' font-family='Playfair Display, serif' font-weight='bold' text-anchor='middle' fill='%23b56a3c'%3EKitab%3C/text%3E%3Ctext x='100' y='152' font-size='22' font-family='Playfair Display, serif' font-weight='bold' text-anchor='middle' fill='%23b56a3c'%3ESansar%3C/text%3E%3Ctext x='100' y='180' font-size='14' font-weight='bold' text-anchor='middle' fill='%232c241a'%3EOLD BOOKS%3C/text%3E%3C/svg%3E" alt="KitabSansar Logo">
+      <img class="logo-image" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Crect width='200' height='200' fill='%23fef0e4' rx='30'/%3E%3Ctext x='100' y='85' font-size='36' text-anchor='middle' fill='%233b2a1f'%3E📚%3C/text%3E%3Ctext x='100' y='125' font-size='22' font-family='monospace' font-weight='bold' text-anchor='middle' fill='%23b56a3c'%3EKitab%3C/text%3E%3Ctext x='100' y='152' font-size='22' font-weight='bold' text-anchor='middle' fill='%23b56a3c'%3ESansar%3C/text%3E%3Ctext x='100' y='180' font-size='14' font-weight='bold' text-anchor='middle' fill='%232c241a'%3EOLD BOOKS%3C/text%3E%3C/svg%3E" alt="KitabSansar Logo">
       <div class="logo-text">
         <h1>KitabSansar</h1>
         <div class="oldbooks-badge">
@@ -566,14 +546,14 @@
       </div>
       <hr>
       <div style="font-size:0.7rem; background:#f7efe6; border-radius: 20px; padding: 0.7rem; text-align:center;">
-        <i class="fas fa-heart" style="color:#c17b4c;"></i> Click "I'm interested" → seller gets instant notification
+        <i class="fas fa-heart" style="color:#c17b4c;"></i> Click "I'm interested" → seller gets notification
       </div>
     </div>
   </div>
-  <footer>🎓 KitabSansar | OLDBOOKS — Student Textbook Marketplace | Connect with students across Nepal</footer>
+  <footer>🎓 KitabSansar | OLDBOOKS — Student Textbook Marketplace | Sellers can mark books as SOLD</footer>
 </div>
 
-<!-- AUTH MODAL with Registration & Sign In -->
+<!-- AUTH MODAL -->
 <div id="authModal" class="modal">
   <div class="modal-content">
     <div class="auth-tabs">
@@ -581,7 +561,6 @@
       <div class="auth-tab" data-tab="signup">Create Account</div>
     </div>
     
-    <!-- Sign In Form -->
     <div id="signinForm">
       <div class="input-group">
         <label>Email / Mobile Number</label>
@@ -592,9 +571,7 @@
         <input type="password" id="signinPassword" placeholder="Enter password">
       </div>
       <button class="btn btn-primary" id="signinBtn" style="width:100%;">Sign In</button>
-      
       <div style="text-align: center; margin: 1rem 0; color: #a18464;">or continue with</div>
-      
       <div class="social-buttons">
         <button class="social-btn btn-google" id="googleAuthBtn"><i class="fab fa-google"></i> Continue with Google</button>
         <button class="social-btn btn-facebook" id="facebookAuthBtn"><i class="fab fa-facebook-f"></i> Continue with Facebook</button>
@@ -603,68 +580,22 @@
       </div>
     </div>
     
-    <!-- Sign Up Form -->
     <div id="signupForm" style="display: none;">
       <div class="form-row">
-        <div class="input-group">
-          <label>First Name *</label>
-          <input type="text" id="firstName" placeholder="First name">
-        </div>
-        <div class="input-group">
-          <label>Last Name</label>
-          <input type="text" id="lastName" placeholder="Last name">
-        </div>
+        <div class="input-group"><label>First Name *</label><input type="text" id="firstName" placeholder="First name"></div>
+        <div class="input-group"><label>Last Name</label><input type="text" id="lastName" placeholder="Last name"></div>
       </div>
-      <div class="input-group">
-        <label>Email Address *</label>
-        <input type="email" id="signupEmail" placeholder="your@email.com">
-      </div>
-      <div class="input-group">
-        <label>Mobile Number *</label>
-        <input type="tel" id="signupMobile" placeholder="98XXXXXXXX">
-      </div>
+      <div class="input-group"><label>Email Address *</label><input type="email" id="signupEmail" placeholder="your@email.com"></div>
+      <div class="input-group"><label>Mobile Number *</label><input type="tel" id="signupMobile" placeholder="98XXXXXXXX"></div>
       <div class="form-row">
-        <div class="input-group">
-          <label>City (Nepal) *</label>
-          <select id="city">
-            <option value="">Select City</option>
-            <option value="Kathmandu">Kathmandu</option>
-            <option value="Pokhara">Pokhara</option>
-            <option value="Lalitpur">Lalitpur</option>
-            <option value="Biratnagar">Biratnagar</option>
-            <option value="Bharatpur">Bharatpur</option>
-            <option value="Bhaktapur">Bhaktapur</option>
-            <option value="Butwal">Butwal</option>
-            <option value="Dharan">Dharan</option>
-            <option value="Nepalgunj">Nepalgunj</option>
-            <option value="Janakpur">Janakpur</option>
-          </select>
-        </div>
-        <div class="input-group">
-          <label>Gender</label>
-          <select id="gender">
-            <option value="">Select</option>
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
-            <option value="Other">Other</option>
-          </select>
-        </div>
+        <div class="input-group"><label>City (Nepal) *</label><select id="city"><option value="">Select City</option><option>Kathmandu</option><option>Pokhara</option><option>Lalitpur</option><option>Biratnagar</option><option>Bharatpur</option><option>Bhaktapur</option><option>Butwal</option><option>Dharan</option><option>Nepalgunj</option><option>Janakpur</option></select></div>
+        <div class="input-group"><label>Gender</label><select id="gender"><option value="">Select</option><option>Male</option><option>Female</option><option>Other</option></select></div>
       </div>
-      <div class="input-group">
-        <label>Date of Birth</label>
-        <input type="date" id="dob">
-      </div>
-      <div class="input-group">
-        <label>Password *</label>
-        <input type="password" id="signupPassword" placeholder="Create password (min 6 characters)">
-      </div>
-      <div class="input-group">
-        <label>Confirm Password *</label>
-        <input type="password" id="confirmPassword" placeholder="Confirm password">
-      </div>
+      <div class="input-group"><label>Date of Birth</label><input type="date" id="dob"></div>
+      <div class="input-group"><label>Password *</label><input type="password" id="signupPassword" placeholder="Create password"></div>
+      <div class="input-group"><label>Confirm Password *</label><input type="password" id="confirmPassword" placeholder="Confirm password"></div>
       <button class="btn btn-primary" id="signupBtn" style="width:100%;">Create Account</button>
     </div>
-    
     <button class="btn btn-outline" id="closeAuthModalBtn" style="margin-top:1rem; width:100%;">Cancel</button>
   </div>
 </div>
@@ -674,29 +605,12 @@
   <div class="modal-content">
     <h3><i class="fas fa-camera-retro"></i> List Your Book</h3>
     <form id="sellBookForm">
-      <div class="input-group">
-        <input type="text" id="bookTitle" placeholder="Book Title *" required>
-      </div>
-      <div class="input-group">
-        <input type="text" id="bookAuthor" placeholder="Author / Edition">
-      </div>
-      <div class="input-group">
-        <input type="text" id="bookPrice" placeholder="Price (e.g., 450 NPR)" required>
-      </div>
-      <div class="input-group">
-        <textarea id="bookDesc" rows="2" placeholder="Description: Condition, course, semester"></textarea>
-      </div>
-      <div class="input-group">
-        <select id="bookCategory">
-          <option value="Textbook">📘 Textbook</option>
-          <option value="Novel">📖 Novel</option>
-          <option value="Reference">📚 Reference</option>
-        </select>
-      </div>
-      <div class="input-group">
-        <input type="file" id="bookImageInput" accept="image/jpeg,image/png,image/webp">
-        <div id="imagePreviewContainer" style="margin-top:8px;"></div>
-      </div>
+      <div class="input-group"><input type="text" id="bookTitle" placeholder="Book Title *" required></div>
+      <div class="input-group"><input type="text" id="bookAuthor" placeholder="Author / Edition"></div>
+      <div class="input-group"><input type="text" id="bookPrice" placeholder="Price (e.g., 450 NPR)" required></div>
+      <div class="input-group"><textarea id="bookDesc" rows="2" placeholder="Description: Condition, course, semester"></textarea></div>
+      <div class="input-group"><select id="bookCategory"><option value="Textbook">📘 Textbook</option><option value="Novel">📖 Novel</option><option value="Reference">📚 Reference</option></select></div>
+      <div class="input-group"><input type="file" id="bookImageInput" accept="image/jpeg,image/png,image/webp"><div id="imagePreviewContainer" style="margin-top:8px;"></div></div>
       <div style="display: flex; gap: 12px; margin-top: 20px;">
         <button type="button" class="btn btn-outline" id="closeSellModalBtn">Cancel</button>
         <button type="submit" class="btn btn-primary">Publish Book</button>
@@ -706,126 +620,72 @@
 </div>
 
 <script>
-  // ==================== USER DATABASE ====================
   let users = [];
   let currentUser = null;
-  
+  let books = [];
+  let messages = {};
+
   function loadUsers() {
     const stored = localStorage.getItem('kitab_users');
     if(stored) users = JSON.parse(stored);
-    else {
-      users = [{
-        id: '1',
-        firstName: 'Ram',
-        lastName: 'Sharma',
-        email: 'ram@example.com',
-        mobile: '9812345678',
-        city: 'Kathmandu',
-        gender: 'Male',
-        dob: '1995-05-15',
-        password: 'password123',
-        createdAt: Date.now()
-      }];
-      saveUsers();
-    }
+    else { users = [{ id: '1', firstName: 'Ram', lastName: 'Sharma', email: 'ram@example.com', mobile: '9812345678', city: 'Kathmandu', password: 'password123' }]; saveUsers(); }
   }
-  
-  function saveUsers() {
-    localStorage.setItem('kitab_users', JSON.stringify(users));
-  }
-  
-  function saveAuth() {
-    if(currentUser) localStorage.setItem('kitab_current_user', JSON.stringify(currentUser));
-    else localStorage.removeItem('kitab_current_user');
-  }
-  
-  function loadAuth() {
-    const stored = localStorage.getItem('kitab_current_user');
-    if(stored) {
-      currentUser = JSON.parse(stored);
-      updateUIForUser();
-    }
-  }
+  function saveUsers() { localStorage.setItem('kitab_users', JSON.stringify(users)); }
+  function saveAuth() { if(currentUser) localStorage.setItem('kitab_current_user', JSON.stringify(currentUser)); else localStorage.removeItem('kitab_current_user'); }
+  function loadAuth() { const stored = localStorage.getItem('kitab_current_user'); if(stored) { currentUser = JSON.parse(stored); updateUIForUser(); } }
   
   function updateUIForUser() {
-    const userInfoSection = document.getElementById('userInfoSection');
-    const showAuthBtn = document.getElementById('showAuthModalBtn');
+    const userInfo = document.getElementById('userInfoSection');
+    const showAuth = document.getElementById('showAuthModalBtn');
     const chatSelect = document.getElementById('chatBookSelect');
     const chatInput = document.getElementById('chatInput');
     const sendBtn = document.getElementById('sendChatBtn');
     const chatWarning = document.getElementById('chatAuthWarning');
-    const quickAddSection = document.getElementById('quickAddSection');
-    
+    const quickAdd = document.getElementById('quickAddSection');
     if(currentUser) {
-      userInfoSection.style.display = 'flex';
-      showAuthBtn.style.display = 'none';
-      const fullName = `${currentUser.firstName || ''} ${currentUser.lastName || ''}`.trim();
-      document.getElementById('userNameDisplay').innerText = fullName || currentUser.email || currentUser.mobile;
+      userInfo.style.display = 'flex';
+      showAuth.style.display = 'none';
+      document.getElementById('userNameDisplay').innerText = `${currentUser.firstName || ''} ${currentUser.lastName || ''}`.trim() || currentUser.email;
       document.getElementById('userCityDisplay').innerText = currentUser.city ? `📍 ${currentUser.city}` : '';
       document.getElementById('userAvatar').innerHTML = (currentUser.firstName ? currentUser.firstName.charAt(0) : '📖').toUpperCase();
       if(chatSelect) chatSelect.disabled = false;
       if(chatInput) chatInput.disabled = false;
       if(sendBtn) sendBtn.disabled = false;
       if(chatWarning) chatWarning.style.display = 'none';
-      if(quickAddSection) quickAddSection.style.display = 'block';
+      if(quickAdd) quickAdd.style.display = 'block';
       updateChatSelect();
       renderBooks();
     } else {
-      userInfoSection.style.display = 'none';
-      showAuthBtn.style.display = 'flex';
+      userInfo.style.display = 'none';
+      showAuth.style.display = 'flex';
       if(chatSelect) { chatSelect.disabled = true; chatSelect.innerHTML = '<option value="">🔒 Sign in to chat</option>'; }
       if(chatInput) chatInput.disabled = true;
       if(sendBtn) sendBtn.disabled = true;
       if(chatWarning) chatWarning.style.display = 'block';
-      if(quickAddSection) quickAddSection.style.display = 'none';
+      if(quickAdd) quickAdd.style.display = 'none';
       document.getElementById('chatMessagesContainer').innerHTML = '<div style="text-align:center; padding:30px;">✨ Sign in to join conversations</div>';
       renderBooks();
     }
   }
   
-  function socialAuth(provider, identifier, nameHint = '') {
-    let existingUser = users.find(u => u.email === identifier || u.mobile === identifier);
-    if(!existingUser) {
-      const newUser = {
-        id: Date.now().toString(),
-        firstName: nameHint || provider,
-        lastName: '',
-        email: provider === 'google' || provider === 'facebook' ? identifier : '',
-        mobile: provider === 'mobile' || provider === 'whatsapp' ? identifier : '',
-        city: '',
-        gender: '',
-        dob: '',
-        password: '',
-        provider: provider,
-        createdAt: Date.now()
-      };
-      users.push(newUser);
+  function socialAuth(provider, identifier, nameHint) {
+    let existing = users.find(u => u.email === identifier || u.mobile === identifier);
+    if(!existing) {
+      existing = { id: Date.now().toString(), firstName: nameHint || provider, lastName: '', email: provider === 'google' || provider === 'facebook' ? identifier : '', mobile: provider === 'mobile' || provider === 'whatsapp' ? identifier : '', city: '', password: '', provider: provider };
+      users.push(existing);
       saveUsers();
-      currentUser = newUser;
-    } else {
-      currentUser = existingUser;
     }
+    currentUser = existing;
     saveAuth();
     updateUIForUser();
     closeAuthModal();
     loadData();
   }
   
-  function regularSignUp(firstName, lastName, email, mobile, city, gender, dob, password) {
+  function regularSignUp(first, last, email, mobile, city, gender, dob, pass) {
     if(users.find(u => u.email === email)) return { success: false, error: 'Email already registered' };
     if(users.find(u => u.mobile === mobile)) return { success: false, error: 'Mobile number already registered' };
-    const newUser = {
-      id: Date.now().toString(),
-      firstName: firstName,
-      lastName: lastName,
-      email: email,
-      mobile: mobile,
-      city: city,
-      gender: gender,
-      dob: dob,
-      password: password,
-      createdAt: Date.now()
-    };
+    const newUser = { id: Date.now().toString(), firstName: first, lastName: last, email, mobile, city, gender, dob, password: pass };
     users.push(newUser);
     saveUsers();
     currentUser = newUser;
@@ -833,26 +693,18 @@
     return { success: true };
   }
   
-  function regularSignIn(identifier, password) {
-    const user = users.find(u => (u.email === identifier || u.mobile === identifier) && u.password === password);
-    if(user) {
-      currentUser = user;
-      saveAuth();
-      return { success: true };
-    }
-    return { success: false, error: 'Invalid credentials' };
+  function regularSignIn(identifier, pass) {
+    const user = users.find(u => (u.email === identifier || u.mobile === identifier) && u.password === pass);
+    if(user) { currentUser = user; saveAuth(); return { success: true }; }
+    return { success: false };
   }
   
-  // ==================== BOOKS & CHAT ====================
-  let books = [];
-  let messages = {};
+  const defaultCover = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23f3e9df'/%3E%3Ctext x='50' y='55' font-size='44' text-anchor='middle' fill='%23c58f64'%3E📘%3C/text%3E%3C/svg%3E";
   
   function saveToLocal() {
     localStorage.setItem('kitab_books', JSON.stringify(books));
     localStorage.setItem('kitab_messages', JSON.stringify(messages));
   }
-  
-  const defaultCover = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23f3e9df'/%3E%3Ctext x='50' y='55' font-size='44' text-anchor='middle' fill='%23c58f64'%3E📘%3C/text%3E%3C/svg%3E";
   
   function loadData() {
     const storedBooks = localStorage.getItem('kitab_books');
@@ -860,16 +712,32 @@
     const storedMessages = localStorage.getItem('kitab_messages');
     if(storedMessages) messages = JSON.parse(storedMessages);
     else messages = {};
-    
     if(!books.length) {
       books = [
-        { id: '1', title: 'Engineering Mathematics III', author: 'Dr. K.C. Rajbanshi', price: '550 NPR', description: '3rd semester, good condition', seller: 'Ram Sharma', sellerId: '1', category: 'Textbook', imageDataUrl: defaultCover, interestCount: 3 },
-        { id: '2', title: 'Physics for Scientists', author: 'Serway', price: '1200 NPR', description: '9th Edition, like new', seller: 'Sneha Sharma', sellerId: '2', category: 'Textbook', imageDataUrl: defaultCover, interestCount: 2 }
+        { id: '1', title: 'Engineering Mathematics III', author: 'Dr. K.C. Rajbanshi', price: '550 NPR', description: '3rd semester, good condition', seller: 'Ram Sharma', sellerId: '1', category: 'Textbook', imageDataUrl: defaultCover, interestCount: 3, isSold: false },
+        { id: '2', title: 'Physics for Scientists', author: 'Serway', price: '1200 NPR', description: '9th Edition, like new', seller: 'Sneha Sharma', sellerId: '2', category: 'Textbook', imageDataUrl: defaultCover, interestCount: 2, isSold: false }
       ];
       saveToLocal();
     }
     renderBooks();
     if(currentUser) updateChatSelect();
+  }
+  
+  function markAsSold(bookId) {
+    const book = books.find(b => b.id === bookId);
+    if(!book) return;
+    if(book.sellerId !== currentUser?.id) { alert('You can only mark your own books as sold'); return; }
+    book.isSold = true;
+    if(!messages[bookId]) messages[bookId] = [];
+    messages[bookId].push({
+      senderName: '📢 System',
+      text: `✅ This book has been marked as SOLD by the seller. Thank you for your interest!`,
+      timestamp: Date.now(),
+      isSystem: true
+    });
+    saveToLocal();
+    renderBooks();
+    alert('✅ Book marked as SOLD! It will appear with "SOLD" badge.');
   }
   
   function renderBooks() {
@@ -881,29 +749,40 @@
       return;
     }
     document.getElementById('bookCountBadge').innerText = books.length;
-    grid.innerHTML = books.map(book => `
-      <div class="book-card">
-        <img class="book-image" src="${escapeHtml(book.imageDataUrl || defaultCover)}" alt="cover">
-        <div class="book-info">
-          <div class="book-title">📘 ${escapeHtml(book.title)}</div>
-          <div class="book-price">💰 ${escapeHtml(book.price)}</div>
-          <div class="book-seller" style="font-size:0.7rem; margin:5px 0;"><i class="fas fa-user"></i> ${escapeHtml(book.seller)}</div>
-          <div class="book-desc" style="font-size:0.8rem;">${escapeHtml(book.description || 'Good condition')}</div>
-          <div class="card-actions">
-            <button class="btn ${currentUser ? 'btn-primary' : 'btn-outline'} btn-sm interest-btn" data-id="${book.id}" ${!currentUser ? 'disabled' : ''}><i class="fas fa-hands-helping"></i> I'm interested</button>
-            <button class="btn btn-outline btn-sm chat-from-card" data-id="${book.id}" ${!currentUser ? 'disabled' : ''}><i class="fas fa-comment"></i> Chat</button>
+    grid.innerHTML = books.map(book => {
+      const isOwner = currentUser && book.sellerId === currentUser.id;
+      const isSold = book.isSold === true;
+      return `
+        <div class="book-card ${isSold ? 'sold-card' : ''}">
+          <img class="book-image" src="${escapeHtml(book.imageDataUrl || defaultCover)}" alt="cover">
+          <div class="book-info">
+            <div class="book-title">
+              📘 ${escapeHtml(book.title)}
+              ${isSold ? '<span class="sold-badge"><i class="fas fa-check-circle"></i> SOLD</span>' : ''}
+            </div>
+            <div class="book-price">💰 ${escapeHtml(book.price)}</div>
+            <div class="book-seller" style="font-size:0.7rem; margin:5px 0;"><i class="fas fa-user"></i> ${escapeHtml(book.seller)}</div>
+            <div class="book-desc" style="font-size:0.8rem;">${escapeHtml(book.description || 'Good condition')}</div>
+            <div class="card-actions">
+              ${!isSold ? `<button class="btn ${currentUser ? 'btn-primary' : 'btn-outline'} btn-sm interest-btn" data-id="${book.id}" ${!currentUser || isSold ? 'disabled' : ''}><i class="fas fa-hands-helping"></i> I'm interested</button>` : '<button class="btn btn-outline btn-sm" disabled><i class="fas fa-check"></i> Sold Out</button>'}
+              <button class="btn btn-outline btn-sm chat-from-card" data-id="${book.id}" ${!currentUser ? 'disabled' : ''}><i class="fas fa-comment"></i> Chat</button>
+              ${isOwner && !isSold ? `<button class="btn btn-success btn-sm mark-sold-btn" data-id="${book.id}"><i class="fas fa-tag"></i> Mark as Sold</button>` : ''}
+            </div>
+            <div class="interest-badge"><i class="fas fa-heart"></i> ${book.interestCount || 0} interested</div>
           </div>
-          <div class="interest-badge"><i class="fas fa-heart"></i> ${book.interestCount || 0} interested</div>
         </div>
-      </div>
-    `).join('');
+      `;
+    }).join('');
     
     attachBookEvents();
+    document.querySelectorAll('.mark-sold-btn').forEach(btn => {
+      btn.onclick = (e) => { e.stopPropagation(); markAsSold(btn.getAttribute('data-id')); };
+    });
   }
   
   function attachBookEvents() {
     document.querySelectorAll('.interest-btn').forEach(btn => {
-      btn.onclick = () => { if(currentUser) sendInterestRequest(btn.getAttribute('data-id')); else showAuthModal(); };
+      btn.onclick = () => { if(currentUser && !btn.disabled) sendInterestRequest(btn.getAttribute('data-id')); else showAuthModal(); };
     });
     document.querySelectorAll('.chat-from-card').forEach(btn => {
       btn.onclick = () => {
@@ -917,7 +796,7 @@
   
   function sendInterestRequest(bookId) {
     const book = books.find(b => b.id === bookId);
-    if(!book) return;
+    if(!book || book.isSold) { alert('This book is already sold!'); return; }
     book.interestCount = (book.interestCount || 0) + 1;
     if(!messages[bookId]) messages[bookId] = [];
     messages[bookId].push({
@@ -942,7 +821,8 @@
       sellerId: currentUser.id,
       category: category,
       imageDataUrl: imageDataUrl || defaultCover,
-      interestCount: 0
+      interestCount: 0,
+      isSold: false
     };
     books.unshift(newBook);
     saveToLocal();
@@ -953,7 +833,7 @@
     const select = document.getElementById('chatBookSelect');
     if(!select) return;
     if(!currentUser) { select.innerHTML = '<option value="">🔒 Sign in to chat</option>'; return; }
-    select.innerHTML = '<option value="">🌸 Choose a book to chat</option>' + books.map(b => `<option value="${b.id}">📙 ${escapeHtml(b.title)}</option>`).join('');
+    select.innerHTML = '<option value="">🌸 Choose a book to chat</option>' + books.map(b => `<option value="${b.id}">📙 ${escapeHtml(b.title)} ${b.isSold ? '(SOLD)' : ''}</option>`).join('');
     select.onchange = () => { if(select.value) loadChatForBook(select.value); };
   }
   
@@ -970,7 +850,6 @@
       `).join('');
       container.scrollTop = container.scrollHeight;
     }
-    window.currentChatBookId = bookId;
   }
   
   function sendChatMessage(bookId, text) {
@@ -982,12 +861,11 @@
       timestamp: Date.now()
     });
     saveToLocal();
-    if(window.currentChatBookId === bookId) loadChatForBook(bookId);
+    if(document.getElementById('chatBookSelect').value === bookId) loadChatForBook(bookId);
   }
   
   function escapeHtml(str) { if(!str) return ''; return String(str).replace(/[&<>]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[m])); }
   
-  // ==================== UI CONTROLS ====================
   const authModal = document.getElementById('authModal');
   const sellModal = document.getElementById('sellModal');
   
@@ -1007,38 +885,32 @@
   document.getElementById('closeAuthModalBtn').onclick = closeAuthModal;
   
   document.getElementById('signupBtn').onclick = () => {
-    const firstName = document.getElementById('firstName').value;
-    const lastName = document.getElementById('lastName').value;
+    const first = document.getElementById('firstName').value;
+    const last = document.getElementById('lastName').value;
     const email = document.getElementById('signupEmail').value;
     const mobile = document.getElementById('signupMobile').value;
     const city = document.getElementById('city').value;
     const gender = document.getElementById('gender').value;
     const dob = document.getElementById('dob').value;
-    const password = document.getElementById('signupPassword').value;
+    const pass = document.getElementById('signupPassword').value;
     const confirm = document.getElementById('confirmPassword').value;
-    if(!firstName || !email || !mobile || !city || !password) { alert('Please fill all required fields'); return; }
-    if(password !== confirm) { alert('Passwords do not match'); return; }
-    const result = regularSignUp(firstName, lastName, email, mobile, city, gender, dob, password);
-    if(result.success) { closeAuthModal(); loadData(); }
-    else alert(result.error);
+    if(!first || !email || !mobile || !city || !pass) { alert('Please fill all required fields'); return; }
+    if(pass !== confirm) { alert('Passwords do not match'); return; }
+    const result = regularSignUp(first, last, email, mobile, city, gender, dob, pass);
+    if(result.success) { closeAuthModal(); loadData(); } else alert(result.error);
   };
   
   document.getElementById('signinBtn').onclick = () => {
-    const identifier = document.getElementById('signinIdentifier').value;
-    const password = document.getElementById('signinPassword').value;
-    const result = regularSignIn(identifier, password);
-    if(result.success) { closeAuthModal(); loadData(); }
-    else alert('Invalid email/mobile or password');
+    const result = regularSignIn(document.getElementById('signinIdentifier').value, document.getElementById('signinPassword').value);
+    if(result.success) { closeAuthModal(); loadData(); } else alert('Invalid credentials');
   };
   
   document.getElementById('googleAuthBtn').onclick = () => socialAuth('google', prompt('Enter your Gmail:'), 'GoogleUser');
   document.getElementById('facebookAuthBtn').onclick = () => socialAuth('facebook', prompt('Enter Facebook email:'), 'FBUser');
   document.getElementById('whatsappAuthBtn').onclick = () => socialAuth('whatsapp', prompt('Enter WhatsApp number:'), 'WhatsAppUser');
   document.getElementById('mobileOnlyAuthBtn').onclick = () => socialAuth('mobile', prompt('Enter mobile number:'), 'MobileUser');
-  
   document.getElementById('logoutBtn').onclick = () => { currentUser = null; saveAuth(); updateUIForUser(); loadData(); };
   
-  // Sell button
   const sellBtn = document.createElement('button');
   sellBtn.id = 'showSellModalBtn';
   sellBtn.className = 'btn btn-primary';
