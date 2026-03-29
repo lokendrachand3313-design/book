@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>KitabSansar | OLDBOOKS — Seller Marketplace with 10% Commission</title>
+  <title>KitabSansar | OLDBOOKS — Buy & Sell Used Books</title>
   <!-- Font Awesome 6 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <!-- Google Fonts -->
@@ -46,7 +46,7 @@
       flex-wrap: wrap;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 2rem;
+      margin-bottom: 1.5rem;
       gap: 1.2rem;
       padding-bottom: 1rem;
       border-bottom: 2px solid rgba(198, 170, 138, 0.3);
@@ -60,12 +60,12 @@
     }
     
     .logo-image {
-      width: 70px;
-      height: 70px;
+      width: 65px;
+      height: 65px;
       object-fit: contain;
       border-radius: 16px;
       background: linear-gradient(135deg, #fef5e8, #fffaf2);
-      padding: 8px;
+      padding: 6px;
       box-shadow: 0 6px 14px rgba(193, 123, 76, 0.2);
       transition: transform 0.3s ease;
     }
@@ -76,7 +76,7 @@
     
     .logo-text h1 {
       font-family: 'Playfair Display', serif;
-      font-size: 2rem;
+      font-size: 1.8rem;
       font-weight: 800;
       background: linear-gradient(125deg, #3b2a1f, #b56a3c);
       background-clip: text;
@@ -93,6 +93,53 @@
       font-weight: 600;
       display: inline-block;
       margin-top: 4px;
+    }
+    
+    /* Search Bar */
+    .search-section {
+      background: white;
+      border-radius: 60px;
+      padding: 0.3rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      margin-bottom: 1.5rem;
+      border: 1px solid #eedbcb;
+    }
+    
+    .search-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.3rem 0.3rem 0.3rem 1rem;
+    }
+    
+    .search-wrapper i {
+      color: #c17b4c;
+      font-size: 1.2rem;
+    }
+    
+    .search-wrapper input {
+      flex: 1;
+      border: none;
+      padding: 0.8rem 0;
+      font-size: 1rem;
+      outline: none;
+      background: transparent;
+      font-family: inherit;
+    }
+    
+    .search-wrapper button {
+      background: #c17b4c;
+      border: none;
+      color: white;
+      padding: 0.7rem 1.5rem;
+      border-radius: 50px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+    
+    .search-wrapper button:hover {
+      background: #a55e34;
     }
     
     .seller-info {
@@ -148,11 +195,6 @@
       color: #5e3e2a;
     }
     
-    .btn-outline:hover {
-      background: #fef3e8;
-      border-color: #c17b4c;
-    }
-    
     .btn-sm {
       padding: 0.45rem 1.1rem;
       font-size: 0.75rem;
@@ -163,29 +205,9 @@
       color: white;
     }
     
-    .sold-badge {
-      background: #2c6e2f;
+    .btn-warning {
+      background: #e67e22;
       color: white;
-      padding: 0.2rem 0.8rem;
-      border-radius: 40px;
-      font-size: 0.7rem;
-      font-weight: 600;
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-    }
-    
-    .commission-badge {
-      background: #c17b4c;
-      color: white;
-      padding: 0.2rem 0.8rem;
-      border-radius: 40px;
-      font-size: 0.7rem;
-      font-weight: 600;
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      margin-left: 8px;
     }
     
     .dashboard {
@@ -237,11 +259,6 @@
       transition: all 0.35s ease;
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
       border: 1px solid #f2e5d8;
-    }
-    
-    .book-card.sold-card {
-      opacity: 0.75;
-      background: #f5f0e8;
     }
     
     .book-card:hover {
@@ -414,7 +431,9 @@
     
     @media (max-width: 780px) {
       .chat-panel { position: static; margin-top: 1rem; }
-      .logo-image { width: 55px; height: 55px; }
+      .logo-image { width: 50px; height: 50px; }
+      .search-wrapper { flex-wrap: wrap; }
+      .search-wrapper button { width: 100%; margin-top: 0.5rem; }
     }
     
     .quick-add-section {
@@ -474,8 +493,14 @@
     }
     
     .btn-google { background: white; border: 1px solid #ddd; color: #5e3e2a; }
-    .btn-google:hover { background: #f8f8f8; border-color: #c17b4c; }
     .btn-mobile { background: #6c5ce7; color: white; }
+    
+    .no-results {
+      grid-column: 1/-1;
+      text-align: center;
+      padding: 3rem;
+      color: #a18464;
+    }
   </style>
 </head>
 <body>
@@ -496,7 +521,7 @@
         <div>
           <div id="sellerNameDisplay" style="font-weight:600;"></div>
           <div id="sellerCityDisplay" style="font-size:0.7rem; color:#a18464;"></div>
-          <div id="commissionDisplay" style="font-size:0.65rem; color:#c17b4c;"></div>
+          <div id="commissionDisplay" style="font-size:0.65rem; color:#e67e22;"></div>
         </div>
         <button class="btn btn-outline btn-sm" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</button>
       </div>
@@ -511,11 +536,20 @@
     </div>
   </div>
 
+  <!-- Search Bar -->
+  <div class="search-section">
+    <div class="search-wrapper">
+      <i class="fas fa-search"></i>
+      <input type="text" id="searchInput" placeholder="Search by book title or author name...">
+      <button id="searchBtn"><i class="fas fa-search"></i> Search</button>
+    </div>
+  </div>
+
   <div class="dashboard">
     <div class="listings-panel">
       <div class="section-title">
         <i class="fas fa-book-open"></i>
-        <span>📚 Textbooks & Used Books</span>
+        <span>📚 Available Books</span>
         <span id="bookCountBadge" style="font-size:0.8rem; background:#efe2d2; padding:0.2rem 0.9rem; border-radius:40px;">0</span>
       </div>
 
@@ -555,18 +589,18 @@
       </div>
       <hr>
       <div style="font-size:0.7rem; background:#f7efe6; border-radius: 20px; padding: 0.7rem; text-align:center;">
-        <i class="fas fa-percent" style="color:#c17b4c;"></i> 10% commission on each book sale
+        <i class="fas fa-percent" style="color:#e67e22;"></i> 10% commission after sale | Sellers pay via QR
       </div>
     </div>
   </div>
-  <footer>🎓 KitabSansar | 10% Commission on Book Sales | Sellers pay commission via QR after listing</footer>
+  <footer>🎓 KitabSansar | 10% Commission After Sale | Latest books appear first | Search by title/author</footer>
 </div>
 
 <!-- SELLER AUTH MODAL -->
 <div id="sellerAuthModal" class="modal">
   <div class="modal-content">
     <h3><i class="fas fa-store"></i> Seller Account</h3>
-    <p style="color:#a18464; margin-bottom:1rem;">Sign in to list your books (10% commission applies)</p>
+    <p style="color:#a18464; margin-bottom:1rem;">Sign in to list your books (10% commission on sale)</p>
     
     <div class="auth-tabs">
       <div class="auth-tab active" data-tab="signin">Sign In</div>
@@ -593,7 +627,7 @@
     </div>
     
     <div id="signupForm" style="display: none;">
-      <div class="form-row" style="display: flex; gap: 1rem;">
+      <div style="display: flex; gap: 1rem;">
         <div class="input-group" style="flex:1"><label>First Name *</label><input type="text" id="firstName" placeholder="First name"></div>
         <div class="input-group" style="flex:1"><label>Last Name</label><input type="text" id="lastName" placeholder="Last name"></div>
       </div>
@@ -615,21 +649,22 @@
   </div>
 </div>
 
-<!-- COMMISSION PAYMENT MODAL (10% of Book Price) -->
+<!-- COMMISSION PAYMENT MODAL (After Sale) -->
 <div id="commissionModal" class="modal">
   <div class="modal-content">
     <h3><i class="fas fa-percent"></i> Pay 10% Commission</h3>
     <div class="commission-box">
-      <p><strong>Book Price:</strong> <span id="commissionBookPrice">0 NPR</span></p>
+      <p><strong>Book:</strong> <span id="commissionBookTitle"></span></p>
+      <p><strong>Sale Price:</strong> <span id="commissionBookPrice">0 NPR</span></p>
       <p><strong>Commission (10%):</strong> <span id="commissionAmount" style="font-size:1.2rem; font-weight:bold; color:#c17b4c;">0 NPR</span></p>
     </div>
     <div class="qr-container">
       <p style="margin-bottom: 0.5rem;">Scan QR code to pay commission</p>
       <img class="qr-image" src="qr.jpg" alt="Payment QR Code" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 200 200\'%3E%3Crect width=\'200\' height=\'200\' fill=\'%23c17b4c\'/%3E%3Ctext x=\'100\' y=\'115\' font-size=\'20\' text-anchor=\'middle\' fill=\'white\'%3E10%25%3C/text%3E%3Ctext x=\'100\' y=\'145\' font-size=\'14\' text-anchor=\'middle\' fill=\'white\'%3EPay Commission%3C/text%3E%3C/svg%3E'">
       <div class="info-note" style="margin-top: 1rem;">
-        <i class="fas fa-info-circle"></i> After payment, click "I've Paid" to list your book
+        <i class="fas fa-info-circle"></i> After payment, the book will be marked as sold and removed from listings
       </div>
-      <button class="btn btn-primary" id="confirmCommissionPaymentBtn" style="margin-top: 1rem; width:100%;"><i class="fas fa-check-circle"></i> I've Paid</button>
+      <button class="btn btn-primary" id="confirmCommissionPaymentBtn" style="margin-top: 1rem; width:100%;"><i class="fas fa-check-circle"></i> I've Paid & Confirm Sale</button>
     </div>
     <button class="btn btn-outline" id="closeCommissionModalBtn" style="width:100%; margin-top:1rem;">Cancel</button>
   </div>
@@ -640,7 +675,7 @@
   <div class="modal-content">
     <h3><i class="fas fa-camera-retro"></i> List Your Book</h3>
     <div class="info-note" style="margin-bottom: 1rem; background:#fef0e4;">
-      <i class="fas fa-percent"></i> 10% commission will be charged on the book price
+      <i class="fas fa-percent"></i> 10% commission will be charged when book sells
     </div>
     <form id="sellBookForm">
       <div class="input-group"><input type="text" id="bookTitle" placeholder="Book Title *" required></div>
@@ -651,19 +686,20 @@
       <div class="input-group"><input type="file" id="bookImageInput" accept="image/jpeg,image/png,image/webp"><div id="imagePreviewContainer" style="margin-top:8px;"></div></div>
       <div style="display: flex; gap: 12px; margin-top: 20px;">
         <button type="button" class="btn btn-outline" id="closeSellModalBtn">Cancel</button>
-        <button type="submit" class="btn btn-primary">List Book & Pay Commission</button>
+        <button type="submit" class="btn btn-primary">List Book</button>
       </div>
     </form>
   </div>
 </div>
 
 <script>
-  // Seller Database with commission tracking
+  // Seller Database
   let sellers = [];
   let currentSeller = null;
   let books = [];
   let messages = {};
-  let pendingBookForListing = null;
+  let pendingSaleBook = null;
+  let currentSearchQuery = '';
 
   function loadSellers() {
     const stored = localStorage.getItem('kitab_sellers');
@@ -707,66 +743,46 @@
     updateChatSelect();
   }
   
-  // Calculate commission (10%)
   function calculateCommission(price) {
     return Math.round(price * 0.1);
   }
   
-  // Show commission payment modal
-  function showCommissionPayment(bookData) {
-    const price = parseFloat(bookData.price);
-    const commission = calculateCommission(price);
-    document.getElementById('commissionBookPrice').innerText = price + ' NPR';
+  function markAsSold(book) {
+    const commission = calculateCommission(book.priceRaw);
+    pendingSaleBook = book;
+    document.getElementById('commissionBookTitle').innerText = book.title;
+    document.getElementById('commissionBookPrice').innerText = book.price;
     document.getElementById('commissionAmount').innerText = commission + ' NPR';
-    pendingBookForListing = bookData;
     document.getElementById('commissionModal').style.display = 'flex';
   }
   
-  // Confirm commission payment and list book
-  function confirmCommissionAndList() {
-    if(pendingBookForListing) {
-      const commission = calculateCommission(parseFloat(pendingBookForListing.price));
-      // Update seller's total commission paid
-      if(currentSeller) {
-        currentSeller.totalCommissionPaid = (currentSeller.totalCommissionPaid || 0) + commission;
-        currentSeller.booksListed = (currentSeller.booksListed || 0) + 1;
-        // Update seller in array
-        const index = sellers.findIndex(s => s.id === currentSeller.id);
-        if(index !== -1) sellers[index] = currentSeller;
-        saveSellers();
-      }
+  function confirmCommissionAndRemove() {
+    if(pendingSaleBook && currentSeller) {
+      const commission = calculateCommission(pendingSaleBook.priceRaw);
+      currentSeller.totalCommissionPaid = (currentSeller.totalCommissionPaid || 0) + commission;
+      const index = sellers.findIndex(s => s.id === currentSeller.id);
+      if(index !== -1) sellers[index] = currentSeller;
+      saveSellers();
       
-      // Add the book
-      const newBook = {
-        id: Date.now().toString(),
-        title: pendingBookForListing.title.trim(),
-        author: pendingBookForListing.author.trim() || 'Not specified',
-        price: pendingBookForListing.price + ' NPR',
-        priceRaw: parseFloat(pendingBookForListing.price),
-        description: pendingBookForListing.description.trim(),
-        seller: `${currentSeller.firstName} ${currentSeller.lastName}`.trim() || currentSeller.email,
-        sellerId: currentSeller.id,
-        category: pendingBookForListing.category,
-        imageDataUrl: pendingBookForListing.imageDataUrl || defaultCover,
-        interestCount: 0,
-        isSold: false,
-        commission: commission
-      };
-      books.unshift(newBook);
+      // Remove the book from data
+      const bookIndex = books.findIndex(b => b.id === pendingSaleBook.id);
+      if(bookIndex !== -1) books.splice(bookIndex, 1);
+      
+      // Add system message about sale
+      if(!messages[pendingSaleBook.id]) messages[pendingSaleBook.id] = [];
+      messages[pendingSaleBook.id].push({ 
+        senderName: '📢 System', 
+        text: `✅ Book "${pendingSaleBook.title}" has been SOLD! Commission of Rs. ${commission} paid.`, 
+        timestamp: Date.now() 
+      });
+      
       saveToLocal();
       renderBooks();
+      updateChatSelect();
       
-      // Reset pending book
-      pendingBookForListing = null;
       document.getElementById('commissionModal').style.display = 'none';
-      
-      alert(`✅ Book listed successfully!\n\nCommission paid: Rs. ${commission}\nTotal commission paid: Rs. ${currentSeller.totalCommissionPaid}`);
-      
-      // Close sell modal
-      document.getElementById('sellModal').style.display = 'none';
-      document.getElementById('sellBookForm').reset();
-      document.getElementById('imagePreviewContainer').innerHTML = '';
-      selectedImage = null;
+      pendingSaleBook = null;
+      alert(`✅ Book sold! Commission of Rs. ${commission} paid successfully.\n\nThe book has been removed from listings.`);
     }
   }
   
@@ -887,30 +903,40 @@
     else messages = {};
     if(!books.length) {
       books = [
-        { id: '1', title: 'Engineering Mathematics III', author: 'Dr. K.C. Rajbanshi', price: '550 NPR', priceRaw: 550, description: '3rd semester, good condition', seller: 'Ram Sharma', sellerId: '1', category: 'Textbook', imageDataUrl: defaultCover, interestCount: 3, isSold: false, commission: 55 },
-        { id: '2', title: 'Physics for Scientists', author: 'Serway', price: '1200 NPR', priceRaw: 1200, description: '9th Edition, like new', seller: 'Sneha Sharma', sellerId: '2', category: 'Textbook', imageDataUrl: defaultCover, interestCount: 2, isSold: false, commission: 120 }
+        { id: '1', title: 'Engineering Mathematics III', author: 'Dr. K.C. Rajbanshi', price: '550 NPR', priceRaw: 550, description: '3rd semester, good condition', seller: 'Ram Sharma', sellerId: '1', category: 'Textbook', imageDataUrl: defaultCover, interestCount: 3, createdAt: Date.now() - 86400000 },
+        { id: '2', title: 'Physics for Scientists', author: 'Serway', price: '1200 NPR', priceRaw: 1200, description: '9th Edition, like new', seller: 'Sneha Sharma', sellerId: '2', category: 'Textbook', imageDataUrl: defaultCover, interestCount: 2, createdAt: Date.now() - 172800000 }
       ];
       saveToLocal();
     }
+    // Sort books by createdAt (latest first)
+    books.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
     renderBooks();
     updateChatSelect();
   }
   
-  function markAsSold(bookId) {
-    const book = books.find(b => b.id === bookId);
-    if(!book) return;
-    if(book.sellerId !== currentSeller?.id) { alert('You can only mark your own books as sold'); return; }
-    if(book.isSold) { alert('This book is already marked as sold'); return; }
-    book.isSold = true;
-    if(!messages[bookId]) messages[bookId] = [];
-    messages[bookId].push({ senderName: '📢 System', text: `✅ This book has been marked as SOLD. Commission: Rs. ${book.commission}`, timestamp: Date.now() });
+  function addNewBook(title, author, price, description, category, imageDataUrl) {
+    if(!currentSeller) { alert('Please sign in as seller to list books'); return; }
+    const newBook = {
+      id: Date.now().toString(),
+      title: title.trim(),
+      author: author.trim() || 'Not specified',
+      price: price + ' NPR',
+      priceRaw: parseFloat(price),
+      description: description.trim() || 'Well-maintained used book',
+      seller: `${currentSeller.firstName} ${currentSeller.lastName}`.trim() || currentSeller.email,
+      sellerId: currentSeller.id,
+      category: category,
+      imageDataUrl: imageDataUrl || defaultCover,
+      interestCount: 0,
+      createdAt: Date.now()
+    };
+    books.unshift(newBook); // Add to beginning (latest first)
     saveToLocal();
     renderBooks();
-    alert(`✅ Book marked as SOLD!\n\n10% commission (Rs. ${book.commission}) was already collected when you listed.`);
   }
   
   function sendInterestRequest(bookId, bookTitle, sellerName) {
-    alert(`📩 Interest sent to seller: ${sellerName}\n\nThey will see your message in chat. You can also chat directly above!`);
+    alert(`📩 Interest sent to seller: ${sellerName}\n\nThey will see your message in chat.`);
     if(!messages[bookId]) messages[bookId] = [];
     messages[bookId].push({ senderName: 'Buyer', text: `💌 I'm interested in "${bookTitle}"! Please let me know more details.`, timestamp: Date.now() });
     saveToLocal();
@@ -920,30 +946,40 @@
   function renderBooks() {
     const grid = document.getElementById('booksGrid');
     if(!grid) return;
-    if(books.length === 0) {
-      grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:3rem;"><i class="fas fa-book-open" style="font-size:3rem;"></i><p>No books yet. Sellers can sign in to list books!</p></div>`;
+    
+    let filteredBooks = books;
+    if(currentSearchQuery) {
+      const query = currentSearchQuery.toLowerCase();
+      filteredBooks = books.filter(book => 
+        book.title.toLowerCase().includes(query) || 
+        (book.author && book.author.toLowerCase().includes(query))
+      );
+    }
+    
+    if(filteredBooks.length === 0) {
+      grid.innerHTML = `<div class="no-results"><i class="fas fa-search" style="font-size:3rem; color:#c79a6e;"></i><p style="margin-top:1rem;">No books found matching "${currentSearchQuery}"</p></div>`;
       document.getElementById('bookCountBadge').innerText = '0';
       return;
     }
-    document.getElementById('bookCountBadge').innerText = books.length;
-    grid.innerHTML = books.map(book => {
+    document.getElementById('bookCountBadge').innerText = filteredBooks.length;
+    grid.innerHTML = filteredBooks.map(book => {
       const isOwner = currentSeller && book.sellerId === currentSeller.id;
-      const isSold = book.isSold === true;
       return `
-        <div class="book-card ${isSold ? 'sold-card' : ''}">
+        <div class="book-card">
           <img class="book-image" src="${escapeHtml(book.imageDataUrl || defaultCover)}" alt="cover">
           <div class="book-info">
             <div class="book-title">
               📘 ${escapeHtml(book.title)}
-              ${isSold ? '<span class="sold-badge"><i class="fas fa-check-circle"></i> SOLD</span>' : '<span class="commission-badge"><i class="fas fa-percent"></i> 10% Commission</span>'}
+              <span class="commission-badge"><i class="fas fa-percent"></i> 10% Commission</span>
             </div>
+            <div class="book-author" style="font-size:0.8rem; color:#8b7358; margin:5px 0;">✍️ ${escapeHtml(book.author || 'Unknown Author')}</div>
             <div class="book-price">💰 ${escapeHtml(book.price)}</div>
             <div class="book-seller" style="font-size:0.7rem; margin:5px 0;"><i class="fas fa-store"></i> Seller: ${escapeHtml(book.seller)}</div>
             <div class="book-desc" style="font-size:0.8rem;">${escapeHtml(book.description || 'Good condition')}</div>
             <div class="card-actions">
-              ${!isSold ? `<button class="btn btn-primary btn-sm interest-btn" data-id="${book.id}" data-title="${escapeHtml(book.title)}" data-seller="${escapeHtml(book.seller)}"><i class="fas fa-hands-helping"></i> I'm interested</button>` : '<button class="btn btn-outline btn-sm" disabled>Sold Out</button>'}
+              <button class="btn btn-primary btn-sm interest-btn" data-id="${book.id}" data-title="${escapeHtml(book.title)}" data-seller="${escapeHtml(book.seller)}"><i class="fas fa-hands-helping"></i> I'm interested</button>
               <button class="btn btn-outline btn-sm chat-from-card" data-id="${book.id}"><i class="fas fa-comment"></i> Ask Question</button>
-              ${isOwner && !isSold ? `<button class="btn btn-success btn-sm mark-sold-btn" data-id="${book.id}"><i class="fas fa-tag"></i> Mark as Sold</button>` : ''}
+              ${isOwner ? `<button class="btn btn-success btn-sm mark-sold-btn" data-id="${book.id}" data-title="${escapeHtml(book.title)}" data-price="${book.priceRaw}" data-price-display="${escapeHtml(book.price)}"><i class="fas fa-tag"></i> Mark as Sold</button>` : ''}
             </div>
             <div class="interest-badge"><i class="fas fa-heart"></i> ${book.interestCount || 0} interested</div>
           </div>
@@ -960,7 +996,12 @@
       };
     });
     document.querySelectorAll('.mark-sold-btn').forEach(btn => {
-      btn.onclick = (e) => { e.stopPropagation(); markAsSold(btn.getAttribute('data-id')); };
+      btn.onclick = (e) => {
+        e.stopPropagation();
+        const bookId = btn.getAttribute('data-id');
+        const book = books.find(b => b.id === bookId);
+        if(book) markAsSold(book);
+      };
     });
     document.querySelectorAll('.chat-from-card').forEach(btn => {
       btn.onclick = () => {
@@ -1009,7 +1050,19 @@
   document.getElementById('showSellerAuthBtn').onclick = showSellerAuthModal;
   document.getElementById('closeSellerAuthModalBtn').onclick = closeSellerAuthModal;
   document.getElementById('closeCommissionModalBtn').onclick = () => commissionModal.style.display = 'none';
-  document.getElementById('confirmCommissionPaymentBtn').onclick = confirmCommissionAndList;
+  document.getElementById('confirmCommissionPaymentBtn').onclick = confirmCommissionAndRemove;
+  
+  // Search functionality
+  document.getElementById('searchBtn').onclick = () => {
+    currentSearchQuery = document.getElementById('searchInput').value;
+    renderBooks();
+  };
+  document.getElementById('searchInput').addEventListener('keypress', (e) => {
+    if(e.key === 'Enter') {
+      currentSearchQuery = document.getElementById('searchInput').value;
+      renderBooks();
+    }
+  });
   
   document.querySelectorAll('.auth-tab').forEach(tab => {
     tab.onclick = () => {
@@ -1031,7 +1084,7 @@
     if(!first || !email || !city || !pass) { alert('Please fill all required fields'); return; }
     if(pass !== confirm) { alert('Passwords do not match'); return; }
     const result = regularSignUp(first, last, email, mobile, city, pass);
-    if(result.success) { closeSellerAuthModal(); alert('Account created successfully! You can now list books with 10% commission.'); }
+    if(result.success) { closeSellerAuthModal(); alert('Account created successfully! You can now list books.'); }
     else alert(result.error);
   };
   
@@ -1070,17 +1123,12 @@
     const title = document.getElementById('bookTitle').value;
     const price = document.getElementById('bookPrice').value;
     if(!title || !price) { alert('Please enter book title and price'); return; }
-    
-    const bookData = {
-      title: title,
-      author: document.getElementById('bookAuthor').value,
-      price: parseFloat(price),
-      description: document.getElementById('bookDesc').value,
-      category: document.getElementById('bookCategory').value,
-      imageDataUrl: selectedImage
-    };
-    
-    showCommissionPayment(bookData);
+    addNewBook(title, document.getElementById('bookAuthor').value, price, document.getElementById('bookDesc').value, document.getElementById('bookCategory').value, selectedImage);
+    sellModal.style.display = 'none';
+    document.getElementById('sellBookForm').reset();
+    selectedImage = null;
+    document.getElementById('imagePreviewContainer').innerHTML = '';
+    alert('✅ Book listed successfully! It will appear at the top of the list.');
   };
   
   document.getElementById('sendChatBtn').onclick = () => {
@@ -1096,19 +1144,10 @@
     const title = document.getElementById('quickBookTitle').value;
     const price = document.getElementById('quickBookPrice').value;
     if(!title || !price) { alert('Enter title and price'); return; }
-    
-    const bookData = {
-      title: title,
-      author: '',
-      price: parseFloat(price),
-      description: 'Quick listing',
-      category: 'Textbook',
-      imageDataUrl: null
-    };
-    
-    showCommissionPayment(bookData);
+    addNewBook(title, '', price, 'Quick listing', 'Textbook', null);
     document.getElementById('quickBookTitle').value = '';
     document.getElementById('quickBookPrice').value = '';
+    alert('✅ Book listed successfully!');
   };
   
   loadSellers();
