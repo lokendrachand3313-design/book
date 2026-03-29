@@ -358,10 +358,13 @@
     .chat-messages {
       background: #fef9f2;
       border-radius: 1.5rem;
-      height: 380px;
+      height: 400px;
       overflow-y: auto;
       padding: 1rem;
       margin: 1rem 0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
     }
     
     .chat-bubble {
@@ -369,13 +372,19 @@
       border-radius: 1.2rem;
       padding: 0.7rem 1rem;
       max-width: 85%;
-      margin-bottom: 8px;
+      margin-bottom: 4px;
       border: 1px solid #ffd966;
+      word-wrap: break-word;
     }
     
     .chat-bubble.sent {
       background: #ffd966;
       margin-left: auto;
+    }
+    
+    .chat-bubble.received {
+      background: white;
+      margin-right: auto;
     }
     
     .chat-meta {
@@ -402,6 +411,8 @@
       justify-content: space-between;
       align-items: center;
       margin-bottom: 10px;
+      flex-wrap: wrap;
+      gap: 10px;
     }
     
     .current-book-chat {
@@ -717,12 +728,12 @@
           <div class="section-title" style="font-size:1.3rem;">Live Chat</div>
           <div id="currentChatBook" class="current-book-chat">Select a book</div>
         </div>
-        <div class="info-note">Click "Ask Question" on any book to start chatting</div>
+        <div class="info-note">💬 Click "Ask Question" on any book to start chatting with the seller</div>
         <div class="chat-messages" id="chatMessagesContainer">
           <div style="text-align:center; padding:30px;">Click "Ask Question" to start</div>
         </div>
         <div class="chat-input-area">
-          <input type="text" id="chatInput" placeholder="Type message..." disabled>
+          <input type="text" id="chatInput" placeholder="Type your message..." disabled>
           <button class="btn btn-primary btn-sm" id="sendChatBtn" disabled>Send</button>
         </div>
       </div>
@@ -777,11 +788,8 @@
   function removeExpiredBooks() {
     const now = Date.now();
     let removedCount = 0;
-    const beforeCount = books.length;
     
     books = books.filter(book => {
-      // Keep sold books (they are already removed from listings anyway)
-      // For unsold books, check if they are older than 15 days
       if (!book.isSold && book.createdAt && (now - book.createdAt) > FIFTEEN_DAYS) {
         removedCount++;
         return false;
@@ -791,7 +799,6 @@
     
     if (removedCount > 0) {
       saveToLocal();
-      console.log(`Removed ${removedCount} expired books (unsold for 15 days)`);
     }
     return removedCount;
   }
@@ -805,10 +812,7 @@
     if(sm) messages = JSON.parse(sm); 
     else messages = {};
     
-    // Remove expired books on every load
     removeExpiredBooks();
-    
-    // Sort by latest first
     books.sort((a,b) => (b.createdAt||0) - (a.createdAt||0));
     renderBooks();
     if(currentSeller) renderSellerProfile();
@@ -872,6 +876,14 @@
     renderBooks();
     if(currentSeller) renderSellerProfile();
     alert(`✅ Book "${title}" listed successfully! It will be automatically removed if not sold within 15 days.`);
+  }
+
+  // Get sender display name
+  function getSenderDisplayName(senderId, senderName) {
+    if (currentSeller && senderId === currentSeller.id) {
+      return 'You (Seller)';
+    }
+    return senderName;
   }
 
   function renderBooks() {
@@ -967,7 +979,12 @@
   function sendInterest(bookId, title, seller) {
     alert(`Interest sent to seller: ${seller}\n\nStart chatting in the chat box!`);
     if(!messages[bookId]) messages[bookId] = [];
-    messages[bookId].push({ senderName: 'Buyer', text: `I'm interested in "${title}"! Please share details.`, timestamp: Date.now() });
+    messages[bookId].push({ 
+      senderId: 'buyer',
+      senderName: 'Buyer', 
+      text: `I'm interested in "${title}"! Please share details.`, 
+      timestamp: Date.now() 
+    });
     saveToLocal();
     loadChatForBook(bookId);
   }
@@ -975,21 +992,74 @@
   function loadChatForBook(bookId) {
     currentChatBookId = bookId;
     const book = books.find(b => b.id === bookId);
-    if(book) document.getElementById('currentChatBook').innerHTML = `Chatting about: ${escapeHtml(book.title)}`;
+    if(book) {
+      document.getElementById('currentChatBook').innerHTML = `Chatting about: ${escapeHtml(book.title)} with ${escapeHtml(book.seller)}`;
+    }
     const container = document.getElementById('chatMessagesContainer');
     const msgs = messages[bookId] || [];
-    document.getElementById('chatInput').disabled = false;
-    document.getElementById('sendChatBtn').disabled = false;
-    if(msgs.length === 0) container.innerHTML = '<div style="text-align:center; padding:20px;">No messages yet. Start the conversation!</div>';
-    else container.innerHTML = msgs.map(m => `<div class="chat-bubble"><div class="chat-meta"><strong>${escapeHtml(m.senderName)}</strong> · ${new Date(m.timestamp).toLocaleTimeString()}</div><div>${escapeHtml(m.text)}</div></div>`).join('');
-    container.scrollTop = container.scrollHeight;
+    const chatInput = document.getElementById('chatInput');
+    const sendBtn = document.getElementById('sendChatBtn');
+    
+    chatInput.disabled = false;
+    sendBtn.disabled = false;
+    chatInput.placeholder = book ? `Message ${book.seller}...` : "Type your message...";
+    
+    if(msgs.length === 0) {
+      container.innerHTML = '<div style="text-align:center; padding:20px;">No messages yet. Start the conversation!</div>';
+    } else {
+      container.innerHTML = msgs.map(msg => {
+        // Determine if message is from current user (seller or buyer)
+        let isSent = false;
+        if (currentSeller && msg.senderId === currentSeller.id) {
+          isSent = true;
+        } else if (!currentSeller && msg.senderName === 'Buyer') {
+          isSent = true;
+        } else if (currentSeller && msg.senderName === 'Buyer') {
+          isSent = false;
+        } else if (!currentSeller && msg.senderId === 'seller') {
+          isSent = false;
+        }
+        
+        return `
+          <div class="chat-bubble ${isSent ? 'sent' : 'received'}">
+            <div class="chat-meta"><strong>${escapeHtml(msg.senderName)}</strong> · ${new Date(msg.timestamp).toLocaleTimeString()}</div>
+            <div>${escapeHtml(msg.text)}</div>
+          </div>
+        `;
+      }).join('');
+      container.scrollTop = container.scrollHeight;
+    }
   }
 
   function sendChatMessage() {
     const msg = document.getElementById('chatInput').value.trim();
     if(!currentChatBookId || !msg) return;
+    
+    const book = books.find(b => b.id === currentChatBookId);
+    if(!book) {
+      alert('Book not found');
+      return;
+    }
+    
     if(!messages[currentChatBookId]) messages[currentChatBookId] = [];
-    messages[currentChatBookId].push({ senderName: currentSeller ? `Seller: ${currentSeller.firstName}` : 'Buyer', text: msg, timestamp: Date.now() });
+    
+    let senderName, senderId;
+    if (currentSeller) {
+      // Seller is logged in
+      senderName = currentSeller.firstName;
+      senderId = currentSeller.id;
+    } else {
+      // Buyer (guest)
+      senderName = 'Buyer';
+      senderId = 'buyer';
+    }
+    
+    messages[currentChatBookId].push({ 
+      senderId: senderId,
+      senderName: senderName, 
+      text: msg, 
+      timestamp: Date.now() 
+    });
     saveToLocal();
     loadChatForBook(currentChatBookId);
     document.getElementById('chatInput').value = '';
@@ -1013,11 +1083,82 @@
     renderBooks();
   }
 
-  function regularSignIn(email, pass) { const s = sellers.find(s => s.email === email && s.password === pass); if(s) { currentSeller = s; saveSellerAuth(); updateUI(); closeAuthModal(); return true; } return false; }
-  function googleSignUp() { const email = prompt('Enter your Gmail address:'); if(email) { let s = sellers.find(s => s.email === email); if(!s) { s = { id: Date.now().toString(), firstName: email.split('@')[0], email: email, totalCommissionPaid: 0 }; sellers.push(s); saveSellers(); } currentSeller = s; saveSellerAuth(); updateUI(); closeAuthModal(); } }
-  function mobileSignup() { const mobile = prompt('Enter mobile number (without +977, e.g., 9812345678):'); if(mobile) { const fullMobile = '+977' + mobile; let s = sellers.find(s => s.mobile === fullMobile); if(!s) { s = { id: Date.now().toString(), firstName: 'User', mobile: fullMobile, totalCommissionPaid: 0 }; sellers.push(s); saveSellers(); } currentSeller = s; saveSellerAuth(); updateUI(); closeAuthModal(); } }
-  function logout() { currentSeller = null; saveSellerAuth(); updateUI(); document.querySelector('.nav-tab[data-page="buyer"]').click(); }
-  function escapeHtml(str) { if(!str) return ''; return String(str).replace(/[&<>]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[m])); }
+  function regularSignIn(email, pass) { 
+    const s = sellers.find(s => s.email === email && s.password === pass); 
+    if(s) { 
+      currentSeller = s; 
+      saveSellerAuth(); 
+      updateUI(); 
+      closeAuthModal(); 
+      return true; 
+    } 
+    return false; 
+  }
+  
+  function googleSignUp() { 
+    const email = prompt('Enter your Gmail address:'); 
+    if(email) { 
+      let s = sellers.find(s => s.email === email); 
+      if(!s) { 
+        s = { 
+          id: Date.now().toString(), 
+          firstName: email.split('@')[0], 
+          email: email, 
+          totalCommissionPaid: 0,
+          createdAt: Date.now()
+        }; 
+        sellers.push(s); 
+        saveSellers(); 
+      } 
+      currentSeller = s; 
+      saveSellerAuth(); 
+      updateUI(); 
+      closeAuthModal(); 
+    } 
+  }
+  
+  function mobileSignup() { 
+    const mobile = prompt('Enter mobile number (without +977, e.g., 9812345678):'); 
+    if(mobile && /^[0-9]{10}$/.test(mobile)) { 
+      const fullMobile = '+977' + mobile; 
+      let s = sellers.find(s => s.mobile === fullMobile); 
+      if(!s) { 
+        s = { 
+          id: Date.now().toString(), 
+          firstName: 'User', 
+          mobile: fullMobile, 
+          totalCommissionPaid: 0,
+          createdAt: Date.now()
+        }; 
+        sellers.push(s); 
+        saveSellers(); 
+      } 
+      currentSeller = s; 
+      saveSellerAuth(); 
+      updateUI(); 
+      closeAuthModal(); 
+    } else {
+      alert('Please enter a valid 10-digit mobile number');
+    }
+  }
+  
+  function logout() { 
+    currentSeller = null; 
+    saveSellerAuth(); 
+    updateUI(); 
+    document.querySelector('.nav-tab[data-page="buyer"]').click(); 
+    // Clear current chat
+    currentChatBookId = null;
+    document.getElementById('currentChatBook').innerHTML = 'Select a book';
+    document.getElementById('chatMessagesContainer').innerHTML = '<div style="text-align:center; padding:30px;">Click "Ask Question" to start</div>';
+    document.getElementById('chatInput').disabled = true;
+    document.getElementById('sendChatBtn').disabled = true;
+  }
+  
+  function escapeHtml(str) { 
+    if(!str) return ''; 
+    return String(str).replace(/[&<>]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[m])); 
+  }
 
   const authModal = document.getElementById('sellerAuthModal');
   const sellModal = document.getElementById('sellModal');
@@ -1031,7 +1172,13 @@
   document.getElementById('confirmCommissionPaymentBtn').onclick = confirmCommissionAndRemove;
   document.getElementById('downloadQRBtn').onclick = downloadQR;
   document.getElementById('logoutBtn').onclick = logout;
-  document.getElementById('signinBtn').onclick = () => { if(regularSignIn(document.getElementById('signinEmail').value, document.getElementById('signinPassword').value)) closeAuthModal(); else alert('Invalid credentials'); };
+  document.getElementById('signinBtn').onclick = () => { 
+    if(regularSignIn(document.getElementById('signinEmail').value, document.getElementById('signinPassword').value)) {
+      closeAuthModal(); 
+    } else {
+      alert('Invalid credentials'); 
+    }
+  };
   document.getElementById('googleAuthBtn').onclick = () => { googleSignUp(); closeAuthModal(); };
   document.getElementById('mobileSignupBtn').onclick = () => { mobileSignup(); closeAuthModal(); };
   document.getElementById('closeSellModalBtn').onclick = () => sellModal.style.display = 'none';
@@ -1041,8 +1188,40 @@
   document.getElementById('searchInput').addEventListener('keypress', e => { if(e.key === 'Enter') { currentSearchQuery = e.target.value; renderBooks(); } });
 
   let selectedImage = null;
-  document.getElementById('bookImageInput').onchange = (e) => { const f = e.target.files[0]; if(f) { const r = new FileReader(); r.onload = ev => { selectedImage = ev.target.result; document.getElementById('imagePreviewContainer').innerHTML = `<img src="${selectedImage}" style="width:80px;height:100px;border-radius:8px;object-fit:cover;">`; }; r.readAsDataURL(f); } };
-  document.getElementById('sellBookForm').onsubmit = (e) => { e.preventDefault(); addNewBook(document.getElementById('bookTitle').value, document.getElementById('bookAuthor').value, document.getElementById('bookPrice').value, document.getElementById('bookDesc').value, document.getElementById('bookCategory').value, selectedImage); sellModal.style.display = 'none'; document.getElementById('sellBookForm').reset(); selectedImage = null; document.getElementById('imagePreviewContainer').innerHTML = ''; };
+  const imageInput = document.getElementById('bookImageInput');
+  const previewContainer = document.getElementById('imagePreviewContainer');
+  if(imageInput) {
+    imageInput.onchange = (e) => { 
+      const f = e.target.files[0]; 
+      if(f) { 
+        const r = new FileReader(); 
+        r.onload = ev => { 
+          selectedImage = ev.target.result; 
+          if(previewContainer) previewContainer.innerHTML = `<img src="${selectedImage}" style="width:80px;height:100px;border-radius:8px;object-fit:cover;">`; 
+        }; 
+        r.readAsDataURL(f); 
+      } 
+    };
+  }
+  
+  const sellForm = document.getElementById('sellBookForm');
+  if(sellForm) {
+    sellForm.onsubmit = (e) => { 
+      e.preventDefault(); 
+      addNewBook(
+        document.getElementById('bookTitle').value, 
+        document.getElementById('bookAuthor').value, 
+        document.getElementById('bookPrice').value, 
+        document.getElementById('bookDesc').value, 
+        document.getElementById('bookCategory').value, 
+        selectedImage
+      ); 
+      sellModal.style.display = 'none'; 
+      sellForm.reset(); 
+      selectedImage = null; 
+      if(previewContainer) previewContainer.innerHTML = ''; 
+    };
+  }
 
   document.querySelectorAll('.nav-tab').forEach(tab => {
     tab.onclick = () => {
