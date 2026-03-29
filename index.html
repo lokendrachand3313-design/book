@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
   <title>KitabSansar | OLDBOOKS — Buy & Sell Used Books</title>
-  <!-- Font Awesome 6 (only for profile icon and basic icons, will minimize usage) -->
+  <!-- Font Awesome 6 (minimal usage) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
@@ -511,6 +511,12 @@
       margin-bottom: 0.3rem;
     }
     
+    .expiry-note {
+      font-size: 0.7rem;
+      color: #e67e22;
+      margin-top: 5px;
+    }
+    
     .quick-add-section {
       background: rgba(255, 255, 255, 0.95);
       border-radius: 1rem;
@@ -726,7 +732,7 @@
   <!-- SELLER PAGE -->
   <div id="sellerPage" class="page"><div id="sellerProfileContent"></div></div>
 
-  <footer>KitabSansar | 10% Commission After Sale | Sellers pay commission when marking book as sold</footer>
+  <footer>KitabSansar | 10% Commission After Sale | Books automatically removed after 15 days if unsold</footer>
 </div>
 
 <!-- Auth Modal -->
@@ -747,21 +753,62 @@
   let currentChatBookId = null;
   let pendingSaleBook = null;
   let currentSearchQuery = '';
+  
+  // 15 days in milliseconds
+  const FIFTEEN_DAYS = 15 * 24 * 60 * 60 * 1000;
+  
   const defaultCover = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23e9dfd1'/%3E%3Ctext x='50' y='55' font-size='44' text-anchor='middle' fill='%23997b55'%3E📖%3C/text%3E%3C/svg%3E";
 
-  function loadSellers() { const s = localStorage.getItem('kitab_sellers'); if(s) sellers = JSON.parse(s); else sellers = [{ id: '1', firstName: 'Ram', lastName: 'Sharma', email: 'ram@example.com', city: 'Kathmandu', password: 'password123', totalCommissionPaid: 0 }]; saveSellers(); }
+  function loadSellers() { 
+    const s = localStorage.getItem('kitab_sellers'); 
+    if(s) sellers = JSON.parse(s); 
+    else sellers = []; 
+    saveSellers(); 
+  }
   function saveSellers() { localStorage.setItem('kitab_sellers', JSON.stringify(sellers)); }
   function saveSellerAuth() { if(currentSeller) localStorage.setItem('kitab_current_seller', JSON.stringify(currentSeller)); else localStorage.removeItem('kitab_current_seller'); }
   function loadSellerAuth() { const s = localStorage.getItem('kitab_current_seller'); if(s) { currentSeller = JSON.parse(s); updateUI(); } }
-  function saveToLocal() { localStorage.setItem('kitab_books', JSON.stringify(books)); localStorage.setItem('kitab_messages', JSON.stringify(messages)); }
+  function saveToLocal() { 
+    localStorage.setItem('kitab_books', JSON.stringify(books)); 
+    localStorage.setItem('kitab_messages', JSON.stringify(messages)); 
+  }
+
+  // Remove expired books (older than 15 days and not sold)
+  function removeExpiredBooks() {
+    const now = Date.now();
+    let removedCount = 0;
+    const beforeCount = books.length;
+    
+    books = books.filter(book => {
+      // Keep sold books (they are already removed from listings anyway)
+      // For unsold books, check if they are older than 15 days
+      if (!book.isSold && book.createdAt && (now - book.createdAt) > FIFTEEN_DAYS) {
+        removedCount++;
+        return false;
+      }
+      return true;
+    });
+    
+    if (removedCount > 0) {
+      saveToLocal();
+      console.log(`Removed ${removedCount} expired books (unsold for 15 days)`);
+    }
+    return removedCount;
+  }
 
   function loadData() {
-    const sb = localStorage.getItem('kitab_books'); if(sb) books = JSON.parse(sb);
-    const sm = localStorage.getItem('kitab_messages'); if(sm) messages = JSON.parse(sm); else messages = {};
-    if(!books.length) books = [
-      { id: '1', title: 'Engineering Mathematics III', author: 'Dr. K.C. Rajbanshi', price: '550 NPR', priceRaw: 550, description: '3rd semester textbook for engineering students', seller: 'Ram Sharma', sellerId: '1', imageDataUrl: defaultCover, interestCount: 3, isSold: false, createdAt: Date.now() - 86400000 },
-      { id: '2', title: 'Physics for Scientists', author: 'Serway & Jewett', price: '1200 NPR', priceRaw: 1200, description: '9th Edition, excellent condition', seller: 'Ram Sharma', sellerId: '1', imageDataUrl: defaultCover, interestCount: 2, isSold: false, createdAt: Date.now() - 172800000 }
-    ];
+    const sb = localStorage.getItem('kitab_books'); 
+    if(sb) books = JSON.parse(sb); 
+    else books = [];
+    
+    const sm = localStorage.getItem('kitab_messages'); 
+    if(sm) messages = JSON.parse(sm); 
+    else messages = {};
+    
+    // Remove expired books on every load
+    removeExpiredBooks();
+    
+    // Sort by latest first
     books.sort((a,b) => (b.createdAt||0) - (a.createdAt||0));
     renderBooks();
     if(currentSeller) renderSellerProfile();
@@ -806,25 +853,43 @@
   function addNewBook(title, author, price, description, category, imageDataUrl) {
     if(!currentSeller) { alert('Please sign in as seller'); return; }
     const newBook = {
-      id: Date.now().toString(), title: title.trim(), author: author.trim() || 'Unknown',
-      price: price + ' NPR', priceRaw: parseFloat(price), description: description.trim() || 'Well-maintained',
-      seller: `${currentSeller.firstName} ${currentSeller.lastName}`.trim() || currentSeller.email,
-      sellerId: currentSeller.id, category: category, imageDataUrl: imageDataUrl || defaultCover,
-      interestCount: 0, isSold: false, createdAt: Date.now()
+      id: Date.now().toString(),
+      title: title.trim(),
+      author: author.trim() || 'Unknown',
+      price: price + ' NPR',
+      priceRaw: parseFloat(price),
+      description: description.trim() || 'Well-maintained used book',
+      seller: `${currentSeller.firstName} ${currentSeller.lastName || ''}`.trim() || currentSeller.email,
+      sellerId: currentSeller.id,
+      category: category,
+      imageDataUrl: imageDataUrl || defaultCover,
+      interestCount: 0,
+      isSold: false,
+      createdAt: Date.now()
     };
     books.unshift(newBook);
     saveToLocal();
     renderBooks();
     if(currentSeller) renderSellerProfile();
+    alert(`✅ Book "${title}" listed successfully! It will be automatically removed if not sold within 15 days.`);
   }
 
   function renderBooks() {
     const grid = document.getElementById('booksGrid');
     if(!grid) return;
     let filtered = books.filter(b => !b.isSold);
-    if(currentSearchQuery) { const q = currentSearchQuery.toLowerCase(); filtered = filtered.filter(b => b.title.toLowerCase().includes(q) || (b.author && b.author.toLowerCase().includes(q))); }
-    if(filtered.length === 0) { grid.innerHTML = '<div class="no-results">No books found</div>'; return; }
-    grid.innerHTML = filtered.map(book => `
+    if(currentSearchQuery) { 
+      const q = currentSearchQuery.toLowerCase(); 
+      filtered = filtered.filter(b => b.title.toLowerCase().includes(q) || (b.author && b.author.toLowerCase().includes(q))); 
+    }
+    if(filtered.length === 0) { 
+      grid.innerHTML = '<div class="no-results">No books available. Check back later!</div>'; 
+      return; 
+    }
+    grid.innerHTML = filtered.map(book => {
+      const daysLeft = Math.ceil((FIFTEEN_DAYS - (Date.now() - (book.createdAt || Date.now()))) / (24 * 60 * 60 * 1000));
+      const expiryWarning = daysLeft <= 3 ? `<div class="expiry-note">⚠️ Expires in ${daysLeft} days if unsold</div>` : '';
+      return `
       <div class="book-card">
         <img class="book-image" src="${escapeHtml(book.imageDataUrl || defaultCover)}" alt="${escapeHtml(book.title)}">
         <div class="book-info">
@@ -833,6 +898,7 @@
           <div class="book-price">${escapeHtml(book.price)}</div>
           <div class="book-seller">Seller: ${escapeHtml(book.seller)}</div>
           <div class="book-desc" style="font-size:0.8rem; margin:8px 0;">${escapeHtml(book.description || 'Good condition')}</div>
+          ${expiryWarning}
           <div class="card-actions">
             <button class="btn btn-primary btn-sm interest-btn" data-id="${book.id}" data-title="${escapeHtml(book.title)}" data-seller="${escapeHtml(book.seller)}">I'm interested</button>
             <button class="btn btn-outline btn-sm chat-btn" data-id="${book.id}">Ask Question</button>
@@ -840,9 +906,14 @@
           <div class="interest-badge">${book.interestCount || 0} interested</div>
         </div>
       </div>
-    `).join('');
-    document.querySelectorAll('.interest-btn').forEach(btn => { btn.onclick = () => sendInterest(btn.dataset.id, btn.dataset.title, btn.dataset.seller); });
-    document.querySelectorAll('.chat-btn').forEach(btn => { btn.onclick = () => loadChatForBook(btn.dataset.id); });
+    `}).join('');
+    
+    document.querySelectorAll('.interest-btn').forEach(btn => { 
+      btn.onclick = () => sendInterest(btn.dataset.id, btn.dataset.title, btn.dataset.seller); 
+    });
+    document.querySelectorAll('.chat-btn').forEach(btn => { 
+      btn.onclick = () => loadChatForBook(btn.dataset.id); 
+    });
   }
 
   function renderSellerProfile() {
@@ -852,7 +923,7 @@
     const html = `
       <div class="profile-card">
         <div class="profile-header">
-          <div class="profile-avatar">${currentSeller.firstName ? currentSeller.firstName.charAt(0) : '👤'}</div>
+          <div class="profile-avatar">${currentSeller.firstName ? currentSeller.firstName.charAt(0).toUpperCase() : '👤'}</div>
           <div class="profile-info">
             <h2>${currentSeller.firstName} ${currentSeller.lastName || ''}</h2>
             <p>${currentSeller.email}</p>
@@ -868,17 +939,21 @@
       </div>
       <div class="section-title">My Books for Sale</div>
       <div class="seller-books-grid" id="sellerBooksGrid">
-        ${sellerBooks.map(book => `
+        ${sellerBooks.map(book => {
+          const daysLeft = Math.ceil((FIFTEEN_DAYS - (Date.now() - (book.createdAt || Date.now()))) / (24 * 60 * 60 * 1000));
+          const expiryText = daysLeft > 0 ? `(Expires in ${daysLeft} days)` : '(Expired)';
+          return `
           <div class="seller-book-card">
             <img class="seller-book-image" src="${book.imageDataUrl || defaultCover}" alt="${book.title}">
             <div class="seller-book-info">
               <h4>${escapeHtml(book.title)}</h4>
               <p class="book-price" style="font-size:1rem;">${book.price}</p>
               <p style="font-size:0.8rem; margin:5px 0;">${book.description || 'No description'}</p>
+              <p style="font-size:0.7rem; color:#e67e22;">${expiryText}</p>
               ${!book.isSold ? `<button class="btn btn-success btn-sm mark-sold-from-profile" data-id="${book.id}" data-price="${book.priceRaw}">Mark as Sold & Pay Commission</button>` : '<span style="background:#28a745; color:white; padding:5px; border-radius:20px; display:inline-block;">Sold</span>'}
             </div>
           </div>
-        `).join('')}
+        `}).join('')}
         ${sellerBooks.length === 0 ? '<div class="no-results">No books listed yet. Click "List New Book" to start selling!</div>' : ''}
       </div>
     `;
@@ -940,7 +1015,7 @@
 
   function regularSignIn(email, pass) { const s = sellers.find(s => s.email === email && s.password === pass); if(s) { currentSeller = s; saveSellerAuth(); updateUI(); closeAuthModal(); return true; } return false; }
   function googleSignUp() { const email = prompt('Enter your Gmail address:'); if(email) { let s = sellers.find(s => s.email === email); if(!s) { s = { id: Date.now().toString(), firstName: email.split('@')[0], email: email, totalCommissionPaid: 0 }; sellers.push(s); saveSellers(); } currentSeller = s; saveSellerAuth(); updateUI(); closeAuthModal(); } }
-  function mobileSignup() { const mobile = prompt('Enter mobile number (+977XXXXXXXXXX):'); if(mobile) { let s = sellers.find(s => s.mobile === mobile); if(!s) { s = { id: Date.now().toString(), firstName: 'User', mobile: mobile, totalCommissionPaid: 0 }; sellers.push(s); saveSellers(); } currentSeller = s; saveSellerAuth(); updateUI(); closeAuthModal(); } }
+  function mobileSignup() { const mobile = prompt('Enter mobile number (without +977, e.g., 9812345678):'); if(mobile) { const fullMobile = '+977' + mobile; let s = sellers.find(s => s.mobile === fullMobile); if(!s) { s = { id: Date.now().toString(), firstName: 'User', mobile: fullMobile, totalCommissionPaid: 0 }; sellers.push(s); saveSellers(); } currentSeller = s; saveSellerAuth(); updateUI(); closeAuthModal(); } }
   function logout() { currentSeller = null; saveSellerAuth(); updateUI(); document.querySelector('.nav-tab[data-page="buyer"]').click(); }
   function escapeHtml(str) { if(!str) return ''; return String(str).replace(/[&<>]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[m])); }
 
@@ -978,6 +1053,15 @@
       if(tab.dataset.page === 'seller' && currentSeller) renderSellerProfile();
     };
   });
+
+  // Run expiry check every hour
+  setInterval(() => {
+    const removed = removeExpiredBooks();
+    if(removed > 0) {
+      renderBooks();
+      if(currentSeller) renderSellerProfile();
+    }
+  }, 60 * 60 * 1000);
 
   loadSellers();
   loadSellerAuth();
