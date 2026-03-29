@@ -621,6 +621,7 @@
             <option value="Dharan">Dharan</option>
             <option value="Nepalgunj">Nepalgunj</option>
             <option value="Janakpur">Janakpur</option>
+             <option value="Dang">Dang</option>
           </select>
         </div>
         <div class="input-group">
@@ -838,7 +839,7 @@
     localStorage.setItem('kitab_messages', JSON.stringify(messages));
   }
   
-  const defaultCover = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23f3e9df'/%3E%3Ctext x='50' y='55' font-size='44' text-anchor='middle' fill='%23c58f64'%3E📘%3C/text%3E%3C/svg%3E";
+  const defaultCover = "image.png' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23f3e9df'/%3E%3Ctext x='50' y='55' font-size='44' text-anchor='middle' fill='%23c58f64'%3E📘%3C/text%3E%3C/svg%3E";
   
   function loadData() {
     const storedBooks = localStorage.getItem('kitab_books');
