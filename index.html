@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>📚 KitabSansar | Student Textbook Marketplace — Buy & Sell Used Books</title>
+  <title>KitabSansar | OLDBOOKS — Student Textbook Marketplace</title>
   <!-- Font Awesome 6 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <!-- Google Fonts -->
@@ -41,7 +41,7 @@
       padding: 1.5rem;
     }
 
-    /* Header */
+    /* Header with custom logo */
     .top-bar {
       display: flex;
       flex-wrap: wrap;
@@ -52,27 +52,50 @@
       padding-bottom: 1rem;
       border-bottom: 2px solid rgba(198, 170, 138, 0.3);
     }
-    .logo h1 {
+    
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    
+    .logo-icon {
+      background: linear-gradient(135deg, #c17b4c, #9b5e32);
+      width: 55px;
+      height: 55px;
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 16px rgba(193, 123, 76, 0.25);
+    }
+    
+    .logo-icon i {
+      font-size: 32px;
+      color: white;
+    }
+    
+    .logo-text h1 {
       font-family: 'Playfair Display', serif;
-      font-size: 2.2rem;
-      font-weight: 700;
+      font-size: 2rem;
+      font-weight: 800;
       background: linear-gradient(125deg, #3b2a1f, #b56a3c);
       background-clip: text;
       -webkit-background-clip: text;
       color: transparent;
     }
-    .logo p {
-      font-size: 0.75rem;
-      color: #a18464;
-      margin-top: 4px;
-    }
-    .student-badge {
-      background: #e8dfd1;
-      padding: 0.3rem 1rem;
+    
+    .oldbooks-badge {
+      background: #2c241a;
+      color: #f7e5d4;
+      padding: 0.2rem 1rem;
       border-radius: 40px;
       font-size: 0.7rem;
       font-weight: 600;
+      display: inline-block;
+      margin-top: 4px;
     }
+    
     .user-info {
       display: flex;
       align-items: center;
@@ -82,6 +105,7 @@
       border-radius: 60px;
       border: 1px solid #e2cfbc;
     }
+    
     .user-avatar {
       width: 40px;
       height: 40px;
@@ -93,6 +117,7 @@
       color: white;
       font-weight: bold;
     }
+    
     .btn {
       border: none;
       padding: 0.7rem 1.5rem;
@@ -106,33 +131,66 @@
       gap: 10px;
       font-family: inherit;
     }
+    
     .btn-primary {
       background: #c17b4c;
       color: white;
       box-shadow: 0 6px 14px rgba(193, 123, 76, 0.25);
     }
+    
     .btn-primary:hover {
       background: #a55e34;
       transform: translateY(-2px);
     }
+    
     .btn-outline {
       background: rgba(255, 248, 240, 0.9);
       border: 1px solid #e2cfbc;
       color: #5e3e2a;
     }
+    
     .btn-outline:hover {
       background: #fef3e8;
       border-color: #c17b4c;
     }
+    
     .btn-sm {
       padding: 0.45rem 1.1rem;
       font-size: 0.75rem;
     }
-    .btn-success {
-      background: #2c6e2f;
+    
+    .btn-google {
+      background: white;
+      border: 1px solid #ddd;
+      color: #5e3e2a;
+    }
+    .btn-google:hover {
+      background: #f8f8f8;
+      border-color: #c17b4c;
+    }
+    .btn-facebook {
+      background: #1877f2;
+      color: white;
+      border: none;
+    }
+    .btn-facebook:hover {
+      background: #0e63d4;
+    }
+    .btn-whatsapp {
+      background: #25D366;
       color: white;
     }
-
+    .btn-whatsapp:hover {
+      background: #1da851;
+    }
+    .btn-mobile {
+      background: #6c5ce7;
+      color: white;
+    }
+    .btn-mobile:hover {
+      background: #5b4bc4;
+    }
+    
     /* Dashboard */
     .dashboard {
       display: flex;
@@ -140,10 +198,12 @@
       gap: 2rem;
       margin-top: 1rem;
     }
+    
     .listings-panel {
       flex: 2.5;
       min-width: 280px;
     }
+    
     .chat-panel {
       flex: 1.2;
       min-width: 310px;
@@ -157,7 +217,7 @@
       position: sticky;
       top: 1.5rem;
     }
-
+    
     .section-title {
       font-size: 1.6rem;
       font-weight: 700;
@@ -167,13 +227,14 @@
       gap: 12px;
       font-family: 'Playfair Display', serif;
     }
-
+    
     /* Book Grid */
     .books-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
       gap: 1.8rem;
     }
+    
     .book-card {
       background: #ffffffea;
       border-radius: 2rem;
@@ -182,26 +243,32 @@
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
       border: 1px solid #f2e5d8;
     }
+    
     .book-card:hover {
       transform: translateY(-8px);
       box-shadow: 0 25px 35px -12px rgba(0, 0, 0, 0.15);
     }
+    
     .book-image {
       width: 100%;
       height: 210px;
       object-fit: cover;
       background: #e9dfd1;
     }
+    
     .book-info {
       padding: 1.2rem;
     }
+    
     .book-title {
       font-weight: 800;
       font-size: 1.2rem;
       display: flex;
       align-items: center;
       gap: 6px;
+      flex-wrap: wrap;
     }
+    
     .book-price {
       font-weight: 800;
       color: #c56a2e;
@@ -211,78 +278,116 @@
       padding: 0.2rem 1rem;
       border-radius: 40px;
     }
-    .book-tag {
-      display: inline-block;
-      background: #e8dfd1;
-      padding: 0.2rem 0.8rem;
-      border-radius: 20px;
-      font-size: 0.65rem;
-      margin-left: 8px;
-    }
+    
     .card-actions {
       display: flex;
       gap: 10px;
       margin: 14px 0 10px;
     }
-
+    
     /* Modal */
     .modal {
       display: none;
       position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(30, 22, 16, 0.8);
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(30, 22, 16, 0.85);
       backdrop-filter: blur(8px);
       align-items: center;
       justify-content: center;
       z-index: 1000;
     }
+    
     .modal-content {
       background: #fffef8;
-      max-width: 520px;
+      max-width: 550px;
       width: 90%;
       border-radius: 2rem;
       padding: 2rem;
-      box-shadow: 0 30px 45px rgba(0,0,0,0.2);
+      box-shadow: 0 30px 45px rgba(0, 0, 0, 0.2);
       max-height: 90vh;
       overflow-y: auto;
     }
-    .auth-methods {
+    
+    .auth-tabs {
       display: flex;
-      flex-direction: column;
       gap: 1rem;
-      margin: 1.5rem 0;
+      margin-bottom: 1.5rem;
+      border-bottom: 2px solid #eedbcb;
     }
-    .auth-btn {
-      background: white;
-      border: 2px solid #e8dccc;
-      padding: 0.9rem;
-      border-radius: 60px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-weight: 600;
+    
+    .auth-tab {
+      padding: 0.5rem 1rem;
       cursor: pointer;
-      transition: all 0.2s;
+      font-weight: 600;
+      color: #a18464;
+      border-bottom: 3px solid transparent;
     }
-    .auth-btn:hover {
-      border-color: #c17b4c;
-      background: #fffaf2;
+    
+    .auth-tab.active {
+      color: #c17b4c;
+      border-bottom-color: #c17b4c;
     }
+    
+    .form-row {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+    
+    .form-row .input-group {
+      flex: 1;
+      margin: 0;
+    }
+    
     .input-group {
-      margin: 1rem 0;
+      margin-bottom: 1rem;
     }
-    .input-group input, .input-group textarea, .input-group select {
+    
+    .input-group label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-bottom: 5px;
+      color: #5e4530;
+    }
+    
+    .input-group input,
+    .input-group textarea,
+    .input-group select {
       width: 100%;
       padding: 12px 16px;
       border-radius: 60px;
       border: 1px solid #eedbcb;
       font-family: inherit;
+      background: white;
     }
-    .input-group textarea {
-      border-radius: 24px;
-      resize: vertical;
+    
+    .input-group select {
+      cursor: pointer;
     }
+    
+    .social-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      margin-top: 1rem;
+    }
+    
+    .social-btn {
+      padding: 0.8rem;
+      border-radius: 60px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    
     .chat-messages {
       background: #fef9f2;
       border-radius: 1.5rem;
@@ -291,6 +396,7 @@
       padding: 1rem;
       margin: 1rem 0;
     }
+    
     .chat-bubble {
       background: white;
       border-radius: 1.2rem;
@@ -299,22 +405,26 @@
       margin-bottom: 8px;
       border: 1px solid #f2e4d6;
     }
+    
     .chat-bubble.sent {
       background: #e8dfd1;
       align-self: flex-end;
       margin-left: auto;
     }
+    
     .chat-input-area {
       display: flex;
       gap: 10px;
       margin-top: 8px;
     }
+    
     .chat-input-area input {
       flex: 1;
       border-radius: 60px;
       padding: 10px 16px;
       border: 1px solid #eedbcb;
     }
+    
     .interest-badge {
       background: #f2eee8;
       color: #b96f3c;
@@ -325,12 +435,14 @@
       align-items: center;
       gap: 5px;
     }
+    
     hr {
       margin: 1rem 0;
       border: none;
       height: 1px;
       background: linear-gradient(90deg, #eedbcb, transparent);
     }
+    
     footer {
       margin-top: 3rem;
       text-align: center;
@@ -339,9 +451,18 @@
       border-top: 1px solid #eedbcb;
       padding-top: 1.5rem;
     }
+    
     @media (max-width: 780px) {
-      .chat-panel { position: static; margin-top: 1rem; }
+      .chat-panel {
+        position: static;
+        margin-top: 1rem;
+      }
+      .form-row {
+        flex-direction: column;
+        gap: 0;
+      }
     }
+    
     .quick-add-section {
       background: #fef7ef;
       border-radius: 1rem;
@@ -349,19 +470,35 @@
       margin-bottom: 1.5rem;
       border: 1px dashed #dcc9b2;
     }
+    
+    .error-msg {
+      color: #e74c3c;
+      font-size: 0.7rem;
+      margin-top: 4px;
+    }
   </style>
 </head>
 <body>
 <div class="container">
   <div class="top-bar">
-    <div class="logo">
-      <h1>📖 KitabSansar <span class="student-badge"><i class="fas fa-graduation-cap"></i> Student Textbook Hub</span></h1>
-      <p>sell your textbooks · buy used books · connect with classmates</p>
+    <div class="logo-area">
+      <div class="logo-icon">
+        <i class="fas fa-book-open"></i>
+      </div>
+      <div class="logo-text">
+        <h1>KitabSansar</h1>
+        <div class="oldbooks-badge">
+          <i class="fas fa-book"></i> OLDBOOKS
+        </div>
+      </div>
     </div>
     <div id="userDisplayArea">
       <div class="user-info" id="userInfoSection" style="display: none;">
         <div class="user-avatar" id="userAvatar">👤</div>
-        <span id="userNameDisplay"></span>
+        <div>
+          <div id="userNameDisplay" style="font-weight:600;"></div>
+          <div id="userCityDisplay" style="font-size:0.7rem; color:#a18464;"></div>
+        </div>
         <button class="btn btn-outline btn-sm" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</button>
       </div>
       <button class="btn btn-primary" id="showAuthModalBtn"><i class="fas fa-user-circle"></i> Sign In / Sign Up</button>
@@ -371,12 +508,11 @@
   <div class="dashboard">
     <div class="listings-panel">
       <div class="section-title">
-        <i class="fas fa-book-open"></i> 
+        <i class="fas fa-book-open"></i>
         <span>📚 Textbooks & Used Books</span>
         <span id="bookCountBadge" style="font-size:0.8rem; background:#efe2d2; padding:0.2rem 0.9rem; border-radius:40px;">0</span>
       </div>
-      
-      <!-- Quick Add for Students -->
+
       <div class="quick-add-section" id="quickAddSection" style="display: none;">
         <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
           <i class="fas fa-plus-circle" style="color:#c17b4c;"></i>
@@ -387,11 +523,8 @@
           <input type="text" id="quickBookPrice" placeholder="Price (e.g., 350 NPR)" style="flex:1; min-width:100px; padding:10px; border-radius:40px; border:1px solid #eedbcb;">
           <button class="btn btn-primary btn-sm" id="quickAddBtn"><i class="fas fa-bolt"></i> List Now</button>
         </div>
-        <div style="font-size:0.7rem; color:#a18464; margin-top:8px;">
-          <i class="fas fa-info-circle"></i> Add photo & full details later via "Sell a Book"
-        </div>
       </div>
-      
+
       <div id="booksGrid" class="books-grid"></div>
     </div>
 
@@ -403,7 +536,7 @@
         <i class="fas fa-lock"></i> Please sign in to chat and show interest
       </div>
       <div>
-        <select id="chatBookSelect" class="book-selector" style="width:100%; padding:10px; border-radius:60px; border:1px solid #eedbcb; background:white;" disabled>
+        <select id="chatBookSelect" style="width:100%; padding:10px; border-radius:60px; border:1px solid #eedbcb; background:white;" disabled>
           <option value="">🔒 Sign in to chat about books</option>
         </select>
       </div>
@@ -415,58 +548,132 @@
         <button class="btn btn-primary btn-sm" id="sendChatBtn" disabled><i class="fas fa-paper-plane"></i></button>
       </div>
       <hr>
-      <div style="font-size:0.7rem; background:#f7efe6; border-radius: 20px; padding: 0.7rem; color:#a57c59; text-align:center;">
+      <div style="font-size:0.7rem; background:#f7efe6; border-radius: 20px; padding: 0.7rem; text-align:center;">
         <i class="fas fa-heart" style="color:#c17b4c;"></i> Click "I'm interested" → seller gets instant notification
       </div>
     </div>
   </div>
-  <footer>🎓 For Students: List your textbooks with price & connect with buyers | Sign in with Mobile, WhatsApp, or Gmail</footer>
+  <footer>🎓 KitabSansar | OLDBOOKS — Student Textbook Marketplace | Connect with students across Nepal</footer>
 </div>
 
-<!-- AUTH MODAL -->
+<!-- AUTH MODAL with Registration & Sign In -->
 <div id="authModal" class="modal">
   <div class="modal-content">
-    <h3 style="font-family:'Playfair Display';"><i class="fas fa-user-plus"></i> Welcome to KitabSansar</h3>
-    <p style="color:#a18464; margin-bottom:1rem;">Sign in to list textbooks, chat, and connect with other students</p>
-    <div class="auth-methods">
-      <button class="auth-btn" id="mobileAuthBtn"><i class="fas fa-mobile-alt" style="font-size:1.3rem;"></i> Continue with Mobile Number</button>
-      <button class="auth-btn" id="whatsappAuthBtn"><i class="fab fa-whatsapp" style="font-size:1.3rem; color:#25D366;"></i> Continue with WhatsApp</button>
-      <button class="auth-btn" id="gmailAuthBtn"><i class="fas fa-envelope" style="font-size:1.3rem; color:#EA4335;"></i> Continue with Gmail</button>
+    <div class="auth-tabs">
+      <div class="auth-tab active" data-tab="signin">Sign In</div>
+      <div class="auth-tab" data-tab="signup">Create Account</div>
     </div>
-    <div id="authInputContainer" style="display:none; margin-top:1rem;">
+    
+    <!-- Sign In Form -->
+    <div id="signinForm">
       <div class="input-group">
-        <input type="text" id="authInputField" placeholder="Enter mobile / email / WhatsApp number">
+        <label>Email / Mobile Number</label>
+        <input type="text" id="signinIdentifier" placeholder="Enter email or mobile number">
       </div>
-      <button class="btn btn-primary" id="submitAuthBtn" style="width:100%;">Verify & Sign In</button>
+      <div class="input-group">
+        <label>Password</label>
+        <input type="password" id="signinPassword" placeholder="Enter password">
+      </div>
+      <button class="btn btn-primary" id="signinBtn" style="width:100%;">Sign In</button>
+      
+      <div style="text-align: center; margin: 1rem 0; color: #a18464;">or continue with</div>
+      
+      <div class="social-buttons">
+        <button class="social-btn btn-google" id="googleAuthBtn"><i class="fab fa-google"></i> Continue with Google</button>
+        <button class="social-btn btn-facebook" id="facebookAuthBtn"><i class="fab fa-facebook-f"></i> Continue with Facebook</button>
+        <button class="social-btn btn-whatsapp" id="whatsappAuthBtn"><i class="fab fa-whatsapp"></i> Continue with WhatsApp</button>
+        <button class="social-btn btn-mobile" id="mobileOnlyAuthBtn"><i class="fas fa-mobile-alt"></i> Continue with Mobile Number</button>
+      </div>
     </div>
+    
+    <!-- Sign Up Form -->
+    <div id="signupForm" style="display: none;">
+      <div class="form-row">
+        <div class="input-group">
+          <label>First Name *</label>
+          <input type="text" id="firstName" placeholder="First name">
+        </div>
+        <div class="input-group">
+          <label>Last Name</label>
+          <input type="text" id="lastName" placeholder="Last name">
+        </div>
+      </div>
+      <div class="input-group">
+        <label>Email Address *</label>
+        <input type="email" id="signupEmail" placeholder="your@email.com">
+      </div>
+      <div class="input-group">
+        <label>Mobile Number *</label>
+        <input type="tel" id="signupMobile" placeholder="98XXXXXXXX">
+      </div>
+      <div class="form-row">
+        <div class="input-group">
+          <label>City (Nepal) *</label>
+          <select id="city">
+            <option value="">Select City</option>
+            <option value="Kathmandu">Kathmandu</option>
+            <option value="Pokhara">Pokhara</option>
+            <option value="Lalitpur">Lalitpur</option>
+            <option value="Biratnagar">Biratnagar</option>
+            <option value="Bharatpur">Bharatpur</option>
+            <option value="Bhaktapur">Bhaktapur</option>
+            <option value="Butwal">Butwal</option>
+            <option value="Dharan">Dharan</option>
+            <option value="Nepalgunj">Nepalgunj</option>
+            <option value="Janakpur">Janakpur</option>
+          </select>
+        </div>
+        <div class="input-group">
+          <label>Gender</label>
+          <select id="gender">
+            <option value="">Select</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+      </div>
+      <div class="input-group">
+        <label>Date of Birth</label>
+        <input type="date" id="dob">
+      </div>
+      <div class="input-group">
+        <label>Password *</label>
+        <input type="password" id="signupPassword" placeholder="Create password (min 6 characters)">
+      </div>
+      <div class="input-group">
+        <label>Confirm Password *</label>
+        <input type="password" id="confirmPassword" placeholder="Confirm password">
+      </div>
+      <button class="btn btn-primary" id="signupBtn" style="width:100%;">Create Account</button>
+    </div>
+    
     <button class="btn btn-outline" id="closeAuthModalBtn" style="margin-top:1rem; width:100%;">Cancel</button>
   </div>
 </div>
 
-<!-- SELL MODAL with full details + photo -->
+<!-- SELL MODAL -->
 <div id="sellModal" class="modal">
   <div class="modal-content">
-    <h3><i class="fas fa-camera-retro"></i> List Your Textbook / Book</h3>
+    <h3><i class="fas fa-camera-retro"></i> List Your Book</h3>
     <form id="sellBookForm">
       <div class="input-group">
-        <input type="text" id="bookTitle" placeholder="Book / Textbook Title *" required>
+        <input type="text" id="bookTitle" placeholder="Book Title *" required>
       </div>
       <div class="input-group">
-        <input type="text" id="bookAuthor" placeholder="Author / Edition (e.g., 5th Edition)">
+        <input type="text" id="bookAuthor" placeholder="Author / Edition">
       </div>
       <div class="input-group">
-        <input type="text" id="bookPrice" placeholder="Price (e.g., 450 NPR, $8)" required>
+        <input type="text" id="bookPrice" placeholder="Price (e.g., 450 NPR)" required>
       </div>
       <div class="input-group">
-        <textarea id="bookDesc" rows="3" placeholder="Description: Condition, highlights, course name, semester, etc."></textarea>
+        <textarea id="bookDesc" rows="2" placeholder="Description: Condition, course, semester"></textarea>
       </div>
       <div class="input-group">
-        <label style="font-size:0.8rem;"><i class="fas fa-tag"></i> Category (optional)</label>
         <select id="bookCategory">
           <option value="Textbook">📘 Textbook</option>
           <option value="Novel">📖 Novel</option>
           <option value="Reference">📚 Reference</option>
-          <option value="Guide">📝 Guide/Notes</option>
         </select>
       </div>
       <div class="input-group">
@@ -475,23 +682,49 @@
       </div>
       <div style="display: flex; gap: 12px; margin-top: 20px;">
         <button type="button" class="btn btn-outline" id="closeSellModalBtn">Cancel</button>
-        <button type="submit" class="btn btn-primary"><i class="fas fa-store"></i> Publish Book</button>
+        <button type="submit" class="btn btn-primary">Publish Book</button>
       </div>
     </form>
   </div>
 </div>
 
 <script>
-  // ==================== AUTH SYSTEM ====================
+  // ==================== USER DATABASE ====================
+  let users = []; // stored in localStorage
   let currentUser = null;
   
+  function loadUsers() {
+    const stored = localStorage.getItem('kitab_users');
+    if(stored) users = JSON.parse(stored);
+    else {
+      // Demo user
+      users = [{
+        id: '1',
+        firstName: 'Ram',
+        lastName: 'Sharma',
+        email: 'ram@example.com',
+        mobile: '9812345678',
+        city: 'Kathmandu',
+        gender: 'Male',
+        dob: '1995-05-15',
+        password: 'password123',
+        createdAt: Date.now()
+      }];
+      saveUsers();
+    }
+  }
+  
+  function saveUsers() {
+    localStorage.setItem('kitab_users', JSON.stringify(users));
+  }
+  
   function saveAuth() {
-    if(currentUser) localStorage.setItem('kitab_user', JSON.stringify(currentUser));
-    else localStorage.removeItem('kitab_user');
+    if(currentUser) localStorage.setItem('kitab_current_user', JSON.stringify(currentUser));
+    else localStorage.removeItem('kitab_current_user');
   }
   
   function loadAuth() {
-    const stored = localStorage.getItem('kitab_user');
+    const stored = localStorage.getItem('kitab_current_user');
     if(stored) {
       currentUser = JSON.parse(stored);
       updateUIForUser();
@@ -510,8 +743,10 @@
     if(currentUser) {
       userInfoSection.style.display = 'flex';
       showAuthBtn.style.display = 'none';
-      document.getElementById('userNameDisplay').innerText = currentUser.name || currentUser.contact;
-      document.getElementById('userAvatar').innerHTML = currentUser.name ? currentUser.name.charAt(0).toUpperCase() : '📖';
+      const fullName = `${currentUser.firstName || ''} ${currentUser.lastName || ''}`.trim();
+      document.getElementById('userNameDisplay').innerText = fullName || currentUser.email || currentUser.mobile;
+      document.getElementById('userCityDisplay').innerText = currentUser.city ? `📍 ${currentUser.city}` : '';
+      document.getElementById('userAvatar').innerHTML = (currentUser.firstName? currentUser.firstName.charAt(0): '📖').toUpperCase();
       if(chatSelect) chatSelect.disabled = false;
       if(chatInput) chatInput.disabled = false;
       if(sendBtn) sendBtn.disabled = false;
@@ -522,7 +757,7 @@
     } else {
       userInfoSection.style.display = 'none';
       showAuthBtn.style.display = 'flex';
-      if(chatSelect) { chatSelect.disabled = true; chatSelect.innerHTML = '<option value="">🔒 Sign in to chat about books</option>'; }
+      if(chatSelect) { chatSelect.disabled = true; chatSelect.innerHTML = '<option value="">🔒 Sign in to chat</option>'; }
       if(chatInput) chatInput.disabled = true;
       if(sendBtn) sendBtn.disabled = true;
       if(chatWarning) chatWarning.style.display = 'block';
@@ -532,63 +767,91 @@
     }
   }
   
-  function signIn(contact, method, nameHint = '') {
-    let userName = nameHint;
-    if(!userName) {
-      if(method === 'mobile') userName = contact.slice(-6);
-      else if(method === 'whatsapp') userName = contact.split('@')[0] || contact.slice(-8);
-      else userName = contact.split('@')[0];
+  // Social auth handlers - create/sign in user
+  function socialAuth(provider, identifier, nameHint = '') {
+    let existingUser = users.find(u => u.email === identifier || u.mobile === identifier);
+    if(!existingUser) {
+      // Auto-create account
+      const newUser = {
+        id: Date.now().toString(),
+        firstName: nameHint || provider,
+        lastName: '',
+        email: provider === 'google' || provider === 'facebook' ? identifier : '',
+        mobile: provider === 'mobile' || provider === 'whatsapp' ? identifier : '',
+        city: '',
+        gender: '',
+        dob: '',
+        password: '',
+        provider: provider,
+        createdAt: Date.now()
+      };
+      users.push(newUser);
+      saveUsers();
+      currentUser = newUser;
+    } else {
+      currentUser = existingUser;
     }
-    currentUser = {
-      id: Date.now().toString(),
-      name: userName,
-      contact: contact,
-      method: method,
-      joined: Date.now()
-    };
     saveAuth();
     updateUIForUser();
     closeAuthModal();
     loadData();
   }
   
-  function logout() {
-    currentUser = null;
+  function regularSignUp(firstName, lastName, email, mobile, city, gender, dob, password) {
+    if(users.find(u => u.email === email)) return { success: false, error: 'Email already registered' };
+    if(users.find(u => u.mobile === mobile)) return { success: false, error: 'Mobile number already registered' };
+    const newUser = {
+      id: Date.now().toString(),
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      mobile: mobile,
+      city: city,
+      gender: gender,
+      dob: dob,
+      password: password,
+      createdAt: Date.now()
+    };
+    users.push(newUser);
+    saveUsers();
+    currentUser = newUser;
     saveAuth();
-    updateUIForUser();
-    loadData();
+    return { success: true };
   }
   
-  // ==================== BOOKS & CHAT DATA ====================
+  function regularSignIn(identifier, password) {
+    const user = users.find(u => (u.email === identifier || u.mobile === identifier) && u.password === password);
+    if(user) {
+      currentUser = user;
+      saveAuth();
+      return { success: true };
+    }
+    return { success: false, error: 'Invalid credentials' };
+  }
+  
+  // ==================== BOOKS & CHAT ====================
   let books = [];
   let messages = {};
   
   function saveToLocal() {
-    localStorage.setItem('kitab_v5_books', JSON.stringify(books));
-    localStorage.setItem('kitab_v5_messages', JSON.stringify(messages));
+    localStorage.setItem('kitab_books', JSON.stringify(books));
+    localStorage.setItem('kitab_messages', JSON.stringify(messages));
   }
   
   const defaultCover = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23f3e9df'/%3E%3Ctext x='50' y='55' font-size='44' text-anchor='middle' fill='%23c58f64'%3E📘%3C/text%3E%3C/svg%3E";
   
   function loadData() {
-    const storedBooks = localStorage.getItem('kitab_v5_books');
+    const storedBooks = localStorage.getItem('kitab_books');
     if(storedBooks) books = JSON.parse(storedBooks);
-    const storedMessages = localStorage.getItem('kitab_v5_messages');
+    const storedMessages = localStorage.getItem('kitab_messages');
     if(storedMessages) messages = JSON.parse(storedMessages);
     else messages = {};
     
     if(!books.length) {
-      // Sample student textbooks
       books = [
-        { id: '1', title: 'Engineering Mathematics III', author: 'Dr. K.C. Rajbanshi', price: '550 NPR', description: 'Used for BE Civil/Computer, 3rd semester, good condition, few highlights', seller: 'Rahul Thapa', sellerContact: 'rahul@example.com', category: 'Textbook', imageDataUrl: defaultCover, interestCount: 3, createdAt: Date.now() - 86400000 },
-        { id: '2', title: 'Physics for Scientists and Engineers', author: 'Serway & Jewett', price: '1200 NPR', description: '9th Edition, like new, no markings, perfect for BSc Physics', seller: 'Sneha Sharma', sellerContact: 'sneha@example.com', category: 'Textbook', imageDataUrl: defaultCover, interestCount: 2, createdAt: Date.now() - 172800000 },
-        { id: '3', title: 'The Alchemist', author: 'Paulo Coelho', price: '250 NPR', description: 'Inspiring novel, great condition', seller: 'Aarav Basnet', sellerContact: 'aarav@example.com', category: 'Novel', imageDataUrl: defaultCover, interestCount: 5, createdAt: Date.now() - 345600000 },
-        { id: '4', title: 'C Programming Language', author: 'Brian Kernighan', price: '400 NPR', description: 'Classic book, used for BSc CSIT, good condition', seller: 'Bikram Thapa', sellerContact: 'bikram@example.com', category: 'Textbook', imageDataUrl: defaultCover, interestCount: 1, createdAt: Date.now() - 500000000 }
+        { id: '1', title: 'Engineering Mathematics III', author: 'Dr. K.C. Rajbanshi', price: '550 NPR', description: '3rd semester, good condition', seller: 'Ram Sharma', sellerId: '1', category: 'Textbook', imageDataUrl: defaultCover, interestCount: 3 },
+        { id: '2', title: 'Physics for Scientists', author: 'Serway', price: '1200 NPR', description: '9th Edition, like new', seller: 'Sneha Sharma', sellerId: '2', category: 'Textbook', imageDataUrl: defaultCover, interestCount: 2 }
       ];
-      messages = {
-        '1': [{ senderName: 'Rahul Thapa', text: 'Available! Perfect for TU engineering students.', timestamp: Date.now() - 3600000, isSystem: false }],
-        '2': [{ senderName: 'Sneha Sharma', text: 'Barely used, great deal!', timestamp: Date.now() - 7200000, isSystem: false }]
-      };
       saveToLocal();
     }
     renderBooks();
@@ -599,7 +862,7 @@
     const grid = document.getElementById('booksGrid');
     if(!grid) return;
     if(books.length === 0) {
-      grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:3rem;"><i class="fas fa-book-open" style="font-size:3rem; color:#c79a6e;"></i><p style="margin-top:1rem;">📚 No textbooks listed yet. Be the first student to sell your books!</p></div>`;
+      grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:3rem;"><i class="fas fa-book-open" style="font-size:3rem;"></i><p>No books yet. Be the first to list!</p></div>`;
       document.getElementById('bookCountBadge').innerText = '0';
       return;
     }
@@ -608,14 +871,10 @@
       <div class="book-card">
         <img class="book-image" src="${escapeHtml(book.imageDataUrl || defaultCover)}" alt="cover">
         <div class="book-info">
-          <div class="book-title">
-            📘 ${escapeHtml(book.title)}
-            <span class="book-tag">${escapeHtml(book.category || 'Book')}</span>
-          </div>
-          <div class="book-author">✍️ ${escapeHtml(book.author || 'Various')}</div>
+          <div class="book-title">📘 ${escapeHtml(book.title)}</div>
           <div class="book-price">💰 ${escapeHtml(book.price)}</div>
-          <div class="book-seller" style="font-size:0.7rem; color:#8b7358; margin:5px 0;"><i class="fas fa-user-graduate"></i> Seller: ${escapeHtml(book.seller)}</div>
-          <div class="book-desc" style="font-size:0.8rem; margin:8px 0; line-height:1.4;">📖 ${escapeHtml(book.description || 'Well-maintained used book')}</div>
+          <div class="book-seller" style="font-size:0.7rem; margin:5px 0;"><i class="fas fa-user"></i> ${escapeHtml(book.seller)}</div>
+          <div class="book-desc" style="font-size:0.8rem;">${escapeHtml(book.description || 'Good condition')}</div>
           <div class="card-actions">
             <button class="btn ${currentUser ? 'btn-primary' : 'btn-outline'} btn-sm interest-btn" data-id="${book.id}" ${!currentUser ? 'disabled' : ''}><i class="fas fa-hands-helping"></i> I'm interested</button>
             <button class="btn btn-outline btn-sm chat-from-card" data-id="${book.id}" ${!currentUser ? 'disabled' : ''}><i class="fas fa-comment"></i> Chat</button>
@@ -625,22 +884,20 @@
       </div>
     `).join('');
     
+    attachBookEvents();
+  }
+  
+  function attachBookEvents() {
     document.querySelectorAll('.interest-btn').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        if(!currentUser) { showAuthModal(); alert('Please sign in to show interest'); return; }
-        const bookId = btn.getAttribute('data-id');
-        sendInterestRequest(bookId);
-      });
+      btn.onclick = () => { if(currentUser) sendInterestRequest(btn.getAttribute('data-id')); else showAuthModal(); };
     });
     document.querySelectorAll('.chat-from-card').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        if(!currentUser) { showAuthModal(); alert('Please sign in to chat'); return; }
+      btn.onclick = () => {
+        if(!currentUser) { showAuthModal(); return; }
         const bookId = btn.getAttribute('data-id');
-        const select = document.getElementById('chatBookSelect');
-        if(select) select.value = bookId;
+        document.getElementById('chatBookSelect').value = bookId;
         loadChatForBook(bookId);
-        document.querySelector('.chat-panel').scrollIntoView({ behavior: 'smooth' });
-      });
+      };
     });
   }
   
@@ -650,42 +907,30 @@
     book.interestCount = (book.interestCount || 0) + 1;
     if(!messages[bookId]) messages[bookId] = [];
     messages[bookId].push({
-      senderName: currentUser.name,
-      text: `💌 Interested in "${book.title}"! Price: ${book.price}. My contact: ${currentUser.contact} (via ${currentUser.method})`,
-      timestamp: Date.now(),
-      isSystem: false
+      senderName: `${currentUser.firstName} ${currentUser.lastName}`.trim() || currentUser.email,
+      text: `💌 Interested in "${book.title}"! Price: ${book.price}. Contact: ${currentUser.email || currentUser.mobile}`,
+      timestamp: Date.now()
     });
     saveToLocal();
     renderBooks();
-    const selected = document.getElementById('chatBookSelect').value;
-    if(selected === bookId) loadChatForBook(bookId);
-    alert(`✨ Interest sent to ${book.seller}! They'll see your message in chat.`);
+    alert(`✨ Interest sent to ${book.seller}!`);
   }
   
   function addNewBook(title, author, price, description, category, imageDataUrl) {
-    if(!currentUser) { alert('Please sign in to sell books'); return; }
-    const newId = Date.now().toString();
+    if(!currentUser) return;
     const newBook = {
-      id: newId,
+      id: Date.now().toString(),
       title: title.trim(),
       author: author.trim() || 'Not specified',
       price: price.trim(),
-      description: description.trim() || 'Gently used, good condition',
-      seller: currentUser.name,
-      sellerContact: currentUser.contact,
-      category: category || 'Book',
+      description: description.trim(),
+      seller: `${currentUser.firstName} ${currentUser.lastName}`.trim() || currentUser.email,
+      sellerId: currentUser.id,
+      category: category,
       imageDataUrl: imageDataUrl || defaultCover,
-      interestCount: 0,
-      createdAt: Date.now()
+      interestCount: 0
     };
     books.unshift(newBook);
-    if(!messages[newId]) messages[newId] = [];
-    messages[newId].push({
-      senderName: currentUser.name,
-      text: `📖 Just listed "${newBook.title}" for ${newBook.price}. Feel free to ask questions!`,
-      timestamp: Date.now(),
-      isSystem: false
-    });
     saveToLocal();
     renderBooks();
   }
@@ -693,65 +938,149 @@
   function updateChatSelect() {
     const select = document.getElementById('chatBookSelect');
     if(!select) return;
-    if(!currentUser) {
-      select.innerHTML = '<option value="">🔒 Sign in to chat</option>';
-      return;
-    }
-    select.innerHTML = '<option value="">🌸 Choose a book to chat</option>' + 
-      books.map(book => `<option value="${book.id}">📙 ${escapeHtml(book.title)} (${escapeHtml(book.seller)})</option>`).join('');
-    select.onchange = () => {
-      const bookId = select.value;
-      if(bookId) loadChatForBook(bookId);
-      else document.getElementById('chatMessagesContainer').innerHTML = '<div style="text-align:center; padding:30px;">✨ Select a book above</div>';
-    };
+    if(!currentUser) { select.innerHTML = '<option value="">🔒 Sign in to chat</option>'; return; }
+    select.innerHTML = '<option value="">🌸 Choose a book to chat</option>' + books.map(b => `<option value="${b.id}">📙 ${escapeHtml(b.title)}</option>`).join('');
+    select.onchange = () => { if(select.value) loadChatForBook(select.value); };
   }
   
   function loadChatForBook(bookId) {
-    if(!currentUser) return;
     const container = document.getElementById('chatMessagesContainer');
-    if(!bookId) return;
     const msgs = messages[bookId] || [];
-    if(msgs.length === 0) {
-      container.innerHTML = `<div style="text-align:center; padding:2rem;">💬 No messages yet. Start the conversation!</div>`;
-    } else {
-      container.innerHTML = msgs.map(msg => {
-        const isCurrentUser = (msg.senderName === currentUser.name);
-        return `
-          <div class="chat-bubble ${isCurrentUser ? 'sent' : ''}" style="${!isCurrentUser ? 'background:white;' : ''}">
-            <div class="chat-meta" style="font-size:0.6rem; color:#b2906e;"><strong>${escapeHtml(msg.senderName)}</strong> · ${new Date(msg.timestamp).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})}</div>
-            <div>${escapeHtml(msg.text)}</div>
-          </div>
-        `;
-      }).join('');
+    if(msgs.length === 0) container.innerHTML = '<div style="text-align:center; padding:2rem;">💬 No messages yet.</div>';
+    else {
+      container.innerHTML = msgs.map(msg => `
+        <div class="chat-bubble ${msg.senderName === currentUser?.firstName ? 'sent' : ''}">
+          <div class="chat-meta" style="font-size:0.6rem;"><strong>${escapeHtml(msg.senderName)}</strong> · ${new Date(msg.timestamp).toLocaleTimeString()}</div>
+          <div>${escapeHtml(msg.text)}</div>
+        </div>
+      `).join('');
       container.scrollTop = container.scrollHeight;
     }
     window.currentChatBookId = bookId;
   }
   
   function sendChatMessage(bookId, text) {
-    if(!currentUser) { alert('Please sign in to chat'); return; }
-    if(!text.trim()) return;
+    if(!currentUser || !text.trim()) return;
     if(!messages[bookId]) messages[bookId] = [];
     messages[bookId].push({
-      senderName: currentUser.name,
+      senderName: `${currentUser.firstName} ${currentUser.lastName}`.trim() || currentUser.email,
       text: text.trim(),
-      timestamp: Date.now(),
-      isSystem: false
+      timestamp: Date.now()
     });
     saveToLocal();
     if(window.currentChatBookId === bookId) loadChatForBook(bookId);
   }
   
-  function escapeHtml(str) { if(!str) return ''; return String(str).replace(/[&<>]/g, function(m){if(m==='&') return '&amp;'; if(m==='<') return '&lt;'; if(m==='>') return '&gt;'; return m;}); }
+  function escapeHtml(str) { if(!str) return ''; return String(str).replace(/[&<>]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[m])); }
   
-  // ==================== MODAL CONTROLS ====================
+  // ==================== UI CONTROLS ====================
   const authModal = document.getElementById('authModal');
   const sellModal = document.getElementById('sellModal');
-  let currentAuthMethod = '';
   
   function showAuthModal() { authModal.style.display = 'flex'; }
-  function closeAuthModal() { authModal.style.display = 'none'; document.getElementById('authInputContainer').style.display = 'none'; document.getElementById('authInputField').value = ''; }
+  function closeAuthModal() { authModal.style.display = 'none'; }
+  
+  // Tab switching
+  document.querySelectorAll('.auth-tab').forEach(tab => {
+    tab.onclick = () => {
+      document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      document.getElementById('signinForm').style.display = tab.dataset.tab === 'signin' ? 'block' : 'none';
+      document.getElementById('signupForm').style.display = tab.dataset.tab === 'signup' ? 'block' : 'none';
+    };
+  });
   
   document.getElementById('showAuthModalBtn').onclick = showAuthModal;
   document.getElementById('closeAuthModalBtn').onclick = closeAuthModal;
-  document.getElementById('mobileAuthBtn').onclick = () => { currentAuthMethod = 'mobile'; document.getElementById('authInputContainer').style.display = 'block'; document.getElementById('authInputField
+  
+  // Sign Up
+  document.getElementById('signupBtn').onclick = () => {
+    const firstName = document.getElementById('firstName').value;
+    const lastName = document.getElementById('lastName').value;
+    const email = document.getElementById('signupEmail').value;
+    const mobile = document.getElementById('signupMobile').value;
+    const city = document.getElementById('city').value;
+    const gender = document.getElementById('gender').value;
+    const dob = document.getElementById('dob').value;
+    const password = document.getElementById('signupPassword').value;
+    const confirm = document.getElementById('confirmPassword').value;
+    if(!firstName || !email || !mobile || !city || !password) { alert('Please fill all required fields'); return; }
+    if(password !== confirm) { alert('Passwords do not match'); return; }
+    const result = regularSignUp(firstName, lastName, email, mobile, city, gender, dob, password);
+    if(result.success) { closeAuthModal(); loadData(); }
+    else alert(result.error);
+  };
+  
+  // Sign In
+  document.getElementById('signinBtn').onclick = () => {
+    const identifier = document.getElementById('signinIdentifier').value;
+    const password = document.getElementById('signinPassword').value;
+    const result = regularSignIn(identifier, password);
+    if(result.success) { closeAuthModal(); loadData(); }
+    else alert('Invalid email/mobile or password');
+  };
+  
+  // Social auth
+  document.getElementById('googleAuthBtn').onclick = () => socialAuth('google', prompt('Enter your Gmail:'), 'GoogleUser');
+  document.getElementById('facebookAuthBtn').onclick = () => socialAuth('facebook', prompt('Enter Facebook email:'), 'FBUser');
+  document.getElementById('whatsappAuthBtn').onclick = () => socialAuth('whatsapp', prompt('Enter WhatsApp number:'), 'WhatsAppUser');
+  document.getElementById('mobileOnlyAuthBtn').onclick = () => socialAuth('mobile', prompt('Enter mobile number:'), 'MobileUser');
+  
+  document.getElementById('logoutBtn').onclick = () => { currentUser = null; saveAuth(); updateUIForUser(); loadData(); };
+  
+  // Sell modal
+  document.getElementById('showSellModalBtn')?.addEventListener('click', () => {
+    if(!currentUser) { alert('Please sign in'); showAuthModal(); return; }
+    sellModal.style.display = 'flex';
+  });
+  const sellBtn = document.createElement('button');
+  sellBtn.id = 'showSellModalBtn';
+  sellBtn.className = 'btn btn-primary';
+  sellBtn.innerHTML = '<i class="fas fa-plus-circle"></i> Sell a Book';
+  sellBtn.style.marginRight = '10px';
+  const userArea = document.getElementById('userDisplayArea');
+  if(userArea && !document.getElementById('showSellModalBtn')) userArea.insertBefore(sellBtn, userArea.firstChild);
+  sellBtn.onclick = () => { if(!currentUser) { alert('Please sign in'); showAuthModal(); } else sellModal.style.display = 'flex'; };
+  
+  document.getElementById('closeSellModalBtn').onclick = () => sellModal.style.display = 'none';
+  window.onclick = (e) => { if(e.target === authModal) closeAuthModal(); if(e.target === sellModal) sellModal.style.display = 'none'; };
+  
+  let selectedImage = null;
+  document.getElementById('bookImageInput').onchange = (e) => {
+    const file = e.target.files[0];
+    if(file) { const reader = new FileReader(); reader.onload = ev => { selectedImage = ev.target.result; document.getElementById('imagePreviewContainer').innerHTML = `<img src="${selectedImage}" style="width:60px;height:60px;border-radius:12px;">`; }; reader.readAsDataURL(file); }
+  };
+  
+  document.getElementById('sellBookForm').onsubmit = (e) => {
+    e.preventDefault();
+    addNewBook(document.getElementById('bookTitle').value, document.getElementById('bookAuthor').value, document.getElementById('bookPrice').value, document.getElementById('bookDesc').value, document.getElementById('bookCategory').value, selectedImage);
+    sellModal.style.display = 'none';
+    document.getElementById('sellBookForm').reset();
+    selectedImage = null;
+    document.getElementById('imagePreviewContainer').innerHTML = '';
+  };
+  
+  document.getElementById('sendChatBtn').onclick = () => {
+    const bookId = document.getElementById('chatBookSelect').value;
+    const msg = document.getElementById('chatInput').value;
+    if(bookId && msg.trim()) sendChatMessage(bookId, msg);
+    document.getElementById('chatInput').value = '';
+  };
+  document.getElementById('chatInput').addEventListener('keypress', e => { if(e.key === 'Enter') document.getElementById('sendChatBtn').click(); });
+  
+  document.getElementById('quickAddBtn').onclick = () => {
+    if(!currentUser) { alert('Please sign in'); showAuthModal(); return; }
+    const title = document.getElementById('quickBookTitle').value;
+    const price = document.getElementById('quickBookPrice').value;
+    if(!title || !price) { alert('Enter title and price'); return; }
+    addNewBook(title, '', price, 'Quick listing', 'Textbook', null);
+    document.getElementById('quickBookTitle').value = '';
+    document.getElementById('quickBookPrice').value = '';
+  };
+  
+  loadUsers();
+  loadAuth();
+  loadData();
+</script>
+</body>
+</html>
