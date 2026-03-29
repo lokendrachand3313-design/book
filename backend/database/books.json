@@ -1,0 +1,47 @@
+[
+  {
+    "id": "1",
+    "title": "Engineering Mathematics III",
+    "author": "Dr. K.C. Rajbanshi",
+    "price": "550 NPR",
+    "priceRaw": 550,
+    "description": "3rd semester, good condition, few highlights",
+    "seller": "Ram",
+    "sellerId": "1",
+    "category": "Textbook",
+    "imageUrl": null,
+    "interestCount": 3,
+    "isSold": false,
+    "createdAt": "2024-01-15T10:30:00.000Z"
+  },
+  {
+    "id": "2",
+    "title": "Physics for Scientists and Engineers",
+    "author": "Serway & Jewett",
+    "price": "1200 NPR",
+    "priceRaw": 1200,
+    "description": "9th Edition, like new, no markings",
+    "seller": "Ram",
+    "sellerId": "1",
+    "category": "Textbook",
+    "imageUrl": null,
+    "interestCount": 2,
+    "isSold": false,
+    "createdAt": "2024-01-14T15:20:00.000Z"
+  },
+  {
+    "id": "3",
+    "title": "The Alchemist",
+    "author": "Paulo Coelho",
+    "price": "250 NPR",
+    "priceRaw": 250,
+    "description": "Inspiring novel, great condition",
+    "seller": "Sita",
+    "sellerId": "2",
+    "category": "Novel",
+    "imageUrl": null,
+    "interestCount": 5,
+    "isSold": false,
+    "createdAt": "2024-01-13T09:45:00.000Z"
+  }
+]
